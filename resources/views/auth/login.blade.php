@@ -28,18 +28,8 @@
       </div>
       <form action="" class="flex-1 flex-col flex gap-2" method="post">
         <div class="flex flex-col items-start w-[20rem]">
-          <p class="text-yellow-500 font-medium mx-2">Nama</p>
-          <input type="text" placeholder="User Name" name="nama"
-            class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
-        </div>
-        <div class="flex flex-col items-start w-[20rem]">
           <p class="text-yellow-500 font-medium mx-2">Email</p>
           <input type="email" placeholder="user@mail.com" name="email"
-            class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
-        </div>
-        <div class="flex flex-col items-start w-[20rem]">
-          <p class="text-yellow-500 font-medium mx-2">Username</p>
-          <input type="text" placeholder="username" name="username"
             class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
         </div>
         <div class="flex flex-col items-start w-[20rem]">
