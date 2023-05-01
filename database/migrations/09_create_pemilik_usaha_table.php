@@ -11,15 +11,15 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('pendana', function (Blueprint $table) {
-      $table->increments('id_pendana');
+    Schema::create('pemilik_usaha', function (Blueprint $table) {
+      $table->increments('id_pemilik_usaha');
       $table->string('username', 20);
       $table->string('email', 50)->unique();
       $table->string('password')->unique();
       $table->string('nama', 50);
       $table->string('no_hp', 20)->nullable();
       $table->string('no_ktp', 16)->nullable();
-      $table->string('pekerjaan', 30)->nullable();
+      $table->string('pekerjaan_sampingan', 30)->nullable();
       $table->string('alamat_rumah', 50)->nullable();
       $table->string('kecamatan', 50)->nullable();
       $table->string('kota', 50)->nullable();
@@ -28,7 +28,6 @@ return new class extends Migration
 
       // Foreign Key Column
       $table->integer('id_bank')->nullable()->unsigned();
-
 
       // Foreign Key Relation
       $table->foreign('id_bank')->references('id_bank')->on('bank')->nullOnDelete();
@@ -43,6 +42,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('pendana');
+    Schema::dropIfExists('pemilik_usaha');
   }
 };
