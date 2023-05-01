@@ -7,34 +7,35 @@ use Illuminate\Database\Eloquent\Model;
 
 class DeskripsiUsaha extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'deskripsi_usaha';
-    protected $primaryKey = 'id_deskripsi_usaha';
-    protected $fillable = [
-        'tahun_berdiri',
-        'periode_produksi',
-        'deskripsi',
-        'target_dana',
-        'foto_usaha',
-        'proposal',
-        'id_pemilik_usaha',
-        'id_jenis_usaha',
-        'id_status_pengajuan'
-    ];
+  protected $table = 'deskripsi_usaha';
+  protected $primaryKey = 'id_deskripsi_usaha';
+  protected $fillable = [
+    'nama_usaha',
+    'tahun_berdiri',
+    'periode_produksi',
+    'deskripsi',
+    'target_dana',
+    'foto_usaha',
+    'proposal',
+    'id_pemilik_usaha',
+    'id_jenis_usaha',
+    'id_status_pengajuan'
+  ];
 
-    public function pemilikUsaha()
-    {
-        return $this->belongsTo(pemilikUsaha::class);
-    }
+  public function pemilikUsaha()
+  {
+    return $this->belongsTo(pemilikUsaha::class);
+  }
 
-    public function jenisUsaha()
-    {
-        return $this->belongsTo(JenisUsaha::class);
-    }
+  public function jenisUsaha()
+  {
+    return $this->belongsTo(JenisUsaha::class);
+  }
 
-    public function statusPengajuan()
-    {
-        return $this->belongsTo(StatusPengajuan::class);
-    }
+  public function statusPengajuan()
+  {
+    return $this->belongsTo(StatusPengajuan::class);
+  }
 }

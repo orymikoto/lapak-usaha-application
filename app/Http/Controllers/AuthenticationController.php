@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
-  // VIEW CONTROLLER
+  // GET REQUEST
   public function login()
   {
     return view('auth.login');
@@ -23,6 +23,22 @@ class AuthenticationController extends Controller
     return view('auth.register');
   }
 
+  public function logout()
+  {
+    if (auth('admin')->check()) {
+      auth('admin')->logout();
+      return redirect('/');
+    } elseif (auth('pendana')->check()) {
+      auth('pendana')->logout();
+      return redirect('/');
+    } elseif (auth('pengusaha')->check()) {
+      auth('pengusaha')->logout();
+      return redirect('/');
+    }
+  }
+
+
+  // POST REQUEST
   public function login_post(Request $request)
   {
     $validation = $request->validate([
@@ -79,41 +95,6 @@ class AuthenticationController extends Controller
       return view('auth.login')->with('registered', 'Register berhasil dilakukan silahkan login!');
     } else {
       return view('auth.register')->with('failed', 'Silahkan pilih jenis akun terlebih dahulu');
-    }
-  }
-
-
-  // POST CONTROLLER
-  public function loginAdmin(Request $request)
-  {
-    try {
-      // $validate = validate($request, [
-      //   'email' => 'required|email',
-      //   'password' => 'required'
-      // ]);
-      auth()->guard('admin')->attempt();
-    } catch (\Throwable $th) {
-      //throw $th;
-    }
-  }
-
-
-  public function loginPendana(Request $request)
-  {
-    try {
-      //code...
-    } catch (\Throwable $th) {
-      //throw $th;
-    }
-  }
-
-
-  public function loginPemilikUsaha(Request $request)
-  {
-    try {
-      //code...
-    } catch (\Throwable $th) {
-      //throw $th;
     }
   }
 }
