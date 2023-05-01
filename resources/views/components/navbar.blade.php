@@ -17,6 +17,28 @@
         Logout</a>
     </div>
   @endauth
+  @auth('pengusaha')
+    <div class="flex gap-x-2 items-center">
+      <a href="/profile"
+        class="text-center w-[10rem] text-white text-lg font-medium rounded-full py-1 bg-yellow-500 hover:bg-white hover:text-yellow-500 hover:shadow hover:bg-yellow-500/50 cursor-pointer flex-1">
+        Profile
+      </a>
+      <a href="/logout"
+        class="text-center w-[10rem] text-white text-lg font-medium hover:bg-white rounded-full py-1 bg-red-700 hover:text-red-700 hover:shadow-md hover:shadow-red-500/50 cursor-pointer flex-1">
+        Logout</a>
+    </div>
+  @endauth
+  @auth('admin')
+    <div class="flex gap-x-2 items-center">
+      <a href="/profile"
+        class="text-center w-[10rem] text-white text-lg font-medium rounded-full py-1 bg-yellow-500 hover:bg-white hover:text-yellow-500 hover:shadow hover:bg-yellow-500/50 cursor-pointer flex-1">
+        Profile
+      </a>
+      <a href="/logout"
+        class="text-center w-[10rem] text-white text-lg font-medium hover:bg-white rounded-full py-1 bg-red-700 hover:text-red-700 hover:shadow-md hover:shadow-red-500/50 cursor-pointer flex-1">
+        Logout</a>
+    </div>
+  @endauth
   @if (!auth('pendana')->check() && !auth('pengusaha')->check() && !auth('admin')->check())
     <div class="flex gap-x-2 items-center w-[14rem]">
       <a href="/login"
