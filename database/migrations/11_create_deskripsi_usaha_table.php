@@ -13,6 +13,7 @@ return new class extends Migration
   {
     Schema::create('deskripsi_usaha', function (Blueprint $table) {
       $table->increments('id_deskripsi_usaha');
+      $table->string('nama_usaha');
       $table->integer('tahun_berdiri');
       $table->integer('periode_produksi');
       $table->string('deskripsi');
