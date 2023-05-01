@@ -44,9 +44,9 @@ return [
       'driver' => 'session',
       'provider' => 'admin',
     ],
-    'pemilik_usaha' => [
+    'pengusaha' => [
       'driver' => 'session',
-      'provider' => 'pemilik_usaha',
+      'provider' => 'pengusaha',
     ],
     'pendana' => [
       'driver' => 'session',
@@ -80,7 +80,7 @@ return [
       'driver' => 'eloquent',
       'model' => App\Models\Admin::class,
     ],
-    'pemilik_usaha' => [
+    'pengusaha' => [
       'driver' => 'eloquent',
       'model' => App\Models\PemilikUsaha::class,
     ],

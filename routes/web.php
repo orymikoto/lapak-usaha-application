@@ -21,3 +21,7 @@ Route::get('/', function () {
 // AUTH LOGIN REGISTER VIEW
 Route::get('/login', [AuthenticationController::class, 'login'])->middleware('guest')->name('login.view');
 Route::get('/register', [AuthenticationController::class, 'register'])->middleware('guest')->name('register.view');
+
+// AUTH LOGIN REGISTER POST
+Route::post('/login', [AuthenticationController::class, 'login_post'])->middleware('guest')->name('login.post');
+Route::post('/register', [AuthenticationController::class, 'register_post'])->middleware('guest')->name('register.post');

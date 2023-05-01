@@ -22,11 +22,14 @@
       <div class="flex flex-col items-center gap-y-1">
         <h2 class="text-neutral-700 font-medium text-lg">Jenis Akun</h2>
         <div class="flex rounded-full w-[21rem] overflow-hidden shadow-md shadow-black/80 bg-white">
-          <a class="flex-1 hover:text-white py-1 text-rose-700 hover:bg-rose-700 duration-200 cursor-pointer font-medium text-lg">Pendana</a>
-          <a class="flex-1 hover:text-white py-1 text-teal-600 hover:bg-teal-600 duration-200 cursor-pointer font-medium text-lg">Pengusaha</a>
+          <a href="/register?role=pendana"
+            class="flex-1 py-1 duration-200 cursor-pointer font-medium text-lg {{ request()->get('role') == 'pendana' ? 'text-white bg-rose-700' : 'text-rose-700 hover:text-white  hover:bg-rose-700' }}">Pendana</a>
+          <a href="/register?role=pengusaha"
+            class="flex-1 py-1 duration-200 cursor-pointer font-medium text-lg {{ request()->get('role') == 'pengusaha' ? 'text-white bg-teal-600' : 'hover:text-white text-teal-600 hover:bg-teal-600' }} ">Pengusaha</a>
         </div>
       </div>
-      <form action="" class="flex-1 flex-col flex gap-2" method="post">
+      <form action="/register?role={{ request()->get('role') }}" class="flex-1 flex-col flex gap-2" method="post">
+        @csrf
         <div class="flex flex-col items-start w-[20rem]">
           <p class="text-yellow-500 font-medium mx-2">Nama</p>
           <input type="text" placeholder="User Name" name="nama"
@@ -49,6 +52,12 @@
         </div>
         <button type="submit"
           class="w-[15rem] text-white hover:text-yellow-500 hover:bg-white bg-yellow-500 rounded-full hover:shadow-md hover:shadow-black duration-200 py-1 cursor-pointer font-medium self-center my-2 text-lg">REGISTER</button>
+        <div class="flex text-sm font-medium self-center">
+          <p class="text-neutral-600">
+            Already have account?
+            <a href="/login" class="hover:text-teal-400 duration-200">Sign In</a>
+          </p>
+        </div>
       </form>
     </div>
   </div>
