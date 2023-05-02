@@ -22,3 +22,8 @@ const swiper = new Swiper('.swiper', {
     prevEl: '.swiper-button-prev',
   },
 });
+
+const selectProvince = (code) => {
+  console.log(code);
+  return location.href(`/profile?edit=true&provinsi=${code}`)
+}

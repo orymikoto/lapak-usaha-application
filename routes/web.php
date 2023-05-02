@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/profile', [ProfileController::class, 'profile'])->middleware('logineduser')->name('profile.view');
 
 // PROFILE POST
+Route::post('/profile/edit', [ProfileController::class, 'profile_post'])->middleware('logineduser')->name('profile.post');
 
 // AUTH LOGIN REGISTER VIEW
 Route::get('/login', [AuthenticationController::class, 'login'])->middleware('guest')->name('login.view');
