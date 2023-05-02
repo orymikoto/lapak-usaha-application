@@ -81,7 +81,7 @@
             @php
               $total += 1;
             @endphp
-          @elseif (request()->get('menu') == 1 && $value->id_status_pendanaan == 2)
+          @elseif (request()->get('menu') == 1 && $value->file_kontrak_admin == null)
             <x-item-pendanaan-admin :value="$value" :key="$total" />
             @php
               $total += 1;
@@ -91,7 +91,12 @@
             @php
               $total += 1;
             @endphp
-          @elseif (request()->get('menu') == 3 && $value->id_status_pendanaan == 3)
+          @elseif (request()->get('menu') == 3 && $value->id_status_pendanaan == 2)
+            <x-item-pendanaan-admin :value="$value" :key="$total" />
+            @php
+              $total += 1;
+            @endphp
+          @elseif (request()->get('menu') == 4 && $value->id_status_pendanaan == 3)
             <x-item-pendanaan-admin :value="$value" :key="$total" />
             @php
               $total += 1;

@@ -8,16 +8,22 @@
       <a href="/daftar-usaha/pendana" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
       <a href="{{ '/pendanaan/' . auth('pendana')->user()->id_pendana }}"
         class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
+      <a href="{{ '/riwayat-pendanaan/' . auth('pendana')->user()->id_pendana }}"
+        class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Riwayat</a>
     @elseif (auth('pengusaha')->check())
       <a href="{{ '/daftar-usaha/' . auth('pengusaha')->user()->id_pemilik_usaha }}"
         class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
       <a href="{{ '/pendanaan/' . auth('pengusaha')->user()->id_pemilik_usaha }}"
         class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
+      <a href="{{ '/riwayat-pendanaan/' . auth('pengusaha')->user()->id_pemilik_usaha }}"
+        class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Riwayat</a>
     @elseif(auth('admin')->check())
       <a href="/admin/daftar-pengusaha"
         class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Dashboard</a>
       <a href="/admin/daftar-usaha" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
       <a href="/admin/pendanaan" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
+      <a href="/admin/riwayat-pendanaan"
+        class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Riwayat</a>
     @endif
   </div>
 

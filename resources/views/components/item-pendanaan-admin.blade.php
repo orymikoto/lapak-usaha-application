@@ -67,7 +67,7 @@
   <div onclick="showUploadFileKontrak({{ $value->id_proyek_pendanaan }})"
     class="flex flex-col justify-center gap-2 text-center w-24 items-center text-neutral-600 hover:text-yellow-500 duration-200 cursor-pointer">
     <img src="/icons/upload.svg" class="w-8 h-8" alt="" srcset="">
-    <p class="text-xs font-medium font-roboto ">Upload File Kontrak</p>
+    <p class="text-xs font-medium font-roboto ">{{ $value->file_kontrak_admin == null ? 'Upload File Kontrak' : 'Perbarui File Kontrak' }}</p>
   </div>
   <div class="flex rounded-full bg-neutral-400 text-neutral-700 w-[15rem] h-[2rem] my-auto overflow-hidden">
     <a href="/admin/pendanaan/detail/{{ $value->id_proyek_pendanaan }}"

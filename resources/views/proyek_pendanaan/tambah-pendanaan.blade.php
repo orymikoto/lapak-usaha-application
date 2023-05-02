@@ -16,7 +16,7 @@
       <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
         <h2 class="text-lg">Pesan!</h2>
         <p class="text-sm font-light text-neutral-400 w-[10rem]">{{ session()->get('success') }}</p>
-        <a href="/pendanaan/{{ auth('pendana')->user()->id_pendana }}"
+        <a href="/pendanaan/{{ auth('pendana')->check() ? auth('pendana')->user()->id_pendana : '' }}{{ auth('pengusaha')->check() ? auth('pengusaha')->user()->id_pemilik_usaha : '' }}"
           class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
       </div>
     </div>

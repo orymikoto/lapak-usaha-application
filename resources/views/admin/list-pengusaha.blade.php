@@ -19,14 +19,16 @@
     <div class="flex rounded-full bg-neutral-400 w-[40rem] overflow-hidden">
       <div class="flex-1 bg-yellow-500 font-medium font-roboto py-1 text-center cursor-pointer text-white duration-200">Daftar
         Pengusaha</div>
-      <a href="/admin/daftar-pendana"
+      <a href="/admin/daftar-pengusaha"
         class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">Daftar
         Pendana
       </a>
-      <a href="/admin/daftar-pembayaran" class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
+      <a href="/admin/daftar-pembayaran"
+        class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
         Daftar
         Pembayaran</a>
-      <a href="/admin/daftar-pencairan" class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
+      <a href="/admin/daftar-pencairan"
+        class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
         Daftar
         Pencairan</a>
     </div>

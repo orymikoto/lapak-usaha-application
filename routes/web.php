@@ -95,6 +95,11 @@ Route::get('/pendanaan/detail/{id_proyek_pendanaan}', [ProyekPendanaanController
 Route::get('/pendanaan/tambah/{id_deskripsi_usaha}', [ProyekPendanaanController::class, 'tambah_pendanaan'])->middleware(['logineduser', 'pendana']);
 Route::get('/pendanaan/{id_pengguna}', [ProyekPendanaanController::class, 'daftar_pendanaan'])->middleware(['logineduser']);
 
+// RIWAYAT VIEW
+Route::get('/admin/riwayat-pendanaan', [ProyekPendanaanController::class, 'admin_riwayat_pendanaan'])->middleware(['logineduser']);
+Route::get('/riwayat-pendanaan/{id_pengguna}', [ProyekPendanaanController::class, 'riwayat_pendanaan'])->middleware(['logineduser']);
+Route::get('/riwayat-pendanaan/detail/{id_pengguna}', [ProyekPendanaanController::class, 'detail_riwayat_pendanaan'])->middleware(['logineduser']);
+
 // PENDANAAN ACTION
 Route::post('/pendanaan/tambah-file-kontrak/admin/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_tambah_file_kontrak_post'])->middleware(['logineduser', 'admin']);
 Route::post('/pendanaan/ubah-status/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_ubah_status'])->middleware(['logineduser', 'admin']);
