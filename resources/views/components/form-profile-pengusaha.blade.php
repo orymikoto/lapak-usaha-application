@@ -27,7 +27,7 @@
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">KECAMATAN</p>
     <select type="text" name="kecamatan"
-      onchange="window.location.assign('{{ url()->current() . '?edit=true&kota=' }} + '{{ request()->get('kota') }}' +  '&kecamatan=' + this.value)"
+      onchange="window.location.assign('{{ url()->current() . '?edit=true&kota=' }}' + '{{ request()->get('kota') }}' +  '&kecamatan=' + this.value)"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-[6px] text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) ? 'disabled' : '' }}>
       @foreach ($district as $key => $value)
@@ -86,28 +86,28 @@
     <p class="text-neutral-700 mx-2">NOMOR REKENING</p>
     <input type="text" name="no_rekening"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
-      {{ request()->get('edit') != 'true' || empty(request()->get('provinsi')) || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
+      {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->no_rekening) ? $detailUser->no_rekening : null }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">NOMOR HANDPHONE</p>
     <input type="text" name="no_hp"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
-      {{ request()->get('edit') != 'true' || empty(request()->get('provinsi')) || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
+      {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->no_hp) ? $detailUser->no_hp : null }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">NOMOR INDUK KEPENDUDUKAN</p>
     <input type="text" name="no_ktp"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
-      {{ request()->get('edit') != 'true' || empty(request()->get('provinsi')) || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
+      {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->no_ktp) ? $detailUser->no_ktp : null }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">PEKERJAAN SAMPINGAN</p>
     <input type="text" name="pekerjaan_sampingan"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
-      {{ request()->get('edit') != 'true' || empty(request()->get('provinsi')) || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
+      {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->pekerjaan_sampingan) ? $detailUser->pekerjaan_sampingan : null }}">
   </div>
 
