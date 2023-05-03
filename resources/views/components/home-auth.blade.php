@@ -4,7 +4,7 @@
 </div>
 
 <div class="flex gap-x-2 my-8">
-  <a class="flex flex-col cursor-pointer p-4 bg-white rounded-lg items-center w-[25rem] shadow-md hover:shadow-black/50 duration-200">
+  <a href="{{auth('admin')->check() ? '/admin/daftar-usaha' : ''}}{{auth('pengusaha')->check() ? '/daftar-usaha/'.(string)auth('pengusaha')->user()->id_pemilik_usaha : ''}}{{auth('pendana')->check() ? '/daftar-usaha/pendana' : ''}}" class="flex flex-col cursor-pointer p-4 bg-white rounded-lg items-center w-[25rem] shadow-md hover:shadow-black/50 duration-200">
     <img src="/icons/city.svg" class="w-10 h-10" alt="" />
     <h2 class="text-yellow-500 text-xl font-medium">Daftar Usaha</h2>
     <p class="text-sm text-neutral-400 w-[15rem] text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos impedit, reprehenderit quia

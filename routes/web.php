@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\DeskripsiUsahaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,12 @@ Route::get('/profile', [ProfileController::class, 'profile'])->middleware('login
 
 // PROFILE POST
 Route::post('/profile/edit', [ProfileController::class, 'profile_post'])->middleware('logineduser')->name('profile.post');
+
+// DAFTAR USAHA VIEW
+Route::get('/admin/daftar-usaha', [DeskripsiUsahaController::class, 'admin_daftar_usaha'])->middleware(['logineduser', 'admin']);
+Route::get('/daftar-usaha/pendana', [DeskripsiUsahaController::class, 'pendana_daftar_usaha'])->middleware(['logineduser', ]);
+Route::get('/daftar-usaha/{id_pemilik_usaha}', [DeskripsiUsahaController::class, 'pengusaha_daftar_usaha'])->middleware(['logineduser', ]);
+
 
 // AUTH LOGIN REGISTER VIEW
 Route::get('/login', [AuthenticationController::class, 'login'])->middleware('guest')->name('login.view');
