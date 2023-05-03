@@ -13,7 +13,7 @@
 
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">KOTA</p>
-    <select type="text" name="kota" onchange="window.location.assign('{{ url()->current() . '?edit=true&kota=' }}' + this.value)"
+    <select type="text" name="kota" onselect="window.location.assign('{{ url()->current() . '?edit=true&kota=' }}' + this.value)"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-[6px] text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' ? 'disabled' : '' }}>
       @foreach ($city as $key => $value)
@@ -31,7 +31,7 @@
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-[6px] text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) ? 'disabled' : '' }}>
       @foreach ($district as $key => $value)
-        @if ($value->city_code == request()->get('kota'))
+        @if ($value->city_code == request()->get('kota') || $value->city_code == $detailUser->kota)
           <option value="{{ $value->code }}"
             {{ $value->code == request()->get('kecamatan') || $value->code == $detailUser->kecamatan ? 'selected' : '' }}>{{ $value->name }}
           </option>
@@ -119,7 +119,7 @@
       <p>UPDATE PROFILE</p>
     </button>
   @else
-    <a href="/profile?edit=true"
+    <a href="/profile?edit=true{{ !empty($detailUser->kota) ? '&kota=' . $detailUser->kota : '' }}{{ !empty($detailUser->kecamatan) ? '&kecamatan=' . $detailUser->kecamatan : '' }}"
       class="col-start-4 col-end-10 text-center  py-2 my-2 font-roboto font-medium text-white bg-rose-700 rounded-full hover:text-rose-700 hover:bg-white hover:shadow-md hover:shadow-rose-700/50 cursor-pointer duration-200">
       <p>EDIT PROFILE</p>
     </a>
