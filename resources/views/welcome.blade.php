@@ -18,7 +18,7 @@
   <x-navbar />
 
   <div class="flex-1 flex flex-col px-12 items-center ">
-    <h1 class="text-yellow-500 font-semibold text-5xl my-4  text-center">Vestry Web App</h1>
+    <h1 class="text-yellow-500 font-semibold text-7xl my-4  text-center font-righteous">Vestry</h1>
     @if (auth('pendana')->check() || auth('pengusaha')->check() || auth('admin')->check())
       <x-home-auth />
     @endif

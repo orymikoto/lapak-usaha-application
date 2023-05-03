@@ -26,10 +26,15 @@ Route::get('/profile', [ProfileController::class, 'profile'])->middleware('login
 // PROFILE POST
 Route::post('/profile/edit', [ProfileController::class, 'profile_post'])->middleware('logineduser')->name('profile.post');
 
-// DAFTAR USAHA VIEW
+// DESKRIPSI USAHA VIEW
+Route::get('/daftar-usaha/tambah', [DeskripsiUsahaController::class, 'tambah_usaha'])->middleware(['logineduser', 'pengusaha']);
 Route::get('/admin/daftar-usaha', [DeskripsiUsahaController::class, 'admin_daftar_usaha'])->middleware(['logineduser', 'admin']);
-Route::get('/daftar-usaha/pendana', [DeskripsiUsahaController::class, 'pendana_daftar_usaha'])->middleware(['logineduser', ]);
-Route::get('/daftar-usaha/{id_pemilik_usaha}', [DeskripsiUsahaController::class, 'pengusaha_daftar_usaha'])->middleware(['logineduser', ]);
+Route::get('/daftar-usaha/pendana', [DeskripsiUsahaController::class, 'pendana_daftar_usaha'])->middleware(['logineduser',]);
+Route::get('/daftar-usaha/{id_pemilik_usaha}', [DeskripsiUsahaController::class, 'pengusaha_daftar_usaha'])->middleware(['logineduser',]);
+
+// DESKRIPSI USAHA POST
+Route::post('/daftar-usaha/tambah/{id_pemilik_usaha}', [DeskripsiUsahaController::class, 'tambah_usaha_post'])->middleware(['logineduser', 'pengusaha']);
+
 
 
 // AUTH LOGIN REGISTER VIEW
