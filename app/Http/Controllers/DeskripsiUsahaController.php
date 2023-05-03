@@ -11,12 +11,23 @@ class DeskripsiUsahaController extends Controller
   // GET REQUEST
   public function admin_daftar_usaha()
   {
-    return view('usaha.daftar-usaha-admin');
+    $daftar_usaha = DeskripsiUsaha::join('jenis_usaha', 'jenis_usaha.id_jenis_usaha', '=', 'deskripsi_usaha.id_jenis_usaha')
+      ->join('status_pengajuan', 'status_pengajuan.id_status_pengajuan', '=', 'deskripsi_usaha.id_status_pengajuan')
+      ->join('pemilik_usaha', 'pemilik_usaha.id_pemilik_usaha', '=', 'deskripsi_usaha.id_pemilik_usaha')->orderBy('id_deskripsi_usaha')
+      ->get();
+    return view('usaha.daftar-usaha-admin')->with(array(
+      'daftar_usaha' => $daftar_usaha
+    ));
   }
 
   public function pendana_daftar_usaha()
   {
-    return view('usaha.daftar-usaha-pendana');
+    $daftar_usaha_terkonfirmasi = DeskripsiUsaha::where('id_status_pengajuan', '2')
+      ->join('jenis_usaha', 'jenis_usaha.id_jenis_usaha', '=', 'deskripsi_usaha.id_jenis_usaha')
+      ->get();
+    return view('usaha.daftar-usaha-pendana')->with(array(
+      'daftar_usaha_terkonfirmasi' => $daftar_usaha_terkonfirmasi
+    ));
   }
 
   public function pengusaha_daftar_usaha($id_pemilik_usaha)
@@ -27,6 +38,19 @@ class DeskripsiUsahaController extends Controller
       ->get();
     return view('usaha.daftar-usaha-pengusaha')->with(array(
       'daftar_usaha_user' => $daftar_usaha_user
+    ));
+  }
+
+  public function lihat_detail_usaha($id_deskripsi_usaha)
+  {
+    $deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)
+      ->join('jenis_usaha', 'jenis_usaha.id_jenis_usaha', '=', 'deskripsi_usaha.id_jenis_usaha')
+      ->join('status_pengajuan', 'status_pengajuan.id_status_pengajuan', '=', 'deskripsi_usaha.id_status_pengajuan')
+      ->join('pemilik_usaha', 'pemilik_usaha.id_pemilik_usaha', '=', 'deskripsi_usaha.id_pemilik_usaha')
+      ->first();
+
+    return view('usaha.detail-usaha')->with(array(
+      'deskripsi_usaha' => $deskripsi_usaha
     ));
   }
 

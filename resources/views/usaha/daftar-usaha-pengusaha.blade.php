@@ -46,8 +46,8 @@
         <div class="flex flex-col md:flex-row md:justify-start items-center rounded-md p-4 gap-4 shadow-[4px_5px_10px_0px_rgba(0,0,0,0.5)] ">
           {{-- FOTO USAHA --}}
           {{-- {{ $value->foto_usaha }} --}}
-          <img class="xl:block md:hidden block w-[16rem] min-h-[14rem] h-full rounded-md shadow-md object-cover object-center"
-            src="{{ asset('upload/foto_usaha/foto_usaha_6452ad34016c5.png') }}" alt="" srcset="">
+          <img class="xl:block md:hidden block w-[16rem] h-[14rem]  rounded-md shadow-md object-cover object-center"
+            src="{{ asset('/storage' . $value->foto_usaha) }}" alt="" srcset="">
 
           {{-- DETAIL USAHA --}}
           <div class="flex flex-col flex-1 gap-2 md:items-start items-center">

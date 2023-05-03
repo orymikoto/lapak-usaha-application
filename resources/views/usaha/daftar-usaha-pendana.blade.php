@@ -45,15 +45,13 @@
 
     {{-- DAFTAR USAHA --}}
     <div class="flex-1 flex flex-col md:pr-6 relative gap-4">
-      <h1 class="text-yellow-500 font-righteous text-3xl text-center my-4">Daftar Usaha {{ auth('pengusaha')->user()->username }}</h1>
-      @foreach ($daftar_usaha_user as $key => $value)
+      <h1 class="text-yellow-500 font-righteous text-3xl text-center my-4">Daftar Usaha</h1>
+      @foreach ($daftar_usaha_terkonfirmasi as $key => $value)
         {{-- {{ asset('storage/app/public' . $value->foto_usaha) }} --}}
         <div class="flex flex-col md:flex-row md:justify-start items-center rounded-md p-4 gap-4 shadow-[4px_5px_10px_0px_rgba(0,0,0,0.5)] ">
           {{-- FOTO USAHA --}}
-          {{-- {{ $value->foto_usaha }} --}}
-          <div
-            class="xl:block md:hidden block min-w-[16rem] min-h-[14rem] h-full bg-[url('{{ $value->foto_usaha }}')] rounded-md shadow-md bg-center bg-cover">
-          </div>
+          <img class="xl:block md:hidden block w-[16rem] h-[14rem]  rounded-md shadow-md object-cover object-center"
+            src="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->foto_usaha) : $value->foto_usaha }}" alt="" srcset="">
 
           {{-- DETAIL USAHA --}}
           <div class="flex flex-col flex-1 gap-2 md:items-start items-center">
@@ -86,7 +84,9 @@
           {{-- ACTION --}}
           <div class="flex flex-col items-center justify-center gap-2 w-[12rem]">
             <div class="w-14 h-14 flex items-center justify-center">
-              <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
+              <a href="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->proposal) : $value->proposal }}">
+                <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
+              </a>
             </div>
             <div class="flex w-[10rem] rounded-full bg-neutral-200 overflow-hidden">
               <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
@@ -100,8 +100,6 @@
 
         </div>
       @endforeach
-      <a href="/daftar-usaha/tambah/{{ auth('pengusaha')->user()->user_id }}"
-        class="bg-emerald-400 duration-200 text-white right-[50%] hover:text-emerald-400 hover:bg-white w-[7rem] hover:shadow-md hover:shadow-emerald-400/50 py-1 rounded-full overflow-hidden my-4  mx-auto text-center font-medium font-roboto">Tambah</a>
     </div>
   </div>
 

@@ -27,3 +27,4 @@ const selectProvince = (code) => {
   console.log(code);
   return location.href(`/profile?edit=true&provinsi=${code}`)
 }
+
