@@ -24,7 +24,7 @@
   </script>
 </head>
 
-<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden ">
+<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   @if (session()->has('hapus'))
     <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
       <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
@@ -35,7 +35,7 @@
     </div>
     {{session()->forget('hapus')}}
   @endif
-  <div id="konfirmasi" class="hidden w-full h-full z-10 flex items-center justify-center absolute bg-neutral-500/60">
+  <div id="konfirmasi" class="hidden w-full h-full z-10 flex flex-1 items-center justify-center absolute bg-neutral-500/60">
     <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
       <h2 class="text-lg">Pesan!</h2>
       <p class="text-sm font-light text-neutral-400 w-[10rem]">Hapus data deskripsi usaha yang dipilih?</p>
@@ -82,7 +82,7 @@
           {{-- FOTO USAHA --}}
           {{-- {{ $value->foto_usaha }} --}}
           <img class="xl:block md:hidden block w-[16rem] h-[14rem]  rounded-md shadow-md object-cover object-center"
-            src="{{ asset('/storage' . $value->foto_usaha) }}" alt="" srcset="">
+            src="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->foto_usaha) : $value->foto_usaha }}" alt="" srcset="">
 
           {{-- DETAIL USAHA --}}
           <div class="flex flex-col flex-1 gap-2 md:items-start items-center">
@@ -115,7 +115,9 @@
           {{-- ACTION --}}
           <div class="flex flex-col items-center justify-center gap-2 w-[12rem]">
             <div class="w-14 h-14 flex items-center justify-center">
-              <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
+              <a href="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->proposal) : $value->proposal }}">
+                <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
+              </a>
             </div>
             <div class="flex w-[10rem] rounded-full bg-neutral-200 overflow-hidden">
               <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"

@@ -32,7 +32,7 @@
   <title>Vestry</title>
 </head>
 
-<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden ">
+<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   <x-navbar />
   @if (session()->has('konfirmasi'))
     <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
