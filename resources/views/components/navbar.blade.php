@@ -1,8 +1,8 @@
 <div class="w-full py-2 flex bg-neutral-800 px-8">
   <a href="/" class="flex flex-col items-center w-[14rem] cursor-pointer">
-    <img src="/images/logo.png" class="object-cover object-center w-12 h-12" alt="logo vestry">
-    <p class="text-white text-sm font-semibold">Vestry Application</p>
-  </a >
+    <img src="/images/logo.png" class="object-contain object-center w-40 h-16" alt="logo vestry">
+    {{-- <p class="text-white text-sm font-semibold">Vestry Application</p> --}}
+  </a>
   <div class="flex-1 flex items-center justify-center gap-x-4">
     @if (auth('pendana')->check() || auth('pengusaha')->check())
       <a href="" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
