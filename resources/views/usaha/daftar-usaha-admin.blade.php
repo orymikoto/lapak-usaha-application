@@ -7,11 +7,63 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   @vite('resources/js/app.js')
 
+  <script>
+
+    const showKonfirmasi = (id) => {
+      document.getElementById("konfirmasi").classList.remove("hidden")
+      document.getElementById("link_konfirmasi").href=`/daftar-usaha/konfirmasi/${id}`
+    }
+
+    const showTidakKonfirmasi = (id) => {
+      document.getElementById("tidak_konfirmasi").classList.remove("hidden")
+      document.getElementById("link_tidak_konfirmasi").href=`/daftar-usaha/tidak-konfirmasi/${id}`
+    }
+
+    const hideKonfirmasi = () => {
+      document.getElementById("konfirmasi").classList.add("hidden")
+      document.getElementById("link_konfirmasi").href="/"
+    }
+    const hideTidakKonfirmasi = () => {
+      document.getElementById("tidak_konfirmasi").classList.add("hidden")
+      document.getElementById("tidak_link_konfirmasi").href="/"
+    }
+
+  </script>
   <title>Vestry</title>
 </head>
 
 <body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden ">
   <x-navbar />
+  @if (session()->has('konfirmasi'))
+    <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
+      <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+        <h2 class="text-lg">Pesan!</h2>
+        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{session()->get('konfirmasi')}}</p>
+        <a href="/admin/daftar-usaha" class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
+      </div>
+    </div>
+    {{session()->forget('updated')}}
+  @endif
+  <div id="konfirmasi" class="hidden w-full h-full z-10 flex items-center justify-center absolute bg-neutral-500/60">
+    <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+      <h2 class="text-lg">Pesan!</h2>
+      <p class="text-sm font-light text-neutral-400 w-[10rem]">Konfirmasi Data Usaha Yang Dipilih?</p>
+      <div class="flex gap-x-2">
+        <button class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50" onclick="hideKonfirmasi()" >Tidak</button>
+        <a id="link_konfirmasi" href="/daftar-usaha/hapus/" class="py-1 w-[7rem] text-center bg-emerald-400 text-white hover:text-emerald-400 hover:bg-white rounded-md hover:shadow-md hover:shadow-emerald-400/50">Ya</a>
+      </div>
+    </div>
+  </div> 
+  <div id="tidak_konfirmasi" class="hidden w-full h-full z-10 flex items-center justify-center absolute bg-neutral-500/60">
+    <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+      <h2 class="text-lg">Pesan!</h2>
+      <p class="text-sm font-light text-neutral-400 w-[10rem]">Tidak Konfirmasi Data Usaha Yang Dipilih?</p>
+      <div class="flex gap-x-2">
+        <button class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50" onclick="hideTidakKonfirmasi()">Tidak</button>
+        <a id="link_tidak_konfirmasi" href="/daftar-usaha/hapus/" class="py-1 w-[7rem] text-center bg-emerald-400 text-white hover:text-emerald-400 hover:bg-white rounded-md hover:shadow-md hover:shadow-emerald-400/50">Ya</a>
+      </div>
+    </div>
+  </div> 
 
   <div class="flex w-full flex-1 my-4 gap-x-4">
     {{-- SIDEBAR --}}
@@ -59,9 +111,12 @@
           <div
             class="flex lg:gap-0 md:gap-2 gap-0 lg:rounded-full md:rounded-none rounded-full lg:flex-row md:flex-col flex-row lg:w-[21rem] md:w-[10rem] w-[21rem] overflow-hidden lg:bg-neutral-200 md:bg-transparent bg-neutral-200 font-medium font-roboto  text-neutral-400">
             <div
+            onclick="{{$value->id_status_pengajuan == 1 ? 'showKonfirmasi(' . $value->id_deskripsi_usaha . ')'  : ''}}"
+            
               class="py-1 text-center select-none flex-1 lg:rounded-none md:rounded-full rounded-none duration-200 {{ $value->id_status_pengajuan == 2 ? 'text-white bg-emerald-400 cursor-default' : 'lg:bg-transparent md:bg-neutral-200 bg-transparent hover:bg-emerald-200 hover:text-white cursor-pointer' }}">
               Terkonfirmasi</div>
             <div
+            onclick="{{$value->id_status_pengajuan == 2 ? 'showTidakKonfirmasi(' . $value->id_deskripsi_usaha . ')'  : ''}}"  
               class="py-1 text-center select-none flex-1 lg:rounded-none md:rounded-full rounded-none duration-200 {{ $value->id_status_pengajuan == 1 ? 'text-white bg-red-500 cursor-default' : 'lg:bg-transparent md:bg-neutral-200 bg-transparent hover:bg-red-300 hover:text-white cursor-pointer' }}">
               Tidak Terkonfirmasi</div>
           </div>
@@ -77,9 +132,6 @@
               <a href="/daftar-usaha/view/{{ $value->id_deskripsi_usaha }}"
                 class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-yellow-500 hover:bg-yellow-500 font-roboto">
                 View</a>
-              <div onclick="console.log('hello')"
-                class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-red-500 hover:bg-red-500 font-roboto">
-                Delete</div>
             </div>
           </div>
 

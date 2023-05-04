@@ -39,8 +39,9 @@ Route::get('/daftar-usaha/{id_pemilik_usaha}', [DeskripsiUsahaController::class,
 // DESKRIPSI USAHA POST
 Route::post('/daftar-usaha/tambah/{id_pemilik_usaha}', [DeskripsiUsahaController::class, 'tambah_usaha_post'])->middleware(['logineduser', 'pengusaha']);
 Route::post('/daftar-usaha/edit/{id_deskripsi_usaha}', [DeskripsiUsahaController::class, 'edit_usaha_post'])->middleware(['logineduser', 'pengusaha']);
-Route::get('/daftar-usaha/hapus/{id_deskripsi_usaha}', [DeskripsiUsahaController::class, 'edit_usaha_post'])->middleware(['logineduser', 'pengusaha']);
+Route::get('/daftar-usaha/hapus/{id_deskripsi_usaha}', [DeskripsiUsahaController::class, 'hapus_usaha_post'])->middleware(['logineduser', 'pengusaha']);
 Route::get('/daftar-usaha/konfirmasi/{id_deskripsi_usaha}', [DeskripsiUsahaController::class, 'konfirmasi_usaha_post'])->middleware(['logineduser', 'admin']);
+Route::get('/daftar-usaha/tidak-konfirmasi/{id_deskripsi_usaha}', [DeskripsiUsahaController::class, 'tidak_konfirmasi_usaha_post'])->middleware(['logineduser', 'admin']);
 
 // ADMIN VIEW
 Route::get('/admin/daftar-pendana', [PendanaController::class, 'admin_daftar_pendana'])->middleware(['logineduser', 'admin']);

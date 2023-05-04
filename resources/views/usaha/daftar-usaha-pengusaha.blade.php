@@ -8,9 +8,44 @@
   @vite('resources/js/app.js')
 
   <title>Vestry</title>
+
+  <script>
+
+    const showKonfirmasi = (id) => {
+      document.getElementById("konfirmasi").classList.remove("hidden")
+      document.getElementById("link_konfirmasi").href=`/daftar-usaha/hapus/${id}`
+    }
+
+    const hideKonfirmasi = () => {
+      document.getElementById("konfirmasi").classList.add("hidden")
+      document.getElementById("link_konfirmasi").href="/"
+    }
+
+  </script>
 </head>
 
 <body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden ">
+  @if (session()->has('hapus'))
+    <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
+      <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+        <h2 class="text-lg">Pesan!</h2>
+        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{session()->get('hapus')}}</p>
+        <a href="/daftar-usaha/{{request()->route()->id_pemilik_usaha}}" class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
+      </div>
+    </div>
+    {{session()->forget('hapus')}}
+  @endif
+  <div id="konfirmasi" class="hidden w-full h-full z-10 flex items-center justify-center absolute bg-neutral-500/60">
+    <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+      <h2 class="text-lg">Pesan!</h2>
+      <p class="text-sm font-light text-neutral-400 w-[10rem]">Hapus data deskripsi usaha yang dipilih?</p>
+      <div class="flex gap-x-2">
+        <button class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50" onclick="hideKonfirmasi()" >Tidak</button>
+        <a id="link_konfirmasi" href="/daftar-usaha/hapus/" class="py-1 w-[7rem] text-center bg-emerald-400 text-white hover:text-emerald-400 hover:bg-white rounded-md hover:shadow-md hover:shadow-emerald-400/50">Ya</a>
+      </div>
+    </div>
+  </div> 
+
   <x-navbar />
 
   <div class="flex w-full flex-1 my-4 gap-x-4">
@@ -86,7 +121,7 @@
               <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
                 class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-yellow-500 hover:bg-yellow-500 font-roboto">
                 Edit</a>
-              <div onclick="console.log('hello')"
+              <div onclick="showKonfirmasi({{$value->id_deskripsi_usaha}})"
                 class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-red-500 hover:bg-red-500 font-roboto">
                 Delete</div>
             </div>
