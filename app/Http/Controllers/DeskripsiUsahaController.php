@@ -54,6 +54,21 @@ class DeskripsiUsahaController extends Controller
     ));
   }
 
+  public function edit_detail_usaha($id_deskripsi_usaha)
+  {
+    $jenis_usaha = JenisUsaha::all();
+    $deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)
+      ->join('jenis_usaha', 'jenis_usaha.id_jenis_usaha', '=', 'deskripsi_usaha.id_jenis_usaha')
+      ->join('status_pengajuan', 'status_pengajuan.id_status_pengajuan', '=', 'deskripsi_usaha.id_status_pengajuan')
+      ->join('pemilik_usaha', 'pemilik_usaha.id_pemilik_usaha', '=', 'deskripsi_usaha.id_pemilik_usaha')
+      ->first();
+
+    return view('usaha.edit-usaha-pengusaha')->with(array(
+      'deskripsi_usaha' => $deskripsi_usaha,
+      'jenis_usaha' => $jenis_usaha
+    ));
+  }
+
   public function tambah_usaha()
   {
     $jenis_usaha = JenisUsaha::all();
