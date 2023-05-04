@@ -32,12 +32,15 @@ class AuthenticationController extends Controller
   public function logout()
   {
     if (auth('admin')->check()) {
+      session()->flash('logout', 'Pengguna telah keluar, silahkan login kembali untuk mengakses fitur lengkap aplikasi Vestry');
       auth('admin')->logout();
       return redirect('/');
     } elseif (auth('pendana')->check()) {
+      session()->flash('logout', 'Pengguna telah keluar, silahkan login kembali untuk mengakses fitur lengkap aplikasi Vestry');
       auth('pendana')->logout();
       return redirect('/');
     } elseif (auth('pengusaha')->check()) {
+      session()->flash('logout', 'Pengguna telah keluar, silahkan login kembali untuk mengakses fitur lengkap aplikasi Vestry');
       auth('pengusaha')->logout();
       return redirect('/');
     }
@@ -89,6 +92,13 @@ class AuthenticationController extends Controller
         'username' => $request->username,
         'email' => $request->email,
         'password' => Hash::make($request->password),
+        'no_ktp' => $request['no_ktp'],
+        'no_hp' => $request['no_hp'],
+        'alamat_rumah' => $request['alamat_rumah'],
+        'kecamatan' => $request['kecamatan'],
+        'kota' => $request['kota'],
+        'no_rekening' => $request['no_rekening'],
+        'id_bank' => $request['id_bank']
       ]);
       return view('auth.login')->with('registered', 'Register berhasil dilakukan silahkan login!');
     } elseif (request()->role == 'pengusaha') {
@@ -97,6 +107,13 @@ class AuthenticationController extends Controller
         'username' => $request->username,
         'email' => $request->email,
         'password' => Hash::make($request->password),
+        'no_ktp' => $request['no_ktp'],
+        'no_hp' => $request['no_hp'],
+        'alamat_rumah' => $request['alamat_rumah'],
+        'kecamatan' => $request['kecamatan'],
+        'kota' => $request['kota'],
+        'no_rekening' => $request['no_rekening'],
+        'id_bank' => $request['id_bank']
       ]);
       return view('auth.login')->with('registered', 'Register berhasil dilakukan silahkan login!');
     } else {
