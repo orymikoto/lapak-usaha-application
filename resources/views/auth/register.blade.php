@@ -65,7 +65,7 @@
                 class="outline-none w-full text-neutral-400 focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md  focus:text-yellow-500 focus:border-yellow-500 duration-200 ">
                 @foreach ($district as $key => $value)
                   @if ($value->city_code == request()->get('kota'))
-                    <option value="{{ $value->code }}" {{ $value->code == request()->get('kota') ? 'selected' : '' }}>
+                    <option value="{{ $value->code }}" {{ $value->code == request()->get('kecamatan') ? 'selected' : '' }}>
                       {{ $value->name }}</option>
                   @endif
                 @endforeach

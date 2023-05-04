@@ -13,7 +13,7 @@
 
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">KOTA</p>
-    <select type="text" name="kota" onselect="window.location.assign('{{ url()->current() . '?edit=true&kota=' }}' + this.value)"
+    <select type="text" name="kota" onchange="window.location.assign('{{ url()->current() . '?edit=true&kota=' }}' + this.value)"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-[6px] text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' ? 'disabled' : '' }}>
       @foreach ($city as $key => $value)
