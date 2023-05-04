@@ -57,7 +57,7 @@
       <div class="flex flex-col w-[30rem]">
         <p class="text-neutral-500 font-medium font-roboto mx-2">FOTO USAHA</p>
         <div class="bg-yellow-500 w-[10rem] text-center rounded-full mx-2 py-1 text-white font-medium font-roboto">
-          <label for="files" class="w-full cursor-pointer bg-slate-300">
+          <label for="files" class="w-full cursor-pointer ">
             change picture
           </label>
         </div>
@@ -68,7 +68,7 @@
       <div class="flex flex-col w-[30rem]">
         <p class="text-neutral-500 font-medium font-roboto mx-2">PROPOSAL</p>
         <div class="bg-yellow-500 w-[10rem] text-center rounded-full mx-2 py-1 text-white font-medium font-roboto">
-          <label for="filesp" class="w-full cursor-pointer bg-slate-300">
+          <label for="filesp" class="w-full cursor-pointer ">
             change proposal
           </label>
         </div>
@@ -78,7 +78,7 @@
           class=" hidden outline-none rounded-md file:cursor-pointer file:py-2 file:px-4 bg-neutral-100 file:rounded-md file:outline-none file:bg-neutral-200 file:text-yellow-500 hover:file:text-white hover:file:bg-yellow-500 file:duration-200 file:ring-0 file:border-none focus:ring-0 text-neutral-500 focus:text-yellow-500 font-medium font-roboto duration-200">
       </div>
       <button type="submit"
-        class="w-[20rem] py-1 text-center text-white hover:text-rose-600 bg-rose-600 hover:bg-white hover:shadow-md hover:shadow-rose-600/50 duration-200 my-2 rounded-full font-roboto font-medium text-lg ">Tambah
+        class="w-[20rem] py-1 text-center text-white hover:text-rose-600 bg-rose-600 hover:bg-white hover:shadow-md hover:shadow-rose-600/50 duration-200 my-2 rounded-full font-roboto font-medium text-lg ">Edit
         Usaha</button>
     </form>
   </div>

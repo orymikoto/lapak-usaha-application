@@ -93,7 +93,7 @@
             srcset="">
         </div>
         <div class="w-14 h-14 flex items-center justify-center">
-          <a href="{{ $deskripsi_usaha->id_deskripsi_usaha > 3 ? asset('/storage' . $deskripsi_usaha->propoal) : $deskripsi_usaha->propoal }}"
+          <a href="{{ $deskripsi_usaha->id_deskripsi_usaha > 3 ? asset('/storage' . $deskripsi_usaha->proposal) : $deskripsi_usaha->proposal }}"
             target="_blank">
             <img src="/icons/pdf.svg" class="w-12 h-12 hover:w-14 hover:h-14 cursor-pointer duration-200" alt="" srcset="">
           </a>

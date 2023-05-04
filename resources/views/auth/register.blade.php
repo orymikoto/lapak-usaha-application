@@ -60,7 +60,7 @@
             </div>
             <div class="col-span-6 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Kecamatan</p>
-              <select type="text" name="kota" {{ empty(request()->get('kota')) ? 'disabled' : '' }}
+              <select type="text" name="kecamatan" {{ empty(request()->get('kota')) ? 'disabled' : '' }}
                 onchange="window.location.assign('{{ url()->current() . '?role=' . request()->get('role') . '&kota=' . request()->get('kota') . '&kecamatan=' }}' + this.value)"
                 class="outline-none w-full text-neutral-400 focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md  focus:text-yellow-500 focus:border-yellow-500 duration-200 ">
                 @foreach ($district as $key => $value)
