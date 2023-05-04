@@ -21,7 +21,7 @@
         <p>Daftar Menu</p>
       </div>
       <div class="flex flex-col flex-1 justify-center font-medium font-roboto">
-        <a class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
+        <a href="/daftar-usaha/pendana" class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
           <p>Daftar Usaha</p>
         </a>
         <a class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
@@ -29,12 +29,6 @@
         </a>
         <a class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
           <p>Riwayat</p>
-        </a>
-        <a class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
-          <p>Akun Pendana</p>
-        </a>
-        <a class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
-          <p>Akun Pengusaha</p>
         </a>
       </div>
       <a href="/"
@@ -48,53 +42,39 @@
       <h1 class="text-yellow-500 font-righteous text-3xl text-center my-4">Daftar Usaha</h1>
       @foreach ($daftar_usaha_terkonfirmasi as $key => $value)
         {{-- {{ asset('storage/app/public' . $value->foto_usaha) }} --}}
-        <div class="flex flex-col md:flex-row md:justify-start items-center rounded-md p-4 gap-4 shadow-[4px_5px_10px_0px_rgba(0,0,0,0.5)] ">
-          {{-- FOTO USAHA --}}
-          <img class="xl:block md:hidden block w-[16rem] h-[14rem]  rounded-md shadow-md object-cover object-center"
+        {{-- {{ asset('storage/app/public' . $value->foto_usaha) }} --}}
+        <div class="flex flex-col md:flex-row md:justify-start items-center rounded-md p-2 gap-2 shadow-[4px_5px_10px_0px_rgba(0,0,0,0.5)] ">
+          <img class="lg:block md:hidden block  lg:w-24 lg:h-20 w-40 h-32 rounded-md shadow-md object-cover object-center"
             src="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->foto_usaha) : $value->foto_usaha }}" alt="" srcset="">
-
           {{-- DETAIL USAHA --}}
-          <div class="flex flex-col flex-1 gap-2 md:items-start items-center">
+          <div class="flex flex-col md:items-start items-center flex-1">
             <h2 class="font-roboto font-medium text-xl text-yellow-500">{{ $value->nama_usaha }}</h2>
-            <div class="flex text-neutral-500 font-medium font-roboto">
-              <p>Tahun Berdiri</p>
-              <p>: {{ $value->tahun_berdiri }}</p>
-            </div>
-            <div class="flex text-neutral-500 font-medium font-roboto">
-              <p>Jenis Usaha</p>
-              <p>: {{ $value->nama_jenis_usaha }}</p>
-            </div>
+            <p class="text-neutral-400 font-medium font-roboto">{{ $value->nama_jenis_usaha }}</p>
+          </div>
+          <div class="w-[10rem] font-roboto font-medium  text-yellow-500 ">
+            <p class="w-full truncate">{{ $value->username }}</p>
+          </div>
+          <div
+            class="flex lg:gap-0 md:gap-2 gap-0 lg:rounded-full md:rounded-none rounded-full lg:flex-row md:flex-col flex-row lg:w-[21rem] md:w-[10rem] w-[21rem] overflow-hidden lg:bg-neutral-200 md:bg-transparent bg-neutral-200 font-medium font-roboto  text-neutral-400">
             <div
-              class="flex lg:gap-0 md:gap-2 gap-0 lg:rounded-full md:rounded-none rounded-full lg:flex-row md:flex-col flex-row lg:w-[21rem] md:w-[10rem] w-[21rem] overflow-hidden lg:bg-neutral-200 md:bg-transparent bg-neutral-200 font-medium font-roboto  text-neutral-400">
-              <div
-                class="py-1 text-center cursor-default select-none flex-1 lg:rounded-none md:rounded-full rounded-none {{ $value->id_status_pengajuan == 2 ? 'text-white bg-emerald-400' : 'lg:bg-transparent md:bg-neutral-200 bg-transparent' }}">
-                Terkonfirmasi</div>
-              <div
-                class="py-1 text-center cursor-default select-none  flex-1 lg:rounded-none md:rounded-full rounded-none {{ $value->id_status_pengajuan == 1 ? 'text-white bg-red-500' : 'lg:bg-transparent md:bg-neutral-200 bg-transparent' }}">
-                Tidak Terkonfirmasi</div>
-            </div>
-            <div class=" flex flex-col md:items-start items-center rounded-md text-justify text-neutral-700 w-full ">
-              <p class="">Deskripsi</p>
-              <p class="p-2 bg-neutral-200 rounded-md text-neutral-500 w-full">
-                {{ $value->deskripsi }}
-              </p>
-            </div>
+              class="py-1 text-center select-none flex-1 lg:rounded-none md:rounded-full rounded-none duration-200 {{ $value->id_status_pengajuan == 2 ? 'text-white bg-emerald-400 cursor-default' : 'lg:bg-transparent md:bg-neutral-200 bg-transparent' }}">
+              Terkonfirmasi</div>
+            <div
+              class="py-1 text-center select-none flex-1 lg:rounded-none md:rounded-full rounded-none duration-200 {{ $value->id_status_pengajuan == 1 ? 'text-white bg-red-500 cursor-default' : 'lg:bg-transparent md:bg-neutral-200 bg-transparent' }}">
+              Tidak Terkonfirmasi</div>
           </div>
 
           {{-- ACTION --}}
-          <div class="flex flex-col items-center justify-center gap-2 w-[12rem]">
+          <div class="flex items-center justify-center gap-2 w-[12rem]">
             <div class="w-14 h-14 flex items-center justify-center">
               <a href="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->proposal) : $value->proposal }}">
                 <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
               </a>
             </div>
             <div class="flex w-[10rem] rounded-full bg-neutral-200 overflow-hidden">
-              <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
+              <a href="/daftar-usaha/view/{{ $value->id_deskripsi_usaha }}"
                 class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-yellow-500 hover:bg-yellow-500 font-roboto">
-                Edit</a>
-              <div onclick="console.log('hello')"
-                class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-red-500 hover:bg-red-500 font-roboto">
-                Delete</div>
+                View</a>
             </div>
           </div>
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\Bank;
 use App\Models\PemilikUsaha;
 use App\Models\Pendana;
 use App\Models\User;
@@ -20,7 +21,12 @@ class AuthenticationController extends Controller
 
   public function register()
   {
-    return view('auth.register');
+    $city = \Indonesia::allCities();
+    $district = \Indonesia::allDistricts();
+    $bank = Bank::all();
+    return view('auth.register')->with(array(
+      'city' => $city, 'district' => $district, 'bank' => $bank
+    ));
   }
 
   public function logout()
