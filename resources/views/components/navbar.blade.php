@@ -1,6 +1,6 @@
 <div class="w-full py-2 flex bg-neutral-800 px-8">
   <a href="/" class="flex flex-col items-center w-[14rem] cursor-pointer">
-    <img src="/images/logo.png" class="object-contain object-center w-40 h-16" alt="logo vestry">
+    <img src="/images/logo.png" class="w-40 h-16" alt="logo vestry">
     {{-- <p class="text-white text-sm font-semibold">Vestry Application</p> --}}
   </a>
   <div class="flex-1 flex items-center justify-center gap-x-4">
