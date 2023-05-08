@@ -11,11 +11,11 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('pembayaran', function (Blueprint $table) {
-      $table->increments('id_pembayaran');
-      $table->date('tanggal_pembayaran');
-      $table->string('bukti_pembayaran');
-      $table->boolean('status_pembayaran');
+    Schema::create('pencairan_dana', function (Blueprint $table) {
+      $table->increments('pencairan_dana');
+      $table->date('tanggal_pencairan_dana');
+      $table->integer('nominal_pencairan');
+      $table->boolean('status_pencairan');
 
       // Foreign Key Column
       $table->integer('id_proyek_pendanaan')->unsigned();
@@ -33,6 +33,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('pembayaran');
+    Schema::dropIfExists('pencairan_dana');
   }
 };

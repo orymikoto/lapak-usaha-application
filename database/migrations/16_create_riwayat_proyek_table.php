@@ -12,7 +12,17 @@ return new class extends Migration
   public function up(): void
   {
     Schema::create('riwayat_proyek', function (Blueprint $table) {
-      $table->id();
+      $table->increments('id_riwayat_proyek');
+      $table->date('tanggal_mulai');
+      $table->date('tanggal_selesai');
+
+      // Foreign Key Column
+      $table->integer('id_proyek_pendanaan')->unsigned();
+
+      // Foreign Key Relation
+      $table->foreign('id_proyek_pendanaan')->references('id_proyek_pendanaan')->on('proyek_pendanaan')->onDelete('cascade');
+
+      // Timestamps
       $table->timestamps();
     });
   }
