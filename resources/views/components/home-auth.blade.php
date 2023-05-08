@@ -12,7 +12,8 @@
       cupiditate,
       et quam.</p>
   </a>
-  <a class="flex flex-col cursor-pointer p-4 bg-white rounded-lg items-center w-[25rem] shadow-md hover:shadow-black/50 duration-200">
+  <a href="{{ auth('admin')->check() ? '/admin/pendanaan' : '' }}{{ auth('pengusaha')->check() ? '/pendanaan/' . (string) auth('pengusaha')->user()->id_pemilik_usaha : '' }}{{ auth('pendana')->check() ? '/pendanaan/' . (string) auth('pendana')->user()->id_pendana : '' }}"
+    class="flex flex-col cursor-pointer p-4 bg-white rounded-lg items-center w-[25rem] shadow-md hover:shadow-black/50 duration-200">
     <img src="/icons/draft.svg" class="w-10 h-10" alt="" />
     <h2 class="text-yellow-500 text-xl font-medium">Pendanaan</h2>
     <p class="text-sm text-neutral-400 w-[15rem] text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos impedit, reprehenderit

@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
     // CUSTOM MIDDLEWARE
     'logineduser' => \App\Http\Middleware\LoginedUser::class,
     'admin' => \App\Http\Middleware\admin::class,
-    'pengusaha' => \App\Http\Middleware\pengusaha::class
+    'pengusaha' => \App\Http\Middleware\pengusaha::class,
+    'pendana' => \App\Http\Middleware\pendana::class
   ];
 }

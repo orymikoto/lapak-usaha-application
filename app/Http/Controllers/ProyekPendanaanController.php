@@ -2,64 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PemilikUsaha;
+use App\Models\Pendana;
 use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
 
 class ProyekPendanaanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  // ADMIN METHOD
+  public function admin_daftar_pendanaan()
+  {
+    return view();
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  public function admin_detail_pendanaan($id_proyek_pendanaan)
+  {
+    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->first();
+    return view();
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function admin_tambah_file_kontrak_post(Request $request, $id_proyek_pendanaan)
+  {
+    return redirect();
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProyekPendanaan $proyekPendanaan)
-    {
-        //
+  // VIEW METHOD
+  public function daftar_pendanaan($id_pengguna)
+  {
+    if (auth('pendana')->check()) {
+      $pendanaan_pendana = Pendana::where('id_pendana', $id_pengguna)->proyekPendanaan;
+      return view();
+    } elseif (auth('pengusaha')->check()) {
+      $pendanaan_pengusaha = PemilikUsaha::where('id_pemilik_usaha', $id_pengguna)->proyekPendanaan;
+      return view();
+    } else {
+      return view();
     }
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProyekPendanaan $proyekPendanaan)
-    {
-        //
-    }
+  public function detail_pendanaan($id_proyek_pendanaan)
+  {
+    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->first();
+    return view();
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ProyekPendanaan $proyekPendanaan)
-    {
-        //
-    }
+  public function tambah_pendanaan($id_proyek_pendanaan)
+  {
+    return view();
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ProyekPendanaan $proyekPendanaan)
-    {
-        //
-    }
+  // ACTION METHOD
+  public function pengusaha_tambah_file_kontrak_post($id_proyek_pendanaan)
+  {
+    return redirect();
+  }
+
+  public function pendana_tambah_file_kontrak_post($id_proyek_pendanaan)
+  {
+    return redirect();
+  }
+
+  public function tambah_pendanaan_post(Request $request)
+  {
+    return redirect();
+  }
+
+  public function index()
+  {
+  }
 }

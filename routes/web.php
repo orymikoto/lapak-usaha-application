@@ -5,6 +5,7 @@ use App\Http\Controllers\DeskripsiUsahaController;
 use App\Http\Controllers\PemilikUsahaController;
 use App\Http\Controllers\PendanaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProyekPendanaanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,19 @@ Route::get('/daftar-usaha/tidak-konfirmasi/{id_deskripsi_usaha}', [DeskripsiUsah
 // ADMIN VIEW
 Route::get('/admin/daftar-pendana', [PendanaController::class, 'admin_daftar_pendana'])->middleware(['logineduser', 'admin']);
 Route::get('/admin/daftar-pengusaha', [PemilikUsahaController::class, 'admin_daftar_pemilik_usaha'])->middleware(['logineduser', 'admin']);
+
+// PENDANAAN VIEW
+Route::get('/admin/pendanaan/', [ProyekPendanaanController::class, 'admin_daftar_pendanaan'])->middleware(['logineduser', 'admin']);
+Route::get('/admin/pendanaan/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_detail_pendanaan'])->middleware(['logineduser', 'admin']);
+Route::get('/pendanaan/detail/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'detail_pendanaan'])->middleware(['logineduser']);
+Route::get('/pendanaan/tambah', [ProyekPendanaanController::class, 'tambah_pendanaan'])->middleware(['logineduser', 'pendana']);
+Route::get('/pendanaan/{id_pengguna}', [ProyekPendanaanController::class, 'daftar_pendanaan'])->middleware(['logineduser']);
+
+// PENDANAAN ACTION
+Route::post('/admin/pendanaan/tambah-file-kontrak/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_tambah_file_kontrak_post'])->middleware(['logineduser', 'admin']);
+Route::post('/pendanaan/tambah-file-kontrak/pengusaha/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'pengusaha_tambah_file_kontrak_post'])->middleware(['logineduser', 'pengusaha']);
+Route::post('/pendanaan/tambah-file-kontrak/pendana/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'pendana_tambah_file_kontrak_post'])->middleware(['logineduser', 'pendana']);
+Route::post('/pendanaan/tambah', [ProyekPendanaanController::class, 'tambah_pendanaan_post'])->middleware(['logineduser', 'pendana']);
 
 // AUTH LOGIN REGISTER VIEW
 Route::get('/login', [AuthenticationController::class, 'login'])->middleware('guest')->name('login.view');
