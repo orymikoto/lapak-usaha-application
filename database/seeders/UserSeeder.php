@@ -99,7 +99,7 @@ class UserSeeder extends Seeder
           'proposal' => '/upload/proposal/usaha_1.pdf',
           'id_pemilik_usaha' => 1,
           'id_jenis_usaha' => 1,
-          'id_status_pengajuan' => 1,
+          'id_status_pengajuan' => 2,
         ],
         [
           'nama_usaha' => 'Miko Coorporation',
