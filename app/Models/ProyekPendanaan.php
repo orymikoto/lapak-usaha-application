@@ -29,11 +29,11 @@ class ProyekPendanaan extends Model
 
   public function pemilikUsaha(): BelongsTo
   {
-    return $this->belongsTo(pemilikUsaha::class);
+    return $this->belongsTo(PemilikUsaha::class, 'id_pemilik_usaha', 'id_pemilik_usaha');
   }
   public function deskripsiUsaha(): BelongsTo
   {
-    return $this->belongsTo(DeskripsiUsaha::class);
+    return $this->belongsTo(DeskripsiUsaha::class, 'id_deskripsi_usaha', 'id_deskripsi_usaha');
   }
 
   public function Pendana(): BelongsTo
@@ -43,7 +43,7 @@ class ProyekPendanaan extends Model
 
   public function statusPendanaan(): BelongsTo
   {
-    return $this->belongsTo(statusPendanaan::class);
+    return $this->belongsTo(StatusPendanaan::class);
   }
 
   public function pembayaran(): HasOne
@@ -63,6 +63,6 @@ class ProyekPendanaan extends Model
 
   public function pencairanDana(): HasMany
   {
-    return $this->hasMany(pencairanDana::class);
+    return $this->hasMany(PencairanDana::class);
   }
 }

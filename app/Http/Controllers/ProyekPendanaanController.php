@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PemilikUsaha;
-use App\Models\Pendana;
 use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
 
@@ -30,16 +28,17 @@ class ProyekPendanaanController extends Controller
   public function daftar_pendanaan($id_pengguna)
   {
     if (auth('pendana')->check()) {
-      $pendanaan_pendana = Pendana::whereIdPendana($id_pengguna)->first();
-      dd($pendanaan_pendana->proyekPendanaan->join('deskripsi_usaha', 'deskripsi_usaha.id_deskripsi_usaha', '=', 'proyek_pendanaan.id_deskripsi_usaha'));
+      $pendanaan_pendana = ProyekPendanaan::whereIdPendana($id_pengguna)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
+      // dd($pendanaan_pendana);
+      // dd($pendanaan_pendana->proyekPendanaan->join('deskripsi_usaha', 'deskripsi_usaha.id_deskripsi_usaha', '=', 'proyek_pendanaan.id_deskripsi_usaha'));
       return view('proyek_pendanaan.daftar-pendanaan')->with(array(
         'daftarPendanaan' => $pendanaan_pendana
       ));
     } elseif (auth('pengusaha')->check()) {
-      $pendanaan_pengusaha = PemilikUsaha::where('id_pemilik_usaha', $id_pengguna)->first()->proyekPendanaan;
+      $pendanaan_pengusaha = ProyekPendanaan::whereIdPemilikUsaha($id_pengguna)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan');
       return view('proyek_pendanaan.daftar-pendanaan')->with(array('daftarPendanaan' => $pendanaan_pengusaha));
     } else {
-      return view();
+      return view('proyek_pendanaan.daftar-pendanaan');
     }
   }
 

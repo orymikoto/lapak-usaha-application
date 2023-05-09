@@ -86,6 +86,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\JenisUsaha|null $jenisUsaha
  * @property-read \App\Models\PemilikUsaha|null $pemilikUsaha
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProyekPendanaan> $proyekPendanaan
+ * @property-read int|null $proyek_pendanaan_count
  * @property-read \App\Models\StatusPengajuan|null $statusPengajuan
  * @method static \Illuminate\Database\Eloquent\Builder|DeskripsiUsaha newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|DeskripsiUsaha newQuery()
@@ -326,9 +328,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Pendana $Pendana
- * @property-read \App\Models\DeskripsiUsaha|null $deskripsiUsaha
+ * @property-read \App\Models\DeskripsiUsaha $deskripsiUsaha
  * @property-read \App\Models\Pembayaran|null $pembayaran
- * @property-read \App\Models\PemilikUsaha|null $pemilikUsaha
+ * @property-read \App\Models\PemilikUsaha $pemilikUsaha
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PencairanDana> $pencairanDana
  * @property-read int|null $pencairan_dana_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProgresPendanaan> $progresPendanaan
