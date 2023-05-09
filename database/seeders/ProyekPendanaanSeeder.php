@@ -27,6 +27,10 @@ class ProyekPendanaanSeeder extends Seeder
     ProyekPendanaan::insert(array(
       [
        'jumlah_dana' => 25000000,
+       'file_kontrak_admin' => null,
+       'file_kontrak_pengusaha' => null,
+       'file_kontrak_pendana' => null,
+       'bukti_bagi_hasil' => null,
        'id_deskripsi_usaha' => 1,
        'id_pemilik_usaha' => 1,
        'id_pendana' => 1,
@@ -35,20 +39,24 @@ class ProyekPendanaanSeeder extends Seeder
       [
         'jumlah_dana' => 10000000,
         'file_kontrak_admin' => '/storage/upload/file_kontrak_admin/proyek_pendanaan1.pdf',
+        'file_kontrak_pengusaha' => null,
+        'file_kontrak_pendana' => null,
+        'bukti_bagi_hasil' => null,
         'id_deskripsi_usaha' => 2,
         'id_pemilik_usaha' => 2,
-        'id_pendana' => 2,
-        'id_status_pendanaan' => 2,
+        'id_pendana' => 1,
+        'id_status_pendanaan' => 1,
       ],
       [
         'jumlah_dana' => 10000000,
         'file_kontrak_admin' => '/storage/upload/file_kontrak_admin/proyek_pendanaan2.pdf',
         'file_kontrak_pengusaha' => '/storage/upload/file_kontrak_pengusaha/proyek_pendanaan2.pdf',
         'file_kontrak_pendana' => '/storage/upload/file_kontrak_pendana/proyek_pendanaan2.pdf',
+        'bukti_bagi_hasil' => null,
         'id_deskripsi_usaha' => 2,
         'id_pemilik_usaha' => 2,
         'id_pendana' => 1,
-        'id_status_pendanaan' => 4,
+        'id_status_pendanaan' => 2,
       ],
     ));
     Pembayaran::insert(array(

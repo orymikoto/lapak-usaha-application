@@ -42,11 +42,11 @@ class PemilikUsaha extends Authenticatable
 
   public function deskripsiUsaha(): HasMany
   {
-    return $this->hasMany(DeskripsiUsaha::class);
+    return $this->hasMany(DeskripsiUsaha::class, 'id_pemilik_usaha', 'id_pemilik_usaha');
   }
 
   public function proyekPendanaan(): HasMany
   {
-    return $this->hasMany(ProyekPendanaan::class);
+    return $this->hasMany(ProyekPendanaan::class, 'id_pemilik_usaha', 'id_pemilik_usaha');
   }
 }

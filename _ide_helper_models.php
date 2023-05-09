@@ -325,7 +325,7 @@ namespace App\Models{
  * @property int $id_status_pendanaan
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\Pendana|null $Pendana
+ * @property-read \App\Models\Pendana $Pendana
  * @property-read \App\Models\DeskripsiUsaha|null $deskripsiUsaha
  * @property-read \App\Models\Pembayaran|null $pembayaran
  * @property-read \App\Models\PemilikUsaha|null $pemilikUsaha

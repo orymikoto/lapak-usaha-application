@@ -12,8 +12,8 @@ class ProyekPendanaan extends Model
 {
   use HasFactory;
 
-  protected $table = 'deskripsi_usaha';
-  protected $primaryKey = 'id_deskripsi_usaha';
+  protected $table = 'proyek_pendanaan';
+  protected $primaryKey = 'id_proyek_pendanaan';
   protected $fillable = [
     'jumlah_dana',
     'file_kontrak_admin',
@@ -38,12 +38,12 @@ class ProyekPendanaan extends Model
 
   public function Pendana(): BelongsTo
   {
-    return $this->belongsTo(Pendana::class);
+    return $this->belongsTo(Pendana::class, 'id_pendana', 'id_pendana');
   }
 
-  public function statusPenndanaan(): BelongsTo
+  public function statusPendanaan(): BelongsTo
   {
-    return $this->belongsTo(statusPenndanaan::class);
+    return $this->belongsTo(statusPendanaan::class);
   }
 
   public function pembayaran(): HasOne
