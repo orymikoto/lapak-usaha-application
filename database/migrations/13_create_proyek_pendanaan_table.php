@@ -24,7 +24,7 @@ return new class extends Migration
       $table->integer('id_deskripsi_usaha')->unsigned();
       $table->integer('id_pemilik_usaha')->unsigned();
       $table->integer('id_pendana')->unsigned();
-      $table->integer('status_pendanaan')->unsigned();
+      $table->integer('id_status_pendanaan')->unsigned();
 
       // Foreign Key Relation
       $table->foreign('id_deskripsi_usaha')->references('id_deskripsi_usaha')->on('deskripsi_usaha')->onDelete('cascade');
