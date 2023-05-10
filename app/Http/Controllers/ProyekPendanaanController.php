@@ -36,7 +36,7 @@ class ProyekPendanaanController extends Controller
         'daftarPendanaan' => $pendanaan_pendana
       ));
     } elseif (auth('pengusaha')->check()) {
-      $pendanaan_pengusaha = ProyekPendanaan::whereIdPemilikUsaha($id_pengguna)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan');
+      $pendanaan_pengusaha = ProyekPendanaan::whereIdPemilikUsaha($id_pengguna)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
       return view('proyek_pendanaan.daftar-pendanaan')->with(array('daftarPendanaan' => $pendanaan_pengusaha));
     } else {
       return view('proyek_pendanaan.daftar-pendanaan');
@@ -51,7 +51,8 @@ class ProyekPendanaanController extends Controller
 
   public function tambah_pendanaan($id_deskripsi_usaha)
   {
-    $deskripsiUsaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->first();
+    $deskripsiUsaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->with('pemilikUsaha', 'jenisUsaha')->first();
+    // dd($deskripsiUsaha->pemilikUsaha);
     return view('proyek_pendanaan.tambah-pendanaan')->with(array(
       'deskripsi_usaha' => $deskripsiUsaha
     ));
