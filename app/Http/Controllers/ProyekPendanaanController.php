@@ -69,9 +69,19 @@ class ProyekPendanaanController extends Controller
     return redirect();
   }
 
-  public function tambah_pendanaan_post(Request $request)
+  public function tambah_pendanaan_post(Request $request, $id_deskripsi_usaha)
   {
-    return redirect();
+    $deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->with('pemilikUsaha')->first();
+    $new_proyek = ProyekPendanaan::create([
+      'jumlah_dana' => (int) $request['jumlah_dana'],
+      'id_deskripsi' => (int) $id_deskripsi_usaha,
+      'id_pemilik_usaha' => (int) $deskripsi_usaha->pemilikUsaha->id_pemilik_usaha,
+      'id_pendana' => (int) auth('pendanaan')->user()->id_pendana,
+      'id_status_pendanaan' => 1,
+    ]);
+
+    session()->flash('success', 'Pendanaan berhasil ditambahkan');
+    return redirect("/pendanaan/tambah/{$id_deskripsi_usaha}");
   }
 
   public function index()
