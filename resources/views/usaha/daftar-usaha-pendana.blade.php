@@ -71,7 +71,10 @@
                 <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
               </a>
             </div>
-            <div class="flex w-[10rem] rounded-full bg-neutral-200 overflow-hidden">
+            <div class="flex w-[12rem] rounded-full bg-neutral-200 overflow-hidden">
+              <a href="/pendanaan/tambah/{{ $value->id_deskripsi_usaha }}"
+                class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-emerald-400 hover:bg-emerald-400 font-roboto">
+                Danai</a>
               <a href="/daftar-usaha/view/{{ $value->id_deskripsi_usaha }}"
                 class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-yellow-500 hover:bg-yellow-500 font-roboto">
                 View</a>

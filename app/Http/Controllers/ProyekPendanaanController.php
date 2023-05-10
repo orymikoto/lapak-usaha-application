@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeskripsiUsaha;
 use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
 
@@ -48,9 +49,12 @@ class ProyekPendanaanController extends Controller
     return view();
   }
 
-  public function tambah_pendanaan($id_proyek_pendanaan)
+  public function tambah_pendanaan($id_deskripsi_usaha)
   {
-    return view();
+    $deskripsiUsaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->first();
+    return view('proyek_pendanaan.tambah-pendanaan')->with(array(
+      'deskripsi_usaha' => $deskripsiUsaha
+    ));
   }
 
   // ACTION METHOD
