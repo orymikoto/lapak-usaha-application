@@ -11,7 +11,10 @@ class ProyekPendanaanController extends Controller
   // ADMIN METHOD
   public function admin_daftar_pendanaan()
   {
-    return view();
+    $daftarPendanaan = ProyekPendanaan::with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
+    return view('admin.admin-daftar-pendanaan')->with(array(
+      'daftarPendanaan' => $daftarPendanaan
+    ));
   }
 
   public function admin_detail_pendanaan($id_proyek_pendanaan)
