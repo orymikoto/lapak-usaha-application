@@ -10,7 +10,18 @@
   <title>Vestry</title>
 </head>
 
-<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden overflow-y-scroll">
+<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden overflow-y-scroll relative">
+  @if (session()->has('success'))
+    <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
+      <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+        <h2 class="text-lg">Pesan!</h2>
+        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{ session()->get('success') }}</p>
+        <a href="/pendanaan/{{ auth('pendana')->user()->id_pendana }}"
+          class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
+      </div>
+    </div>
+    {{ session()->forget('success') }}
+  @endif
   <x-navbar />
   <div class="flex flex-col items-center pb-8">
     <h1 class="text-3xl font-righteous text-yellow-500 my-4 text-center">Tambah Pendanaan</h1>
@@ -22,31 +33,35 @@
           <div class="grid grid-cols-12 gap-2 my-8">
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->nama_usaha}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->nama_usaha }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Pemilik Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->pemilikUsaha->nama}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->pemilikUsaha->nama }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Tahun Berdiri</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->tahun_berdiri}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->tahun_berdiri }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Periode Produksi</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->periode_produksi}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->periode_produksi }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Jenis Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->jenisUsaha->nama_jenis_usaha}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->jenisUsaha->nama_jenis_usaha }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Target Dana</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->target_dana}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->target_dana }}</div>
             </div>
             <div class="col-start-2 col-end-12 my-4 rounded-full bg-neutral-200 overflow-hidden flex">
-              <div class="flex-1 text-center text-neutral-600 py-1 font-medium font-roboto {{ $deskripsi_usaha->id_status_pengajuan == 2 ? 'bg-amber-400 text-white' : '' }}">Terkonfirmasi</div>
-              <div class="flex-1 text-center text-neutral-600 py-1 font-medium font-roboto {{ $deskripsi_usaha->id_status_pengajuan == 1 ? 'bg-amber-400 text-white' : '' }}">Tidak Terkonfirmasi</div>
+              <div
+                class="flex-1 text-center text-neutral-600 py-1 font-medium font-roboto {{ $deskripsi_usaha->id_status_pengajuan == 2 ? 'bg-amber-400 text-white' : '' }}">
+                Terkonfirmasi</div>
+              <div
+                class="flex-1 text-center text-neutral-600 py-1 font-medium font-roboto {{ $deskripsi_usaha->id_status_pengajuan == 1 ? 'bg-amber-400 text-white' : '' }}">
+                Tidak Terkonfirmasi</div>
             </div>
           </div>
           <div class="my-2 flex items-center justify-center gap-x-4">
@@ -70,18 +85,20 @@
       <div class="w-[30rem] h-[35rem] bg-neutral-400/25 flex flex-col-reverse overflow-hidden rounded-lg shadow-md">
         <div class="w-full h-[33rem] bg-gradient-to-b from-amber-400/75 to-rose-600/75 rounded-t-lg flex flex-col p-4">
           <h2 class="text-white font-righteous text-xl text-center my-2">Tambah Pendanaan</h2>
-          <form action="/pendanaan/tambah/{{$deskripsi_usaha->id_deskripsi_usaha}}" method="POST" class="grid grid-cols-12 gap-2 my-8">
+          <form action="/pendanaan/tambah/{{ $deskripsi_usaha->id_deskripsi_usaha }}" method="POST" class="grid grid-cols-12 gap-2 my-8">
+            @csrf
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Jumlah Dana</p>
-              <input max="{{$deskripsi_usaha->target_dana}}" type="number" step="100000" class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate focus:ring-0 outline-none hover:bg-yellow-200/50 duration-200" />
+              <input name="jumlah_dana" max="{{ $deskripsi_usaha->target_dana }}" type="number" step="100000"
+                class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate focus:ring-0 outline-none hover:bg-yellow-200/50 duration-200" />
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->nama_usaha}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->nama_usaha }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Pemilik Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->pemilikUsaha->nama}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->pemilikUsaha->nama }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Nominal Bagi Hasil</p>
@@ -89,11 +106,11 @@
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Periode Produksi</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->periode_produksi}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->periode_produksi }}</div>
             </div>
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Jenis Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{$deskripsi_usaha->jenisUsaha->nama_jenis_usaha}}</div>
+              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->jenisUsaha->nama_jenis_usaha }}</div>
             </div>
             <div class="my-8 flex items-center justify-center gap-x-4 col-span-12">
               <div class="flex flex-col items-center text-center">
@@ -109,7 +126,8 @@
                 <p class="text-white font-roboto font-medium">File Kontrak Pengusaha</p>
               </div>
             </div>
-            <button type="submit" class="py-1 rounded-full col-start-3 col-end-10 bg-teal-400 text-white font-roboto font-medium text-lg hover:text-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400 duration-200 cursor-pointer">
+            <button type="submit"
+              class="py-1 rounded-full col-start-3 col-end-10 bg-teal-400 text-white font-roboto font-medium text-lg hover:text-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400 duration-200 cursor-pointer">
               Submit
             </button>
           </form>

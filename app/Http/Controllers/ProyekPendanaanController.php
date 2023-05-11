@@ -74,9 +74,9 @@ class ProyekPendanaanController extends Controller
     $deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->with('pemilikUsaha')->first();
     $new_proyek = ProyekPendanaan::create([
       'jumlah_dana' => (int) $request['jumlah_dana'],
-      'id_deskripsi' => (int) $id_deskripsi_usaha,
+      'id_deskripsi_usaha' => (int) $id_deskripsi_usaha,
       'id_pemilik_usaha' => (int) $deskripsi_usaha->pemilikUsaha->id_pemilik_usaha,
-      'id_pendana' => (int) auth('pendanaan')->user()->id_pendana,
+      'id_pendana' => (int) auth('pendana')->user()->id_pendana,
       'id_status_pendanaan' => 1,
     ]);
 
