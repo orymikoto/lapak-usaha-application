@@ -64,7 +64,7 @@
       Telah Selesai
     </div>
   </div>
-  <div class="flex flex-col justify-center gap-2 text-center w-24 items-center text-neutral-600 hover:text-yellow-500 duration-200 cursor-pointer">
+  <div onclick="showUploadFileKontrak()" class="flex flex-col justify-center gap-2 text-center w-24 items-center text-neutral-600 hover:text-yellow-500 duration-200 cursor-pointer">
     <img src="/icons/upload.svg" class="w-8 h-8" alt="" srcset="">
     <p class="text-xs font-medium font-roboto ">Upload File Kontrak</p>
   </div>
