@@ -5,9 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\DeskripsiUsaha;
 use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\This;
 
 class ProyekPendanaanController extends Controller
 {
+  // UPLOAD FUNCTION
+  private function upload_file_kontrak_admin($file)
+  {
+    $filename = uniqid('file_kontrak_admin_');
+    $filetype = $file->extension();
+    $destinationPath = 'upload/file_kontrak_admin';
+    $file->storeAs('upload/file_kontrak_admin/', $filename . '.' . $filetype, 'public');
+
+    return '/upload/file_kontrak_admin/' . $filename . '.' . $filetype;
+  }
+
+  private function upload_file_kontrak_pendana($file)
+  {
+    $filename = uniqid('file_kontrak_pendana_');
+    $filetype = $file->extension();
+    $destinationPath = 'upload/file_kontrak_pendana';
+    $file->storeAs('upload/file_kontrak_pendana/', $filename . '.' . $filetype, 'public');
+
+    return '/upload/file_kontrak_pendana/' . $filename . '.' . $filetype;
+  }
+
+  private function upload_file_kontrak_pengusaha($file)
+  {
+    $filename = uniqid('file_kontrak_pengusaha_');
+    $filetype = $file->extension();
+    $destinationPath = 'upload/file_kontrak_pengusaha';
+    $file->storeAs('upload/file_kontrak_pengusaha/', $filename . '.' . $filetype, 'public');
+
+    return '/upload/file_kontrak_pengusaha/' . $filename . '.' . $filetype;
+  }
+
   // ADMIN METHOD
   public function admin_daftar_pendanaan()
   {
@@ -25,7 +57,17 @@ class ProyekPendanaanController extends Controller
 
   public function admin_tambah_file_kontrak_post(Request $request, $id_proyek_pendanaan)
   {
-    return redirect();
+    try {
+      $file_kontrak = $request->file('file_kontrak');
+      $path_file_kontrak = $this->upload_file_kontrak_admin($file_kontrak);
+      $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
+          'file_kontrak_admin' => $path_file_kontrak
+        ]);
+        
+      return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
+    } catch (\Throwable $th) {
+      dd($th);
+    }
   }
 
   // VIEW METHOD
@@ -62,14 +104,32 @@ class ProyekPendanaanController extends Controller
   }
 
   // ACTION METHOD
-  public function pengusaha_tambah_file_kontrak_post($id_proyek_pendanaan)
+  public function pengusaha_tambah_file_kontrak_post(Request $request, $id_proyek_pendanaan)
   {
-    return redirect();
+    try {
+      $file_kontrak = $request->file('file_kontrak');
+      $path_file_kontrak = $this->upload_file_kontrak_pengusaha($file_kontrak);
+      $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
+          'file_kontrak_pengusaha' => $path_file_kontrak  
+        ]);
+      return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
+    } catch (\Throwable $th) {
+      dd($th);
+    }
   }
 
-  public function pendana_tambah_file_kontrak_post($id_proyek_pendanaan)
+  public function pendana_tambah_file_kontrak_post(Request $request, $id_proyek_pendanaan)
   {
-    return redirect();
+    try {
+      $file_kontrak = $request->file('file_kontrak');
+      $path_file_kontrak = $this->upload_file_kontrak_pendana($file_kontrak);
+      $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
+          'file_kontrak_pendana' => $path_file_kontrak
+        ]);
+      return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
+    } catch (\Throwable $th) {
+      dd($th);
+    }
   }
 
   public function tambah_pendanaan_post(Request $request, $id_deskripsi_usaha)
