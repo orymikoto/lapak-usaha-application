@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DeskripsiUsaha;
+use App\Models\JenisUsaha;
 use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\This;
@@ -61,9 +62,9 @@ class ProyekPendanaanController extends Controller
       $file_kontrak = $request->file('file_kontrak');
       $path_file_kontrak = $this->upload_file_kontrak_admin($file_kontrak);
       $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
-          'file_kontrak_admin' => $path_file_kontrak
-        ]);
-        
+        'file_kontrak_admin' => $path_file_kontrak
+      ]);
+
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -90,8 +91,9 @@ class ProyekPendanaanController extends Controller
 
   public function detail_pendanaan($id_proyek_pendanaan)
   {
-    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan);
-    return view();
+    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->first();
+    $jenis_usaha = JenisUsaha::whereIdJenisUsaha($proyek_pendanaan->deskripsiUsaha->id_jenis_usaha)->first();
+    return view('proyek_pendanaan.detail-pendanaan')->with(array('detailPendanaan' => $proyek_pendanaan, 'jenisUsaha' => $jenis_usaha));
   }
 
   public function tambah_pendanaan($id_deskripsi_usaha)
@@ -110,8 +112,8 @@ class ProyekPendanaanController extends Controller
       $file_kontrak = $request->file('file_kontrak');
       $path_file_kontrak = $this->upload_file_kontrak_pengusaha($file_kontrak);
       $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
-          'file_kontrak_pengusaha' => $path_file_kontrak  
-        ]);
+        'file_kontrak_pengusaha' => $path_file_kontrak
+      ]);
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -124,8 +126,8 @@ class ProyekPendanaanController extends Controller
       $file_kontrak = $request->file('file_kontrak');
       $path_file_kontrak = $this->upload_file_kontrak_pendana($file_kontrak);
       $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
-          'file_kontrak_pendana' => $path_file_kontrak
-        ]);
+        'file_kontrak_pendana' => $path_file_kontrak
+      ]);
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);

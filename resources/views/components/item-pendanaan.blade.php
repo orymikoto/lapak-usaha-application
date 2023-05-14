@@ -67,8 +67,9 @@
     <p class="text-xs font-medium font-roboto ">Upload Bukti Pembayaran</p>
   </div>
   <div class="flex rounded-full bg-neutral-400 text-neutral-700 w-[15rem] h-[2rem] my-auto overflow-hidden">
-    <div class="flex-1 py-1 hover:bg-amber-400 hover:text-white font-medium font-roboto duration-200 text-center cursor-pointer">Detail
-    </div>
+    <a href="/pendanaan/detail/{{ $value->id_proyek_pendanaan }}"
+      class="flex-1 py-1 hover:bg-amber-400 hover:text-white font-medium font-roboto duration-200 text-center cursor-pointer">Detail
+    </a>
     <div
       class="flex-1 py-1  font-medium font-roboto duration-200 text-center cursor-default {{ $value->id_status_pendanaan == 1 ? 'hover:bg-red-500 hover:text-white cursor-pointer' : '' }}">
       Batalkan
