@@ -14,7 +14,7 @@
   <x-navbar />
   
   <x-modal-show-picture judul="Foto Deskripsi Usaha" urlFoto="{{$detailPendanaan->deskripsiUsaha->foto_usaha}}" />
-  <div class="flex-1 flex flex-col w-full items-center gap-4">
+  <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
     <div class="bg-white rounded-lg p-4 flex flex-col items-center w-[40rem] shadow-[2px_3px_7px_1px_rgba(0,0,0,0.3)]">
       <h2 class="font-righteous text-xl text-neutral-700 my-4">Deskripsi Usaha</h2>
@@ -113,6 +113,7 @@
           <p>Bukti Bagi Hasil</p>
         </div>
       </div>
+      <div class="text-white bg-red-600 hover:text-red-600 rounded-md hover:bg-white hover:shadow-md hover:shadow-red-600/70 duration-200 w-[14rem] py-1 font-roboto font-medium text-xl text-center cursor-pointer my-4">Batalkan</div>
     </div>
   </div>
 </body>
