@@ -114,7 +114,40 @@
         </div>
       </div>
       <div class="text-white bg-red-600 hover:text-red-600 rounded-md hover:bg-white hover:shadow-md hover:shadow-red-600/70 duration-200 w-[14rem] py-1 font-roboto font-medium text-xl text-center cursor-pointer my-4">Batalkan</div>
+      @if (!empty(request()->get('showProgres')))
+        <a href="/pendanaan/detail/{{request()->get('id_proyek_pendanaan')}}?showProgres=1" class="flex flex-col items-center">
+          <p class="text-teal-400 font-roboto font-medium">Sembunyikan Progres Pendanaan</p>
+          <img src="/icons/down.svg" class="w-8 h-8" alt="">
+        </a>
+        @else
+        <a href="/pendanaan/detail/{{request()->get('id_proyek_pendanaan')}}?showProgres=1" class="flex flex-col items-center">
+          <p class="text-teal-400 font-roboto font-medium">Lihat Daftar Progres Pendanaan</p>
+          <img src="/icons/down.svg" class="w-8 h-8" alt="">
+        </a>
+      @endif
     </div>
+      <div class="w-[40rem] rounded-md bg-white grid grid-cols-12 text-neutral-700 font-medium font-roboto p-4 py-2 gap-2 shadow-[2px_3px_7px_0px_rgba(0,0,0,0.3)]">
+        <p class="col-span-2 text-center">Tanggal</p>
+        <p class="col-span-7 text-center">Keterangan</p>
+        <p class="col-span-3 text-center">Laporan Keuangan</p>
+        @foreach ($detailPendanaan->progresPendanaan as $key => $value )
+          <div class="flex flex-col col-span-2 h-full justify-center">
+            <p class="text-yellow-500">{{$value->tanggal_laporan_progres_pendanaan}}</p>
+          </div>
+          <div class="flex-1 flex flex-col col-span-7 h-full justify-center">
+            <div class="p-2 bg-neutral-200 rounded-md flex-1 text-justify">
+              {{$value->keterangan}}
+            </div>
+          </div>
+          <div class="flex flex-col col-span-3 h-full w-full items-center justify-center">
+            <a href="{{ $value->laporan_keuangan }}" class="hover:bg-neutral-200 duration-200">
+              <img src="/icons/pdf.svg" class="w-12 h-12 object-cover object-center" alt="">
+            </a>
+          </div>
+        @endforeach
+      </div>
+    {{-- @if (!empty(request()->get('showProgres')))
+    @endif --}}
   </div>
 </body>
 

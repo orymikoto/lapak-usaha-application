@@ -295,7 +295,7 @@ namespace App\Models{
  * @property int $id_proyek_pendanaan
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\ProyekPendanaan|null $proyekPendanaan
+ * @property-read \App\Models\ProyekPendanaan $proyekPendanaan
  * @method static \Illuminate\Database\Eloquent\Builder|ProgresPendanaan newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProgresPendanaan newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProgresPendanaan query()

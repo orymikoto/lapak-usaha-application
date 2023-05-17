@@ -91,7 +91,7 @@ class ProyekPendanaanController extends Controller
 
   public function detail_pendanaan($id_proyek_pendanaan)
   {
-    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->first();
+    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan', 'progresPendanaan')->first();
     $jenis_usaha = JenisUsaha::whereIdJenisUsaha($proyek_pendanaan->deskripsiUsaha->id_jenis_usaha)->first();
     return view('proyek_pendanaan.detail-pendanaan')->with(array('detailPendanaan' => $proyek_pendanaan, 'jenisUsaha' => $jenis_usaha));
   }
