@@ -10,12 +10,13 @@
   <title>Vestry</title>
 
   <script>
-    function showPictureModal( urlFoto, Judul) {
+    function showPictureModal(urlFoto, Judul) {
       console.log("yes");
       document.getElementById("modal-show-picture").classList.remove('hidden')
       document.getElementById("modal-show-picture-judul").innerText = Judul
       document.getElementById("modal-show-picture-picture").src = urlFoto
     }
+
     function hidePictureModal() {
       document.getElementById("modal-show-picture").classList.add('hidden')
       document.getElementById("modal-show-picture-judul").innerText = ""
@@ -26,7 +27,7 @@
 
 <body class="antialiased bg-neutral-200 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   <x-navbar />
-  
+
   <x-modal-show-picture />
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
@@ -80,15 +81,18 @@
       {{-- FILE KONTRAK --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">File Kontrak</h2>
       <div class="flex w-[70%] gap-4">
-        <div class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        <div
+          class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Admin</p>
         </div>
-        <div class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        <div
+          class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pendana</p>
         </div>
-        <div class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        <div
+          class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pengusaha</p>
         </div>
@@ -97,15 +101,20 @@
       {{-- FILE FOTO --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">File Foto</h2>
       <div class="flex w-[70%] gap-4 ">
-        <div onclick="showPictureModal('{{$detailPendanaan->deskripsiUsaha->foto_usaha}}', 'Deskripsi Usaha')" class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        <button {{ empty($detailPendanaan->deskripsiUsaha->foto_usaha) ? 'disabled' : '' }}
+          onclick="showPictureModal('{{ $detailPendanaan->deskripsiUsaha->foto_usaha }}', 'Deskripsi Usaha')"
+          class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/img.svg" class="w-16 h-16 " alt="">
           <p>Deskripsi Usaha</p>
-        </div>
-        <button {{$detailPendanaan->}} onclick="showPictureModal('{{$detailPendanaan->deskripsiUsaha->foto_usaha}}', 'Deskripsi Usaha')" class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        </button>
+        <button {{ empty($detailPendanaan->Pembayaran->bukti_pembayaran) ? 'disabled' : '' }}
+          onclick="showPictureModal('{{ $detailPendanaan->Pembayaran->bukti_pembayaran }}', 'Bukti Pembayaran')"
+          class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/img.svg" class="w-16 h-16 " alt="">
           <p>Bukti Pembayaran</p>
         </button>
-        <div class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        <div
+          class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/img.svg" class="w-16 h-16 " alt="">
           <p>Bukti Bagi Hasil</p>
         </div>
@@ -115,43 +124,46 @@
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">Tambah Data</h2>
       <div class="flex gap-4 w-[70%]">
         <div class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
-         <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
+          <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>File Kontrak</p>
         </div>
         <div class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
-         <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
+          <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Pembayaran</p>
         </div>
         <div class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
-         <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
+          <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Bagi Hasil</p>
         </div>
       </div>
-      <div class="text-white bg-red-600 hover:text-red-600 rounded-md hover:bg-white hover:shadow-md hover:shadow-red-600/70 duration-200 w-[14rem] py-1 font-roboto font-medium text-xl text-center cursor-pointer my-4">Batalkan</div>
+      <div
+        class="text-white bg-red-600 hover:text-red-600 rounded-md hover:bg-white hover:shadow-md hover:shadow-red-600/70 duration-200 w-[14rem] py-1 font-roboto font-medium text-xl text-center cursor-pointer my-4">
+        Batalkan</div>
       @if (!empty(request()->get('showProgres')))
-        <a href="/pendanaan/detail/{{$detailPendanaan->id_proyek_pendanaan}}" class="flex flex-col items-center">
+        <a href="/pendanaan/detail/{{ $detailPendanaan->id_proyek_pendanaan }}" class="flex flex-col items-center">
           <p class="text-teal-400 font-roboto font-medium">Sembunyikan Progres Pendanaan</p>
           <img src="/icons/up.svg" class="w-8 h-8" alt="">
         </a>
-        @else
-        <a href="/pendanaan/detail/{{$detailPendanaan->id_proyek_pendanaan}}?showProgres=1" class="flex flex-col items-center">
+      @else
+        <a href="/pendanaan/detail/{{ $detailPendanaan->id_proyek_pendanaan }}?showProgres=1" class="flex flex-col items-center">
           <p class="text-teal-400 font-roboto font-medium">Lihat Daftar Progres Pendanaan</p>
           <img src="/icons/down.svg" class="w-8 h-8" alt="">
         </a>
       @endif
     </div>
     @if (!empty(request()->get('showProgres')))
-      <div class="w-[40rem] rounded-md bg-white grid grid-cols-12 text-neutral-700 font-medium font-roboto p-4 py-2 gap-2 shadow-[2px_3px_7px_0px_rgba(0,0,0,0.3)]">
+      <div
+        class="w-[40rem] rounded-md bg-white grid grid-cols-12 text-neutral-700 font-medium font-roboto p-4 py-2 gap-2 shadow-[2px_3px_7px_0px_rgba(0,0,0,0.3)]">
         <p class="col-span-2 text-center">Tanggal</p>
         <p class="col-span-7 text-center">Keterangan</p>
         <p class="col-span-3 text-center">Laporan Keuangan</p>
-        @foreach ($detailPendanaan->progresPendanaan as $key => $value )
+        @foreach ($detailPendanaan->progresPendanaan as $key => $value)
           <div class="flex flex-col col-span-2 h-full justify-center">
-            <p class="text-yellow-500">{{$value->tanggal_laporan_progres_pendanaan}}</p>
+            <p class="text-yellow-500">{{ $value->tanggal_laporan_progres_pendanaan }}</p>
           </div>
           <div class="flex-1 flex flex-col col-span-7 h-full justify-center">
             <div class="p-2 bg-neutral-200 rounded-md flex-1 text-justify">
-              {{$value->keterangan}}
+              {{ $value->keterangan }}
             </div>
           </div>
           <div class="flex flex-col col-span-3 h-full w-full items-center justify-center">
