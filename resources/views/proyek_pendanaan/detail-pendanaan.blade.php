@@ -8,12 +8,26 @@
   @vite('resources/js/app.js')
 
   <title>Vestry</title>
+
+  <script>
+    function showPictureModal( urlFoto, Judul) {
+      console.log("yes");
+      document.getElementById("modal-show-picture").classList.remove('hidden')
+      document.getElementById("modal-show-picture-judul").innerText = Judul
+      document.getElementById("modal-show-picture-picture").src = urlFoto
+    }
+    function hidePictureModal() {
+      document.getElementById("modal-show-picture").classList.add('hidden')
+      document.getElementById("modal-show-picture-judul").innerText = ""
+      document.getElementById("modal-show-picture-picture").src = ""
+    }
+  </script>
 </head>
 
-<body class="antialiased bg-neutral-200 min-h-screen w-full flex flex-col overflow-x-hidden ">
+<body class="antialiased bg-neutral-200 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   <x-navbar />
   
-  <x-modal-show-picture judul="Foto Deskripsi Usaha" urlFoto="{{$detailPendanaan->deskripsiUsaha->foto_usaha}}" />
+  <x-modal-show-picture />
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
     <div class="bg-white rounded-lg p-4 flex flex-col items-center w-[40rem] shadow-[2px_3px_7px_1px_rgba(0,0,0,0.3)]">
@@ -83,14 +97,14 @@
       {{-- FILE FOTO --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">File Foto</h2>
       <div class="flex w-[70%] gap-4 ">
-        <div class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        <div onclick="showPictureModal('{{$detailPendanaan->deskripsiUsaha->foto_usaha}}', 'Deskripsi Usaha')" class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/img.svg" class="w-16 h-16 " alt="">
           <p>Deskripsi Usaha</p>
         </div>
-        <div class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
+        <button {{$detailPendanaan->}} onclick="showPictureModal('{{$detailPendanaan->deskripsiUsaha->foto_usaha}}', 'Deskripsi Usaha')" class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/img.svg" class="w-16 h-16 " alt="">
           <p>Bukti Pembayaran</p>
-        </div>
+        </button>
         <div class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/img.svg" class="w-16 h-16 " alt="">
           <p>Bukti Bagi Hasil</p>
@@ -115,17 +129,18 @@
       </div>
       <div class="text-white bg-red-600 hover:text-red-600 rounded-md hover:bg-white hover:shadow-md hover:shadow-red-600/70 duration-200 w-[14rem] py-1 font-roboto font-medium text-xl text-center cursor-pointer my-4">Batalkan</div>
       @if (!empty(request()->get('showProgres')))
-        <a href="/pendanaan/detail/{{request()->get('id_proyek_pendanaan')}}?showProgres=1" class="flex flex-col items-center">
+        <a href="/pendanaan/detail/{{$detailPendanaan->id_proyek_pendanaan}}" class="flex flex-col items-center">
           <p class="text-teal-400 font-roboto font-medium">Sembunyikan Progres Pendanaan</p>
-          <img src="/icons/down.svg" class="w-8 h-8" alt="">
+          <img src="/icons/up.svg" class="w-8 h-8" alt="">
         </a>
         @else
-        <a href="/pendanaan/detail/{{request()->get('id_proyek_pendanaan')}}?showProgres=1" class="flex flex-col items-center">
+        <a href="/pendanaan/detail/{{$detailPendanaan->id_proyek_pendanaan}}?showProgres=1" class="flex flex-col items-center">
           <p class="text-teal-400 font-roboto font-medium">Lihat Daftar Progres Pendanaan</p>
           <img src="/icons/down.svg" class="w-8 h-8" alt="">
         </a>
       @endif
     </div>
+    @if (!empty(request()->get('showProgres')))
       <div class="w-[40rem] rounded-md bg-white grid grid-cols-12 text-neutral-700 font-medium font-roboto p-4 py-2 gap-2 shadow-[2px_3px_7px_0px_rgba(0,0,0,0.3)]">
         <p class="col-span-2 text-center">Tanggal</p>
         <p class="col-span-7 text-center">Keterangan</p>
@@ -146,8 +161,7 @@
           </div>
         @endforeach
       </div>
-    {{-- @if (!empty(request()->get('showProgres')))
-    @endif --}}
+    @endif
   </div>
 </body>
 

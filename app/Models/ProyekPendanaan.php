@@ -48,7 +48,7 @@ class ProyekPendanaan extends Model
 
   public function pembayaran(): HasOne
   {
-    return $this->hasOne(Pembayaran::class);
+    return $this->hasOne(Pembayaran::class, 'id_pembayaran');
   }
 
   public function riwayatProyek(): HasOne

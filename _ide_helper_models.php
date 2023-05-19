@@ -141,7 +141,7 @@ namespace App\Models{
  * @property int $id_proyek_pendanaan
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\ProyekPendanaan|null $proyekPendanaan
+ * @property-read \App\Models\ProyekPendanaan $proyekPendanaan
  * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Pembayaran query()
