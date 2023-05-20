@@ -56,9 +56,11 @@ Route::get('/pendanaan/tambah/{id_deskripsi_usaha}', [ProyekPendanaanController:
 Route::get('/pendanaan/{id_pengguna}', [ProyekPendanaanController::class, 'daftar_pendanaan'])->middleware(['logineduser']);
 
 // PENDANAAN ACTION
-Route::post('/admin/pendanaan/tambah-file-kontrak/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_tambah_file_kontrak_post'])->middleware(['logineduser', 'admin']);
+Route::post('/pendanaan/tambah-file-kontrak/admin/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_tambah_file_kontrak_post'])->middleware(['logineduser', 'admin']);
 Route::post('/pendanaan/tambah-file-kontrak/pengusaha/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'pengusaha_tambah_file_kontrak_post'])->middleware(['logineduser', 'pengusaha']);
 Route::post('/pendanaan/tambah-file-kontrak/pendana/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'pendana_tambah_file_kontrak_post'])->middleware(['logineduser', 'pendana']);
+Route::post('/pendanaan/tambah-bukti-pembayaran/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'tambah_bukti_pembayaran'])->middleware(['logineduser', 'pendana']);
+Route::post('/pendanaan/tambah-bukti-bagi-hasil/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'tambah_bukti_bagi_hasil'])->middleware(['logineduser', 'pengusaha']);
 Route::post('/pendanaan/tambah/{id_deskripsi_usaha}', [ProyekPendanaanController::class, 'tambah_pendanaan_post'])->middleware(['logineduser', 'pendana']);
 
 // AUTH LOGIN REGISTER VIEW

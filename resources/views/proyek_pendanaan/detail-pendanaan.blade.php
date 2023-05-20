@@ -11,7 +11,6 @@
 
   <script>
     function showPictureModal(urlFoto, Judul) {
-      console.log("yes");
       document.getElementById("modal-show-picture").classList.remove('hidden')
       document.getElementById("modal-show-picture-judul").innerText = Judul
       document.getElementById("modal-show-picture-picture").src = urlFoto
@@ -22,6 +21,20 @@
       document.getElementById("modal-show-picture-judul").innerText = ""
       document.getElementById("modal-show-picture-picture").src = ""
     }
+
+    function showUploadModal(actionUrl, judul, file_name) {
+      document.getElementById("modal-upload-file").classList.remove('hidden')
+      document.getElementById("modal-upload-file-judul").innerText = judul
+      document.getElementById("modal-upload-file-form").action = actionUrl
+      document.getElementById("modal-upload-file-input").name = file_name
+    }
+  
+    function hideUploadModal() {
+      document.getElementById("modal-upload-file").classList.add('hidden')
+      document.getElementById("modal-upload-file-judul").innerText = ""
+      document.getElementById("modal-upload-file-form").action = ""
+      document.getElementById("modal-upload-file-input").name = ""
+    }
   </script>
 </head>
 
@@ -29,6 +42,7 @@
   <x-navbar />
 
   <x-modal-show-picture />
+  <x-modal-upload-file />
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
     <div class="bg-white rounded-lg p-4 flex flex-col items-center w-[40rem] shadow-[2px_3px_7px_1px_rgba(0,0,0,0.3)]">
@@ -81,21 +95,21 @@
       {{-- FILE KONTRAK --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">File Kontrak</h2>
       <div class="flex w-[70%] gap-4">
-        <div
+        <a href="{{ $detailPendanaan->file_kontrak_admin }}"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Admin</p>
-        </div>
-        <div
+        </a>
+        <a href="{{ $detailPendanaan->file_kontrak_pendana }}"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pendana</p>
-        </div>
-        <div
+        </a>
+        <a href="{{ $detailPendanaan->file_kontrak_pengusaha }}"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pengusaha</p>
-        </div>
+        </a>
       </div>
 
       {{-- FILE FOTO --}}
@@ -104,18 +118,20 @@
         <button {{ empty($detailPendanaan->deskripsiUsaha->foto_usaha) ? 'disabled' : '' }}
           onclick="showPictureModal('{{ $detailPendanaan->deskripsiUsaha->foto_usaha }}', 'Deskripsi Usaha')"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="/icons/img.svg" class="w-16 h-16 " alt="">
+          <img src="{{ empty($detailPendanaan->deskripsiUsaha->foto_usaha) ? '/icons/img-disabled.svg' : '/icons/img.svg'}}" class="w-16 h-16 " alt="">
           <p>Deskripsi Usaha</p>
         </button>
-        <button {{ empty($detailPendanaan->Pembayaran->bukti_pembayaran) ? 'disabled' : '' }}
+        <button {{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? 'disabled' : '' }}
           onclick="showPictureModal('{{ $detailPendanaan->Pembayaran->bukti_pembayaran }}', 'Bukti Pembayaran')"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="/icons/img.svg" class="w-16 h-16 " alt="">
+          <img src="{{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? '/icons/img-disabled.svg' : '/icons/img.svg'}}" class="w-16 h-16 " alt="">
           <p>Bukti Pembayaran</p>
         </button>
         <div
+        onclick="showPictureModal('{{ $detailPendanaan->bukti_bagi_hasil }}', 'Bukti Bagi Hasil')"
+        {{ empty($detailPendanaan->bukti_bagi_hasil) ? 'disabled' : '' }}
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="/icons/img.svg" class="w-16 h-16 " alt="">
+          <img src="{{ empty($detailPendanaan->bukti_bagi_hasil) ? '/icons/img-disabled.svg' : '/icons/img.svg'}}" class="w-16 h-16 " alt="">
           <p>Bukti Bagi Hasil</p>
         </div>
       </div>
@@ -123,15 +139,16 @@
       {{-- ACTIONS --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">Tambah Data</h2>
       <div class="flex gap-4 w-[70%]">
-        <div class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+        <div onclick="showUploadModal( 
+          '{{ auth('admin')->check() ? '/penadanaan/tambah-file-kontrak/admin/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pendana')->check() ? '/penadanaan/tambah-file-kontrak/pendana/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pengusaha')->check() ? '/penadanaan/tambah-file-kontrak/pengusaha/' . $detailPendanaan->id_proyek_pendanaan : '' }}' , 'Upload File Kontrak', 'file_kontrak'  )" class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>File Kontrak</p>
         </div>
-        <div class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+        <div onclick="showUploadModal('{{'/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran' )" class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Pembayaran</p>
         </div>
-        <div class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+        <div onclick="showUploadModal('{{'/pendanaan/tambah-bukti-bagi-hasil/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Bagi Hasil', 'file_bukti_bagi_hasil' )" class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Bagi Hasil</p>
         </div>
