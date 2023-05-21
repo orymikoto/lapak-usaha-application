@@ -18,6 +18,6 @@ class pendana
     if (auth('pendana')->check()) {
       return $next($request);
     }
-    return $next($request);
+    return redirect('/');
   }
 }

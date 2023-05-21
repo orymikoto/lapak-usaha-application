@@ -18,6 +18,6 @@ class LoginedUser
     if (auth('admin')->check() || auth('pendana')->check() || auth('pengusaha')->check()) {
       return $next($request);
     }
-    return redirect('login.view');
+    return redirect('/login');
   }
 }
