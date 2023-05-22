@@ -57,6 +57,18 @@
           </div>
         </div>
         <div class="col-span-6 flex flex-col">
+          <h3 class="mx-2">Pekerjaan Sampingan Pemilik Usaha</h3>
+          <div class="p-2 rounded-md bg-neutral-200">
+            {{ $deskripsi_usaha->pekerjaan_sampingan }}
+          </div>
+        </div>
+        <div class="col-span-6 flex flex-col">
+          <h3 class="mx-2">No Hp Pemilik Usaha</h3>
+          <div class="p-2 rounded-md bg-neutral-200">
+            {{ $deskripsi_usaha->no_hp }}
+          </div>
+        </div>
+        <div class="col-span-6 flex flex-col">
           <h3 class="mx-2">Tahun Berdiri</h3>
           <div class="p-2 rounded-md bg-neutral-200">
             {{ $deskripsi_usaha->tahun_berdiri }}
@@ -81,7 +93,7 @@
           </div>
         </div>
         <div class="col-span-6 flex flex-col">
-          <h3 class="mx-2">Target Dana</h3>
+          <h3 class="mx-2">Status Pengajuan</h3>
           <div class="p-2 rounded-md bg-neutral-200">
             {{ $deskripsi_usaha->status_pengajuan }}
           </div>
