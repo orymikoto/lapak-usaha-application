@@ -336,7 +336,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ProgresPendanaan> $progresPendanaan
  * @property-read int|null $progres_pendanaan_count
  * @property-read \App\Models\RiwayatProyek|null $riwayatProyek
- * @property-read \App\Models\StatusPendanaan|null $statusPendanaan
+ * @property-read \App\Models\StatusPendanaan $statusPendanaan
  * @method static \Illuminate\Database\Eloquent\Builder|ProyekPendanaan newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProyekPendanaan newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ProyekPendanaan query()

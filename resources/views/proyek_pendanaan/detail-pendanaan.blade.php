@@ -10,6 +10,9 @@
   <title>Vestry</title>
 
   <script>
+    // FUNGSI YANG ADA DI SINI UNTUK MENAMPILKAN DAN MENYEMBUNYIKAN SEGALA HIDEN MODAL/POP UP MESSAGE YANG ADA
+
+    // POPUP MENAMPILKAN GAMBAR
     function showPictureModal(urlFoto, Judul) {
       document.getElementById("modal-show-picture").classList.remove('hidden')
       document.getElementById("modal-show-picture-judul").innerText = Judul
@@ -22,18 +25,46 @@
       document.getElementById("modal-show-picture-picture").src = ""
     }
 
+    // POPUP MENAMPILKAN UPLOAD FILE
     function showUploadModal(actionUrl, judul, file_name) {
       document.getElementById("modal-upload-file").classList.remove('hidden')
       document.getElementById("modal-upload-file-judul").innerText = judul
       document.getElementById("modal-upload-file-form").action = actionUrl
       document.getElementById("modal-upload-file-input").name = file_name
     }
-  
+
     function hideUploadModal() {
       document.getElementById("modal-upload-file").classList.add('hidden')
       document.getElementById("modal-upload-file-judul").innerText = ""
       document.getElementById("modal-upload-file-form").action = ""
       document.getElementById("modal-upload-file-input").name = ""
+    }
+
+    // POPUP MENAMPILKAN FILE KONTRAK
+    function showFileKontrak(urlFile, judul) {
+      if (!urlFile) {
+        return showNoFileKontrak(judul)
+      }
+      document.getElementById("modal-show-file-pdf-judul").innerText = judul
+      document.getElementById("modal-show-file-pdf-file-kontrak").href = urlFile
+      document.getElementById("modal-show-file-pdf").classList.remove('hidden')
+
+    }
+
+    function hideFileKontrak() {
+      document.getElementById("modal-show-file-pdf-judul").innerText = ""
+      document.getElementById("modal-show-file-pdf-file-kontrak").href = ""
+      document.getElementById("modal-show-file-pdf").classList.add('hidden')
+    }
+
+    // POPUP MENAMPILKAN PESAN FILE KONTRAK BELUM ADA
+    function showNoFileKontrak(judul) {
+      document.getElementById("modal-show-no-file-pdf-judul").innerText = judul
+      document.getElementById("modal-show-no-file-pdf").classList.remove('hidden')
+    }
+
+    function hideNoFileKontrak() {
+      document.getElementById("modal-show-no-file-pdf").classList.add('hidden')
     }
   </script>
 </head>
@@ -41,26 +72,44 @@
 <body class="antialiased bg-neutral-200 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   <x-navbar />
 
+  {{-- HIDDEN MODAL --}}
   <x-modal-show-picture />
   <x-modal-upload-file />
+  <x-modal-show-file-pdf />
+  <x-modal-show-no-file-pdf />
+
+
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
     <div class="bg-white rounded-lg p-4 flex flex-col items-center w-[40rem] shadow-[2px_3px_7px_1px_rgba(0,0,0,0.3)]">
+      {{-- DESKRIPSI USAHA --}}
       <h2 class="font-righteous text-xl text-neutral-700 my-4">Deskripsi Usaha</h2>
       <div class="grid grid-cols-12 gap-2 w-full text-neutral-600">
-        <div class="flex flex-col font-roboto font-medium w-ful col-span-6">
+        <div class="flex flex-col font-roboto font-medium col-span-6">
           <h3 class="mx-2 text-lg font-medium">Nama Usaha</h3>
           <div class="p-2 rounded-md w-full bg-neutral-200">
             {{ $detailPendanaan->deskripsiUsaha->nama_usaha }}
           </div>
         </div>
-        <div class="flex flex-col font-roboto font-medium w-ful col-span-6">
+        <div class="flex flex-col font-roboto font-medium col-span-6">
           <h3 class="mx-2 text-lg font-medium">Pemilik Usaha</h3>
           <div class="p-2 rounded-md w-full bg-neutral-200">
             {{ $detailPendanaan->pemilikUsaha->nama }}
           </div>
         </div>
-        <div class="flex flex-col font-roboto font-medium w-ful col-span-6">
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <h3 class="mx-2 text-lg font-medium">No Hp Pemilik Usaha</h3>
+          <div class="p-2 rounded-md w-full bg-neutral-200">
+            {{ $detailPendanaan->pemilikUsaha->no_hp }}
+          </div>
+        </div>
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <h3 class="mx-2 text-lg font-medium">Pekerjaan Sampingan</h3>
+          <div class="p-2 rounded-md w-full bg-neutral-200">
+            {{ $detailPendanaan->pemilikUsaha->pekerjaan_sampingan }}
+          </div>
+        </div>
+        <div class="flex flex-col font-roboto font-medium col-span-6">
           <h3 class="mx-2 text-lg font-medium">Jenis Usaha</h3>
           <div class="p-2 rounded-md w-full bg-neutral-200">
             {{ $jenisUsaha->nama_jenis_usaha }}
@@ -92,24 +141,67 @@
         </div>
       </div>
 
+      {{-- PROYEK PENDANAAN --}}
+      <h2 class="font-righteous text-xl text-neutral-700 my-4">Proyek Pendanaan</h2>
+      <div class="grid grid-cols-12 gap-2 w-full text-neutral-600">
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <div class="flex flex-col font-roboto font-medium ">
+            <h3 class="mx-2 text-lg font-mediu col-span-6">Nama Pendana</h3>
+            <div class="p-2 rounded-md w-full bg-neutral-200">
+              {{ $detailPendanaan->Pendana->nama }}
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <h3 class="mx-2 text-lg font-medium">No Hp Pendana</h3>
+          <div class="p-2 rounded-md w-full bg-neutral-200">
+            {{ $detailPendanaan->Pendana->no_hp }}
+          </div>
+        </div>
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <h3 class="mx-2 text-lg font-medium ">Jumlah Dana Proyek</h3>
+          <div class="p-2 rounded-md w-full bg-neutral-200">
+            {{ $detailPendanaan->jumlah_dana }}
+          </div>
+        </div>
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <h3 class="mx-2 text-lg font-medium">Jumlah Bagi Hasil</h3>
+          <div class="p-2 rounded-md w-full bg-neutral-200">
+            {{ $detailPendanaan->nominal_bagi_hasil }}
+          </div>
+        </div>
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <h3 class="mx-2 text-lg font-medium">Status Pembayaran</h3>
+          <div class="p-2 rounded-md w-full bg-neutral-200">
+            {{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Dibayarkan' : 'Lunas' }}
+          </div>
+        </div>
+        <div class="flex flex-col font-roboto font-medium col-span-6">
+          <h3 class="mx-2 text-lg font-medium">Status Proyek</h3>
+          <div class="p-2 rounded-md w-full bg-neutral-200">
+            {{ $detailPendanaan->statusPendanaan->nama_status }}
+          </div>
+        </div>
+      </div>
+
       {{-- FILE KONTRAK --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">File Kontrak</h2>
       <div class="flex w-[70%] gap-4">
-        <a href="{{ $detailPendanaan->file_kontrak_admin }}"
+        <div onclick="showFileKontrak('{{ $detailPendanaan->file_kontrak_admin }}', 'File Kontrak Admin' )"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Admin</p>
-        </a>
-        <a href="{{ $detailPendanaan->file_kontrak_pendana }}"
+        </div>
+        <div onclick="showFileKontrak('{{ $detailPendanaan->file_kontrak_pendana }}', 'File Kontrak Pendana' )"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pendana</p>
-        </a>
-        <a href="{{ $detailPendanaan->file_kontrak_pengusaha }}"
+        </div>
+        <div onclick="showFileKontrak('{{ $detailPendanaan->file_kontrak_pengusaha }}', 'File Kontrak Pengusaha' )"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pengusaha</p>
-        </a>
+        </div>
       </div>
 
       {{-- FILE FOTO --}}
@@ -118,37 +210,45 @@
         <button {{ empty($detailPendanaan->deskripsiUsaha->foto_usaha) ? 'disabled' : '' }}
           onclick="showPictureModal('{{ $detailPendanaan->deskripsiUsaha->foto_usaha }}', 'Deskripsi Usaha')"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="{{ empty($detailPendanaan->deskripsiUsaha->foto_usaha) ? '/icons/img-disabled.svg' : '/icons/img.svg'}}" class="w-16 h-16 " alt="">
+          <img src="{{ empty($detailPendanaan->deskripsiUsaha->foto_usaha) ? '/icons/img-disabled.svg' : '/icons/img.svg' }}" class="w-16 h-16 "
+            alt="">
           <p>Deskripsi Usaha</p>
         </button>
         <button {{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? 'disabled' : '' }}
           onclick="showPictureModal('{{ $detailPendanaan->Pembayaran->bukti_pembayaran }}', 'Bukti Pembayaran')"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="{{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? '/icons/img-disabled.svg' : '/icons/img.svg'}}" class="w-16 h-16 " alt="">
+          <img src="{{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? '/icons/img-disabled.svg' : '/icons/img.svg' }}" class="w-16 h-16 "
+            alt="">
           <p>Bukti Pembayaran</p>
         </button>
-        <div
-        onclick="showPictureModal('{{ $detailPendanaan->bukti_bagi_hasil }}', 'Bukti Bagi Hasil')"
-        {{ empty($detailPendanaan->bukti_bagi_hasil) ? 'disabled' : '' }}
+        <button onclick="showPictureModal('{{ $detailPendanaan->bukti_bagi_hasil }}', 'Bukti Bagi Hasil')"
+          {{ empty($detailPendanaan->bukti_bagi_hasil) ? 'disabled' : '' }}
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="{{ empty($detailPendanaan->bukti_bagi_hasil) ? '/icons/img-disabled.svg' : '/icons/img.svg'}}" class="w-16 h-16 " alt="">
+          <img src="{{ empty($detailPendanaan->bukti_bagi_hasil) ? '/icons/img-disabled.svg' : '/icons/img.svg' }}" class="w-16 h-16 "
+            alt="">
           <p>Bukti Bagi Hasil</p>
-        </div>
+        </button>
       </div>
 
       {{-- ACTIONS --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">Tambah Data</h2>
       <div class="flex gap-4 w-[70%]">
-        <div onclick="showUploadModal( 
-          '{{ auth('admin')->check() ? '/penadanaan/tambah-file-kontrak/admin/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pendana')->check() ? '/penadanaan/tambah-file-kontrak/pendana/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pengusaha')->check() ? '/penadanaan/tambah-file-kontrak/pengusaha/' . $detailPendanaan->id_proyek_pendanaan : '' }}' , 'Upload File Kontrak', 'file_kontrak'  )" class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+        <div
+          onclick="showUploadModal( 
+          '{{ auth('admin')->check() ? '/penadanaan/tambah-file-kontrak/admin/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pendana')->check() ? '/penadanaan/tambah-file-kontrak/pendana/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pengusaha')->check() ? '/penadanaan/tambah-file-kontrak/pengusaha/' . $detailPendanaan->id_proyek_pendanaan : '' }}' , 'Upload File Kontrak', 'file_kontrak'  )"
+          class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>File Kontrak</p>
         </div>
-        <div onclick="showUploadModal('{{'/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran' )" class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+        <div
+          onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran' )"
+          class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Pembayaran</p>
         </div>
-        <div onclick="showUploadModal('{{'/pendanaan/tambah-bukti-bagi-hasil/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Bagi Hasil', 'file_bukti_bagi_hasil' )" class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+        <div
+          onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-bagi-hasil/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Bagi Hasil', 'file_bukti_bagi_hasil' )"
+          class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Bagi Hasil</p>
         </div>

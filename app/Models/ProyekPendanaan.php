@@ -43,7 +43,7 @@ class ProyekPendanaan extends Model
 
   public function statusPendanaan(): BelongsTo
   {
-    return $this->belongsTo(StatusPendanaan::class);
+    return $this->belongsTo(StatusPendanaan::class, 'id_status_pendanaan', 'id_status_pendanaan');
   }
 
   public function Pembayaran(): HasOne

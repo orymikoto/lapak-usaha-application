@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="col-span-6 flex flex-col">
-          <h3 class="mx-2">Pekerjaan Sampingan Pemilik Usaha</h3>
+          <h3 class="mx-2">Pekerjaan Sampingan</h3>
           <div class="p-2 rounded-md bg-neutral-200">
             {{ $deskripsi_usaha->pekerjaan_sampingan }}
           </div>
