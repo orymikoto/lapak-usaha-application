@@ -26,11 +26,12 @@
     }
 
     // POPUP MENAMPILKAN UPLOAD FILE
-    function showUploadModal(actionUrl, judul, file_name) {
+    function showUploadModal(actionUrl, judul, file_name, inputType) {
       document.getElementById("modal-upload-file").classList.remove('hidden')
       document.getElementById("modal-upload-file-judul").innerText = judul
       document.getElementById("modal-upload-file-form").action = actionUrl
       document.getElementById("modal-upload-file-input").name = file_name
+      document.getElementById("modal-upload-file-input").accept = inputType
     }
 
     function hideUploadModal() {
@@ -235,19 +236,19 @@
       <div class="flex gap-4 w-[70%]">
         <div
           onclick="showUploadModal( 
-          '{{ auth('admin')->check() ? '/penadanaan/tambah-file-kontrak/admin/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pendana')->check() ? '/penadanaan/tambah-file-kontrak/pendana/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pengusaha')->check() ? '/penadanaan/tambah-file-kontrak/pengusaha/' . $detailPendanaan->id_proyek_pendanaan : '' }}' , 'Upload File Kontrak', 'file_kontrak'  )"
+          '{{ auth('admin')->check() ? '/pendanaan/tambah-file-kontrak/admin/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pendana')->check() ? '/pendanaan/tambah-file-kontrak/pendana/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pengusaha')->check() ? '/pendanaan/tambah-file-kontrak/pengusaha/' . $detailPendanaan->id_proyek_pendanaan : '' }}' , 'Upload File Kontrak', 'file_kontrak', 'application/pdf'  )"
           class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>File Kontrak</p>
         </div>
         <div
-          onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran' )"
+          onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran', '{{ 'image/' . '*' }}' )"
           class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Pembayaran</p>
         </div>
         <div
-          onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-bagi-hasil/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Bagi Hasil', 'file_bukti_bagi_hasil' )"
+          onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-bagi-hasil/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Bagi Hasil', 'file_bukti_bagi_hasil', '{{ 'image/' . '*' }}' )"
           class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Bagi Hasil</p>

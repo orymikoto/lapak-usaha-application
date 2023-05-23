@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DeskripsiUsaha;
 use App\Models\JenisUsaha;
+use App\Models\Pembayaran;
 use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\This;
@@ -18,7 +19,7 @@ class ProyekPendanaanController extends Controller
     $destinationPath = 'upload/file_kontrak_admin';
     $file->storeAs('upload/file_kontrak_admin/', $filename . '.' . $filetype, 'public');
 
-    return '/upload/file_kontrak_admin/' . $filename . '.' . $filetype;
+    return '/storage/upload/file_kontrak_admin/' . $filename . '.' . $filetype;
   }
 
   private function upload_file_kontrak_pendana($file)
@@ -28,17 +29,34 @@ class ProyekPendanaanController extends Controller
     $destinationPath = 'upload/file_kontrak_pendana';
     $file->storeAs('upload/file_kontrak_pendana/', $filename . '.' . $filetype, 'public');
 
-    return '/upload/file_kontrak_pendana/' . $filename . '.' . $filetype;
+    return '/storage/upload/file_kontrak_pendana/' . $filename . '.' . $filetype;
   }
 
   private function upload_file_kontrak_pengusaha($file)
   {
     $filename = uniqid('file_kontrak_pengusaha_');
     $filetype = $file->extension();
-    $destinationPath = 'upload/file_kontrak_pengusaha';
     $file->storeAs('upload/file_kontrak_pengusaha/', $filename . '.' . $filetype, 'public');
 
-    return '/upload/file_kontrak_pengusaha/' . $filename . '.' . $filetype;
+    return '/storage/upload/file_kontrak_pengusaha/' . $filename . '.' . $filetype;
+  }
+
+  private function upload_file_bukti_pembayaran($file)
+  {
+    $filename = uniqid('bukti_pembayaran_');
+    $filetype = $file->extension();
+    $file->storeAs('upload/bukti_pembayaran/', $filename . '.' . $filetype, 'public');
+
+    return '/storage/upload/bukti_pembayaran/' . $filename . '.' . $filetype;
+  }
+
+  private function upload_file_bukti_bagi_hasil($file)
+  {
+    $filename = uniqid('bukti_bagi_hasil_');
+    $filetype = $file->extension();
+    $file->storeAs('upload/bukti_bagi_hasil/', $filename . '.' . $filetype, 'public');
+
+    return '/storage/upload/bukti_bagi_hasil/' . $filename . '.' . $filetype;
   }
 
   // ADMIN METHOD
@@ -65,6 +83,7 @@ class ProyekPendanaanController extends Controller
         'file_kontrak_admin' => $path_file_kontrak
       ]);
 
+      session()->flash('success', 'File kontrak admin berhasil ditambahkan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -114,6 +133,8 @@ class ProyekPendanaanController extends Controller
       $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
         'file_kontrak_pengusaha' => $path_file_kontrak
       ]);
+
+      session()->flash('success', 'File kontrak pengusaha berhasil ditambahkan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -128,6 +149,8 @@ class ProyekPendanaanController extends Controller
       $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
         'file_kontrak_pendana' => $path_file_kontrak
       ]);
+
+      session()->flash('success', 'File kontrak pendana berhasil ditambahkan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -136,17 +159,56 @@ class ProyekPendanaanController extends Controller
 
   public function tambah_pendanaan_post(Request $request, $id_deskripsi_usaha)
   {
-    $deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->with('pemilikUsaha')->first();
-    $new_proyek = ProyekPendanaan::create([
-      'jumlah_dana' => (int) $request['jumlah_dana'],
-      'id_deskripsi_usaha' => (int) $id_deskripsi_usaha,
-      'id_pemilik_usaha' => (int) $deskripsi_usaha->pemilikUsaha->id_pemilik_usaha,
-      'id_pendana' => (int) auth('pendana')->user()->id_pendana,
-      'id_status_pendanaan' => 1,
-    ]);
+    try {
+      $deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->with('pemilikUsaha')->first();
+      $new_proyek = ProyekPendanaan::create([
+        'jumlah_dana' => (int) $request['jumlah_dana'],
+        'id_deskripsi_usaha' => (int) $id_deskripsi_usaha,
+        'id_pemilik_usaha' => (int) $deskripsi_usaha->pemilikUsaha->id_pemilik_usaha,
+        'id_pendana' => (int) auth('pendana')->user()->id_pendana,
+        'id_status_pendanaan' => 1,
+      ]);
+      Pembayaran::create([
+        'id_proyek_pendanaan' => $new_proyek->id_proyek_pendanaan
+      ]);
 
-    session()->flash('success', 'Pendanaan berhasil ditambahkan');
-    return redirect("/pendanaan/tambah/{$id_deskripsi_usaha}");
+      session()->flash('success', 'Pendanaan berhasil ditambahkan');
+      return redirect("/pendanaan/tambah/{$id_deskripsi_usaha}");
+    } catch (\Throwable $th) {
+      throw $th;
+    }
+  }
+
+  public function tambah_bukti_pembayaran($id_proyek_pendanaan, Request $request)
+  {
+    try {
+      $file_kontrak = $request->file('file_bukti_pembayaran');
+      $path_file_kontrak = $this->upload_file_bukti_pembayaran($file_kontrak);
+      $proyek_pendanaan = Pembayaran::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
+        'bukti_pembayaran' => $path_file_kontrak
+      ]);
+
+      session()->flash('success', 'Bukti Pembayaran Berhasil ditambahkan');
+      return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
+    } catch (\Throwable $th) {
+      throw $th;
+    }
+  }
+
+  public function tambah_bukti_bagi_hasil($id_proyek_pendanaan, Request $request)
+  {
+    try {
+      $file_kontrak = $request->file('file_bukti_bagi_hasil');
+      $path_file_kontrak = $this->upload_file_bukti_bagi_hasil($file_kontrak);
+      $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
+        'bukti_bagi_hasil' => $path_file_kontrak
+      ]);
+
+      session()->flash('success', 'Bukti Pembayaran Berhasil ditambahkan');
+      return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
+    } catch (\Throwable $th) {
+      throw $th;
+    }
   }
 
   public function index()

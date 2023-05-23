@@ -13,9 +13,9 @@ return new class extends Migration
   {
     Schema::create('pembayaran', function (Blueprint $table) {
       $table->increments('id_pembayaran');
-      $table->date('tanggal_pembayaran');
-      $table->string('bukti_pembayaran');
-      $table->boolean('status_pembayaran');
+      $table->date('tanggal_pembayaran')->nullable();
+      $table->string('bukti_pembayaran')->nullable();
+      $table->boolean('status_pembayaran')->default(false);
 
       // Foreign Key Column
       $table->integer('id_proyek_pendanaan')->unsigned();

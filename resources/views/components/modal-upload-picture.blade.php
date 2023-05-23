@@ -7,7 +7,7 @@
     <h2 id="modal-upload-file-judul" class="text text-neutral-700 font-righteous text-lg">Upload File Kontrak</h2>
     <div class="flex flex-col w-[20rem]">
       <p class="text-neutral-500 font-medium font-roboto mx-2">Silahkan pilih file</p>
-      <input type="file" id="modal-upload-file-input" name="file_kontrak" accept="application/pdf" name required
+      <input type="file" id="modal-upload-file-input" name="file_kontrak" accept="application" name required
         class=" outline-none rounded-md file:cursor-pointer file:py-2 file:px-4 bg-neutral-100 file:rounded-md file:outline-none file:bg-neutral-200 file:text-yellow-500 hover:file:text-white hover:file:bg-yellow-500 file:duration-200 file:ring-0 file:border-none focus:ring-0 text-neutral-500 focus:text-yellow-500 font-medium font-roboto duration-200">
     </div>
     <button type="submit"
