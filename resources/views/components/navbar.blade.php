@@ -5,12 +5,12 @@
   </a>
   <div class="flex-1 flex items-center justify-center gap-x-4">
     @if (auth('pendana')->check() || auth('pengusaha')->check())
-      <a href="" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
-      <a href="" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
+      <a href="/daftar-usaha" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
+      <a href="/pendanaan" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
     @elseif(auth('admin')->check())
-      <a href="" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Dashboard</a>
-      <a href="" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
-      <a href="" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
+      <a href="/" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Dashboard</a>
+      <a href="/admin/daftar-usaha" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
+      <a href="/admin/pendanaan" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
     @endif
   </div>
 
