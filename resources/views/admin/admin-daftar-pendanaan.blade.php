@@ -15,6 +15,24 @@
     function hideUploadFileKontrak() {
       document.getElementById("upload_file_kontrak").classList.add("hidden")
     }
+
+    function reveal() {
+      var reveals = document.querySelectorAll(".item");
+
+      for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        var elementVisible = 100;
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("animate-fade-in-left", "opacity-100");
+        } else {
+          reveals[i].classList.remove("animate-fade-in-left", "opacity-100");
+        }
+      }
+    }
+
+    window.addEventListener("scroll", reveal);
   </script>
 
   <title>Vestry</title>
@@ -59,22 +77,22 @@
         @endphp
         @foreach ($daftarPendanaan as $key => $value)
           @if (request()->get('menu') == 0 || request()->get('menu') == null)
-            <x-item-pendanaan-admin :value="$value" />
+            <x-item-pendanaan-admin :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 1 && $value->id_status_pendanaan == 2)
-            <x-item-pendanaan-admin :value="$value" />
+            <x-item-pendanaan-admin :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 2 && $value->id_status_pendanaan == 1)
-            <x-item-pendanaan-admin :value="$value" />
+            <x-item-pendanaan-admin :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 3 && $value->id_status_pendanaan == 3)
-            <x-item-pendanaan-admin :value="$value" />
+            <x-item-pendanaan-admin :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp

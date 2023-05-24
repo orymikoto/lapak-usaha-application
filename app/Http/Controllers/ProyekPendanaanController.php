@@ -70,8 +70,9 @@ class ProyekPendanaanController extends Controller
 
   public function admin_detail_pendanaan($id_proyek_pendanaan)
   {
-    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->first();
-    return view();
+    $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan', 'progresPendanaan', 'Pembayaran')->first();
+    $jenis_usaha = JenisUsaha::whereIdJenisUsaha($proyek_pendanaan->deskripsiUsaha->id_jenis_usaha)->first();
+    return view('admin.detail-pendanaan')->with(array('detailPendanaan' => $proyek_pendanaan, 'jenisUsaha' => $jenis_usaha));
   }
 
   public function admin_tambah_file_kontrak_post(Request $request, $id_proyek_pendanaan)
@@ -84,7 +85,7 @@ class ProyekPendanaanController extends Controller
       ]);
 
       session()->flash('success', 'File kontrak admin berhasil ditambahkan');
-      return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
+      return redirect("/admin/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
     }
@@ -172,7 +173,7 @@ class ProyekPendanaanController extends Controller
         'id_proyek_pendanaan' => $new_proyek->id_proyek_pendanaan
       ]);
 
-      session()->flash('success', 'Pendanaan berhasil ditambahkan');
+      session()->flash('success', 'Data berhasil disimpan');
       return redirect("/pendanaan/tambah/{$id_deskripsi_usaha}");
     } catch (\Throwable $th) {
       throw $th;
@@ -188,7 +189,7 @@ class ProyekPendanaanController extends Controller
         'bukti_pembayaran' => $path_file_kontrak
       ]);
 
-      session()->flash('success', 'Bukti Pembayaran Berhasil ditambahkan');
+      session()->flash('success', 'Perubahan berhasil disimpan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       throw $th;
@@ -204,7 +205,7 @@ class ProyekPendanaanController extends Controller
         'bukti_bagi_hasil' => $path_file_kontrak
       ]);
 
-      session()->flash('success', 'Bukti Pembayaran Berhasil ditambahkan');
+      session()->flash('success', 'Perubahan berhasil disimpan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       throw $th;

@@ -39,12 +39,7 @@
       </p>
     </div>
   </div>
-  <div class="flex flex-col items-center justify-center cursor-pointer text-neutral-700 hover:text-yellow-500 duration-200 w-[9rem]">
-    <img src="{{ !empty($value->file_kontrak_admin) ? '/icons/pdf.svg' : '/icons/pdf-disabled.svg' }}" class="w-12 h-12">
-    <p class="font-medium font-roboto w-[7rem] text-center {{ empty($value->file_kontrak_admin) ? 'text-neutral-400' : '' }}">File
-      Kontrak
-    </p>
-  </div>
+  
   <div class="flex flex-col items-center gap-1 justify-center">
     <h3 class="text-sm font-medium font-roboto text-neutral-400">Status Pendanaan</h3>
     <div
@@ -62,9 +57,11 @@
       Telah Selesai
     </div>
   </div>
-  <div class="flex flex-col justify-center gap-2 text-center w-24 items-center text-neutral-600 hover:text-yellow-500 duration-200 cursor-pointer">
-    <img src="/icons/upload.svg" class="w-8 h-8" alt="" srcset="">
-    <p class="text-xs font-medium font-roboto ">Upload Bukti Pembayaran</p>
+  <div class="flex flex-col items-center justify-center cursor-pointer text-neutral-700 hover:text-yellow-500 duration-200 w-[9rem]">
+    <img src="{{ !empty($value->file_kontrak_admin) ? '/icons/pdf.svg' : '/icons/pdf-disabled.svg' }}" class="w-12 h-12">
+    <p class="font-medium font-roboto w-[7rem] text-center {{ empty($value->file_kontrak_admin) ? 'text-neutral-400' : '' }}">File
+      Kontrak
+    </p>
   </div>
   <div class="flex rounded-full bg-neutral-400 text-neutral-700 w-[15rem] h-[2rem] my-auto overflow-hidden">
     <a href="/pendanaan/detail/{{ $value->id_proyek_pendanaan }}"

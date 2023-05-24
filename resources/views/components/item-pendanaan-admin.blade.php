@@ -1,4 +1,4 @@
-<div class="p-4 flex bg-white rounded-lg shadow-md gap-2">
+<div class="p-4 flex bg-white rounded-lg shadow-md gap-2 {{ $key >= 3 ? 'opacity-0 item' : 'animate-fade-in-left' }}">
   <img class="w-[16rem] object-cover object-center rounded-md"
     src="{{ $value->deskripsiUsaha->id_deskripsi_usaha > 3 ? asset('/storage' . $value->deskripsiUsaha->foto_usaha) : $value->deskripsiUsaha->foto_usaha }}"
     alt="" srcset="">
@@ -70,7 +70,7 @@
     <p class="text-xs font-medium font-roboto ">Upload File Kontrak</p>
   </div>
   <div class="flex rounded-full bg-neutral-400 text-neutral-700 w-[15rem] h-[2rem] my-auto overflow-hidden">
-    <a href="/pendanaan/detail/{{ $value->id_proyek_pendanaan }}"
+    <a href="/admin/pendanaan/detail/{{ $value->id_proyek_pendanaan }}"
       class="flex-1 py-1 hover:bg-amber-400 hover:text-white font-medium font-roboto duration-200 text-center cursor-pointer">Detail
     </a>
     <div

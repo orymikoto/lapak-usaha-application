@@ -51,22 +51,22 @@
         @endphp
         @foreach ($daftarPendanaan as $key => $value)
           @if (request()->get('menu') == 0 || request()->get('menu') == null)
-            <x-item-pendanaan :value="$value" :key="$key" />
+            <x-item-pendanaan :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 1 && $value->id_status_pendanaan == 2)
-            <x-item-pendanaan :value="$value" :key="$key" />
+            <x-item-pendanaan :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 2 && $value->id_status_pendanaan == 1)
-            <x-item-pendanaan :value="$value" :key="$key" />
+            <x-item-pendanaan :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 3 && $value->id_status_pendanaan == 3)
-            <x-item-pendanaan :value="$value" :key="$key" />
+            <x-item-pendanaan :value="$value" :key="$total" />
             @php
               $total += 1;
             @endphp
