@@ -50,7 +50,7 @@ Route::get('/admin/daftar-pengusaha', [PemilikUsahaController::class, 'admin_daf
 
 // PENDANAAN VIEW
 Route::get('/admin/pendanaan/', [ProyekPendanaanController::class, 'admin_daftar_pendanaan'])->middleware(['logineduser', 'admin']);
-Route::get('/admin/pendanaan/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_detail_pendanaan'])->middleware(['logineduser', 'admin']);
+Route::get('/admin/pendanaan/detail/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'admin_detail_pendanaan'])->middleware(['logineduser', 'admin']);
 Route::get('/pendanaan/detail/{id_proyek_pendanaan}', [ProyekPendanaanController::class, 'detail_pendanaan'])->middleware(['logineduser']);
 Route::get('/pendanaan/tambah/{id_deskripsi_usaha}', [ProyekPendanaanController::class, 'tambah_pendanaan'])->middleware(['logineduser', 'pendana']);
 Route::get('/pendanaan/{id_pengguna}', [ProyekPendanaanController::class, 'daftar_pendanaan'])->middleware(['logineduser']);

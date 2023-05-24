@@ -11,10 +11,18 @@
 </head>
 
 <body class="w-full h-screen flex items-center bg-gradient-to-br from-blue-950 to-neutral-800 py-12 justify-center overflow-y-scroll">
-  <div class="rounded-xl overflow-hidden flex lg:w-[60rem] md:w-[50rem] sm:w-[40rem] w-[30rem] h-[40rem] my-8 bg-white">
+  <div class="rounded-xl overflow-hidden flex lg:w-[60rem] md:w-[50rem] sm:w-[40rem] w-[30rem] h-[40rem] my-8 bg-white">  
     <div class="md:w-[20rem] w-0 bg-[url('/images/auth-picture.jpg')] z-10 shadow-lg shadow-blue-950 bg-cover bg-center"></div>
     <div class="flex-1 flex flex-col items-center text-center gap-2">
-      @if (empty(request()->get('role')))
+      @if (session()->has('gagal'))
+          <div class="flex w-full h-full items-center justify-center bg-teal-700">
+            <div class="rounded p-4 bg-white shadow-md flex gap-2 flex-col w-[25rem] items-center">
+              <h2 class="text-yellow-500 text-2xl font-righteous ">Pesan</h2>
+              <p class="text-neutral-600 font-medium font-roboto">{{session()->get('gagal')}}</p>
+              <a href="/register" class="rounded-md font-medium font-roboto w-[10rem] py-2 bg-red-500 text-white hover:bg-white hover:text-red-500 hover:shadow-md hover:shadow-red-500/50 duration-200 cursor-pointer">Kembali</a>
+            </div>
+          </div>
+      @elseif (empty(request()->get('role')))
         <div class="flex flex-col items-center justify-center w-full h-full bg-teal-700">
           <div class="flex flex-col items-center text-neutral-800 my-4">
             <img src="/images/logo.png" alt="vestry logo" class="w-40 h-16">
@@ -77,7 +85,7 @@
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Nama</p>
-              <input type="text" placeholder="User Name" name="nama"
+              <input type="text" placeholder="Nama Lengkap" name="nama"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>

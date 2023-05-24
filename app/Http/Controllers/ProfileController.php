@@ -41,7 +41,7 @@ class ProfileController extends Controller
           'no_rekening' => $request['no_rekening']
         ]);
         
-        session()->flash('updated', 'Data Admin Successfully Updated');
+        session()->flash('updated', 'Data Admin Berhasil Diperbarui');
         return $this->profile();
       } elseif (auth('pendana')->check()) {
         $pendana = Pendana::where('id_pendana', auth('pendana')->user()->id_pendana)->update([
@@ -59,7 +59,7 @@ class ProfileController extends Controller
           'id_bank' => $request['id_bank']
         ]);
 
-        session()->flash('updated', 'Data Pendana Successfully Updated');
+        session()->flash('updated', 'Data Pendana Berhasil Diperbarui');
         return $this->profile();
       } elseif (auth('pengusaha')->check()) {
         $pengusaha = PemilikUsaha::where('id_pemilik_usaha', auth('pengusaha')->user()->id_pemilik_usaha)->update([
@@ -77,7 +77,7 @@ class ProfileController extends Controller
           'id_bank' => $request['id_bank']
         ]);
 
-        session()->flash('updated', 'Data Pengusaha Successfully Updated');
+        session()->flash('updated', 'Data Pengusaha Berhasil Diperbarui');
         return $this->profile();
       }
     } catch (\Throwable $th) {
