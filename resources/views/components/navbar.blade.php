@@ -5,8 +5,14 @@
   </a>
   <div class="flex-1 flex items-center justify-center gap-x-4">
     @if (auth('pendana')->check() || auth('pengusaha')->check())
-      <a href="/daftar-usaha" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
-      <a href="/pendanaan" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
+      <a href="/daftar-usaha/pendana" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
+      <a href="{{ '/pendanaan/' . auth('pendana')->user()->id_pendana }}"
+        class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
+    @elseif (auth('pengusaha')->check())
+      <a href="{{ '/daftar-usaha/pengusaha/' . auth('pengusaha')->user()->id_pemilik_usaha }}"
+        class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
+      <a href="{{ '/pendanaan/' . auth('pengusaha')->user()->id_pemilik_usaha }}"
+        class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Pendanaan</a>
     @elseif(auth('admin')->check())
       <a href="/" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Dashboard</a>
       <a href="/admin/daftar-usaha" class="text-white text-lg font-medium font-roboto cursor-pointer hover:text-yellow-500 duration-200">Usaha</a>
