@@ -22,6 +22,7 @@
               <a href="/register" class="rounded-md font-medium font-roboto w-[10rem] py-2 bg-red-500 text-white hover:bg-white hover:text-red-500 hover:shadow-md hover:shadow-red-500/50 duration-200 cursor-pointer">Kembali</a>
             </div>
           </div>
+          {{session()->forget('gagal')}}
       @elseif (empty(request()->get('role')))
         <div class="flex flex-col items-center justify-center w-full h-full bg-teal-700">
           <div class="flex flex-col items-center text-neutral-800 my-4">
@@ -80,48 +81,65 @@
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Alamat Rumah</p>
               <input type="text" placeholder="alamat_rumah" name="alamat_rumah"
+              required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Nama</p>
               <input type="text" placeholder="Nama Lengkap" name="nama"
+              required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Email</p>
               <input type="email" placeholder="user@mail.com" name="email"
+              required
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Username</p>
               <input type="text" placeholder="username" name="username"
+              required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Password</p>
               <input type="password" placeholder="password" name="password"
+              required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">No HP</p>
               <input type="text" placeholder="no_hp" name="no_hp"
+                minlength="9" maxlength="13"
+                required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">No KTP</p>
               <input type="text" placeholder="no_ktp" name="no_ktp"
+              minlength="16" maxlength="16"
+              required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Bank</p>
               <select type="text" name="id_bank"
+              required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 class="outline-none focus:ring-0 border-2 w-full border-neutral-400  px-2 py-1 text-lg rounded-md text-neutral-400 focus:text-yellow-500 focus:border-yellow-500 duration-200 "
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}>
                 @foreach ($bank as $key => $value)
@@ -133,6 +151,9 @@
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">No Rekening</p>
               <input type="text" placeholder="no_ktp" name="no_rekening"
+              minlength="10" maxlength="16"
+              required
+              oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>

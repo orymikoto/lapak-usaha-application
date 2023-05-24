@@ -82,7 +82,7 @@ class DeskripsiUsahaController extends Controller
       'id_status_pengajuan' => 2,
       ]);
 
-      session()->flash('konfirmasi', 'Deskripsi Usaha has been confirmed and will be showed to Pendana');
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
       return redirect('/admin/daftar-usaha');
     } catch (\Throwable $th) {
       dd($th);
@@ -96,7 +96,7 @@ class DeskripsiUsahaController extends Controller
         'id_status_pengajuan' => 1,
         ]);
   
-        session()->flash('konfirmasi', 'Deskripsi Usaha has been not confirmed and will no longer shown to Pendana');
+        session()->flash('pesan', 'Perubahan berhasil disimpan');
         return redirect('/admin/daftar-usaha');
     } catch (\Throwable $th) {
       dd($th);
@@ -109,7 +109,7 @@ class DeskripsiUsahaController extends Controller
       $usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->first();
       $deleted = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->delete();
 
-      session()->flash('deleted', 'Deskripsi Usaha has been not confirmed and will no longer shown to Pendana');
+      session()->flash('pesan', 'Data berhasil dihapus');
       return redirect("/daftar-usaha/{$usaha->id_pemilik_usaha}");
     } catch (\Throwable $th) {
       dd($th);
@@ -142,7 +142,7 @@ class DeskripsiUsahaController extends Controller
       'proposal' => $path_proposal
     ])->id_deskripsi_usaha;
 
-    session()->flash('create_new', 'Usaha baru berhasil ditambahkan');
+    session()->flash('pesan', 'Data berhasil disimpan');
 
     return redirect('/daftar-usaha/' . $id_pemilik_usaha);
   }
@@ -193,7 +193,7 @@ class DeskripsiUsahaController extends Controller
         'proposal' => !empty($proposal) ? $path_proposal : $deskripsi_usaha->proposal,
       ]);
 
-      session()->flash('updated', 'Deskripsi Usaha successfully updated');
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
       return redirect("/daftar-usaha/edit/{$id_deskripsi_usaha}");
     } catch (\Throwable $th) {
       dd($th);

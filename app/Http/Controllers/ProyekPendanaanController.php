@@ -84,7 +84,7 @@ class ProyekPendanaanController extends Controller
         'file_kontrak_admin' => $path_file_kontrak
       ]);
 
-      session()->flash('success', 'File kontrak admin berhasil ditambahkan');
+      session()->flash('pesan', 'File kontrak admin berhasil ditambahkan');
       return redirect("/admin/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -135,7 +135,7 @@ class ProyekPendanaanController extends Controller
         'file_kontrak_pengusaha' => $path_file_kontrak
       ]);
 
-      session()->flash('success', 'File kontrak pengusaha berhasil ditambahkan');
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -151,7 +151,7 @@ class ProyekPendanaanController extends Controller
         'file_kontrak_pendana' => $path_file_kontrak
       ]);
 
-      session()->flash('success', 'File kontrak pendana berhasil ditambahkan');
+      session()->flash('pesan', 'File kontrak pendana berhasil ditambahkan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       dd($th);
@@ -189,7 +189,7 @@ class ProyekPendanaanController extends Controller
         'bukti_pembayaran' => $path_file_kontrak
       ]);
 
-      session()->flash('success', 'Perubahan berhasil disimpan');
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       throw $th;
@@ -205,7 +205,7 @@ class ProyekPendanaanController extends Controller
         'bukti_bagi_hasil' => $path_file_kontrak
       ]);
 
-      session()->flash('success', 'Perubahan berhasil disimpan');
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
       return redirect("/pendanaan/detail/" . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       throw $th;

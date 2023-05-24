@@ -34,15 +34,15 @@
 
 <body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   <x-navbar />
-  @if (session()->has('konfirmasi'))
+  @if (session()->has('pesan'))
     <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
       <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
         <h2 class="text-lg">Pesan!</h2>
-        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{session()->get('konfirmasi')}}</p>
+        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{session()->get('pesan')}}</p>
         <a href="/admin/daftar-usaha" class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
       </div>
     </div>
-    {{session()->forget('updated')}}
+    {{session()->forget('pesan')}}
   @endif
   <div id="konfirmasi" class="hidden w-full h-full z-10 flex items-center justify-center absolute bg-neutral-500/60">
     <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
