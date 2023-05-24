@@ -10,6 +10,26 @@
   <title>Vestry</title>
 </head>
 
+<script>
+  function reveal() {
+    var reveals = document.querySelectorAll(".item");
+
+    for (var i = 0; i < reveals.length; i++) {
+      var windowHeight = window.innerHeight;
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      var elementVisible = 100;
+
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add("animate-fade-in-left", "opacity-100");
+      } else {
+        reveals[i].classList.remove("animate-fade-in-left", "opacity-100");
+      }
+    }
+  }
+
+  window.addEventListener("scroll", reveal);
+</script>
+
 <body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-y-scroll overflow-x-hidden">
   <x-navbar />
   <div class="flex flex-col items-center flex-1">
@@ -31,22 +51,22 @@
         @endphp
         @foreach ($daftarPendanaan as $key => $value)
           @if (request()->get('menu') == 0 || request()->get('menu') == null)
-            <x-item-pendanaan :value="$value" />
+            <x-item-pendanaan :value="$value" :key="$key" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 1 && $value->id_status_pendanaan == 2)
-            <x-item-pendanaan :value="$value" />
+            <x-item-pendanaan :value="$value" :key="$key" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 2 && $value->id_status_pendanaan == 1)
-            <x-item-pendanaan :value="$value" />
+            <x-item-pendanaan :value="$value" :key="$key" />
             @php
               $total += 1;
             @endphp
           @elseif (request()->get('menu') == 3 && $value->id_status_pendanaan == 3)
-            <x-item-pendanaan :value="$value" />
+            <x-item-pendanaan :value="$value" :key="$key" />
             @php
               $total += 1;
             @endphp

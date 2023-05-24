@@ -1,4 +1,4 @@
-<div class="p-4 flex bg-white rounded-lg shadow-md gap-2">
+<div class=" p-4 flex bg-white rounded-lg shadow-md gap-2 {{ $key >= 3 ? 'opacity-0 item' : 'animate-fade-in-left' }}">
   <img class="w-[16rem] object-cover object-center rounded-md"
     src="{{ $value->deskripsiUsaha->id_deskripsi_usaha > 3 ? asset('/storage' . $value->deskripsiUsaha->foto_usaha) : $value->deskripsiUsaha->foto_usaha }}"
     alt="" srcset="">
