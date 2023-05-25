@@ -28,7 +28,7 @@
     <div class="flex lg:flex-row flex-col gap-x-2">
       {{-- DESKRIPSI USAHA --}}
       <div class="w-[30rem] h-[35rem] bg-neutral-400/25 flex flex-col-reverse overflow-hidden rounded-lg shadow-md">
-        <div class="w-full h-[33rem] bg-gradient-to-b from-amber-400/75 to-rose-600/75 rounded-t-lg flex flex-col p-4">
+        <div class="w-full h-[33rem] bg-neutral-800 rounded-t-lg flex flex-col p-4">
           <h2 class="text-white font-righteous text-xl text-center my-2">Deskripsi Usaha</h2>
           <div class="grid grid-cols-12 gap-2 my-8">
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
@@ -83,7 +83,7 @@
 
       {{-- FORMULIR PENDANAAN --}}
       <div class="w-[30rem] h-[35rem] bg-neutral-400/25 flex flex-col-reverse overflow-hidden rounded-lg shadow-md">
-        <div class="w-full h-[33rem] bg-gradient-to-b from-amber-400/75 to-rose-600/75 rounded-t-lg flex flex-col p-4">
+        <div class="w-full h-[33rem] bg-neutral-800 rounded-t-lg flex flex-col p-4">
           <h2 class="text-white font-righteous text-xl text-center my-2">Tambah Pendanaan</h2>
           <form action="/pendanaan/tambah/{{ $deskripsi_usaha->id_deskripsi_usaha }}" method="POST" class="grid grid-cols-12 gap-2 my-8">
             @csrf
