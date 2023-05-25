@@ -41,9 +41,8 @@
   </div>
   <div class="col-start-4 col-end-10 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">ALAMAT RUMAH</p>
-    <input type="text" name="alamat_rumah"
-    required
-      oninvalid="this.setCustomValidity('Semua data harus diisi')"
+    <input type="text" name="alamat_rumah" required oninvalid="this.setCustomValidity('Semua data harus diisi')"
+      oninput="this.setCustomValidity('')"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->alamat_rumah) ? $detailUser->alamat_rumah : null }}">
@@ -55,34 +54,28 @@
 
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">NAMA</p>
-    <input type="text" name="nama"
-    required
-      oninvalid="this.setCustomValidity('Semua data harus diisi')"
+    <input type="text" name="nama" required oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ $detailUser->nama }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">USERNAME</p>
-    <input type="text" name="username"
-    required
-      oninvalid="this.setCustomValidity('Semua data harus diisi')"
+    <input type="text" name="username" required oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ $detailUser->username }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">EMAIL</p>
-    <input type="email" name="email"
+    <input type="email" name="email" oninput="this.setCustomValidity('')" required
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ $detailUser->email }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">BANK</p>
-    <select type="text" name="id_bank"
-    required
-      oninvalid="this.setCustomValidity('Semua data harus diisi')"
+    <select type="text" name="id_bank" required oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-[6px] text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}>
       @foreach ($bank as $key => $value)
@@ -92,36 +85,28 @@
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">NOMOR REKENING</p>
-    <input type="text" name="no_rekening"
-    minlength="10" maxlength="16"
-    required
+    <input type="text" name="no_rekening" minlength="10" maxlength="16" required
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->no_rekening) ? $detailUser->no_rekening : null }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">NOMOR HANDPHONE</p>
-    <input type="text" name="no_hp"
-    minlength="9" maxlength="13"
-    required
+    <input type="text" name="no_hp" minlength="9" maxlength="13" required
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->no_hp) ? $detailUser->no_hp : null }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">NOMOR INDUK KEPENDUDUKAN</p>
-    <input type="text" name="no_ktp"
-    minlength="16" maxlength="16"
-    required
+    <input type="text" name="no_ktp" minlength="16" maxlength="16" required
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->no_ktp) ? $detailUser->no_ktp : null }}">
   </div>
   <div class="col-span-6 py-1 flex flex-col text-neutral-500 font-medium font-roboto">
     <p class="text-neutral-700 mx-2">PEKERJAAN</p>
-    <input type="text" name="pekerjaan"
-    required
-      oninvalid="this.setCustomValidity('Semua data harus diisi')"
+    <input type="text" name="pekerjaan" required oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
       class="outline-none focus:ring-0 border-2 border-neutral-400 px-2 py-1 text-lg rounded-md bg-neutral-200/50 focus:text-yellow-500 focus:border-yellow-500 duration-200 focus:bg-yellow-100/25"
       {{ request()->get('edit') != 'true' || empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
       value="{{ !empty($detailUser->pekerjaan) ? $detailUser->pekerjaan : null }}">

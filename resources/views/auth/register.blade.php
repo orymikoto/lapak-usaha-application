@@ -11,18 +11,19 @@
 </head>
 
 <body class="w-full h-screen flex items-center bg-gradient-to-br from-blue-950 to-neutral-800 py-12 justify-center overflow-y-scroll">
-  <div class="rounded-xl overflow-hidden flex lg:w-[60rem] md:w-[50rem] sm:w-[40rem] w-[30rem] h-[40rem] my-8 bg-white">  
+  <div class="rounded-xl overflow-hidden flex lg:w-[60rem] md:w-[50rem] sm:w-[40rem] w-[30rem] h-[40rem] my-8 bg-white">
     <div class="md:w-[20rem] w-0 bg-[url('/images/auth-picture.jpg')] z-10 shadow-lg shadow-blue-950 bg-cover bg-center"></div>
     <div class="flex-1 flex flex-col items-center text-center gap-2">
       @if (session()->has('gagal'))
-          <div class="flex w-full h-full items-center justify-center bg-teal-700">
-            <div class="rounded p-4 bg-white shadow-md flex gap-2 flex-col w-[25rem] items-center">
-              <h2 class="text-yellow-500 text-2xl font-righteous ">Pesan</h2>
-              <p class="text-neutral-600 font-medium font-roboto">{{session()->get('gagal')}}</p>
-              <a href="/register" class="rounded-md font-medium font-roboto w-[10rem] py-2 bg-red-500 text-white hover:bg-white hover:text-red-500 hover:shadow-md hover:shadow-red-500/50 duration-200 cursor-pointer">Kembali</a>
-            </div>
+        <div class="flex w-full h-full items-center justify-center bg-teal-700">
+          <div class="rounded p-4 bg-white shadow-md flex gap-2 flex-col w-[25rem] items-center">
+            <h2 class="text-yellow-500 text-2xl font-righteous ">Pesan</h2>
+            <p class="text-neutral-600 font-medium font-roboto">{{ session()->get('gagal') }}</p>
+            <a href="/register"
+              class="rounded-md font-medium font-roboto w-[10rem] py-2 bg-red-500 text-white hover:bg-white hover:text-red-500 hover:shadow-md hover:shadow-red-500/50 duration-200 cursor-pointer">Kembali</a>
           </div>
-          {{session()->forget('gagal')}}
+        </div>
+        {{ session()->forget('gagal') }}
       @elseif (empty(request()->get('role')))
         <div class="flex flex-col items-center justify-center w-full h-full bg-teal-700">
           <div class="flex flex-col items-center text-neutral-800 my-4">
@@ -80,66 +81,54 @@
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Alamat Rumah</p>
-              <input type="text" placeholder="alamat_rumah" name="alamat_rumah"
-              required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
+              <input type="text" placeholder="alamat_rumah" name="alamat_rumah" required
+                oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Nama</p>
-              <input type="text" placeholder="Nama Lengkap" name="nama"
-              required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
-                {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
+              <input type="text" placeholder="Nama Lengkap" name="nama" required oninvalid="this.setCustomValidity('Semua data harus diisi')"
+                oninput="this.setCustomValidity('')" {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Email</p>
-              <input type="email" placeholder="user@mail.com" name="email"
-              required
+              <input type="email" placeholder="user@mail.com" name="email" required oninput="this.setCustomValidity('')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Username</p>
-              <input type="text" placeholder="username" name="username"
-              required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
+              <input type="text" placeholder="username" name="username" required oninput="this.setCustomValidity('')"
+                oninvalid="this.setCustomValidity('Semua data harus diisi')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Password</p>
-              <input type="password" placeholder="password" name="password"
-              required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
-                {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
+              <input type="password" placeholder="password" name="password" required oninvalid="this.setCustomValidity('Semua data harus diisi')"
+                oninput="this.setCustomValidity('')" {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">No HP</p>
-              <input type="text" placeholder="no_hp" name="no_hp"
-                minlength="9" maxlength="13"
-                required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
+              <input type="text" placeholder="no_hp" name="no_hp" minlength="9" maxlength="13" required
+                oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">No KTP</p>
-              <input type="text" placeholder="no_ktp" name="no_ktp"
-              minlength="16" maxlength="16"
-              required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
+              <input type="text" placeholder="no_ktp" name="no_ktp" minlength="16" maxlength="16" required
+                oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">Bank</p>
-              <select type="text" name="id_bank"
-              required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
+              <select type="text" name="id_bank" required oninvalid="this.setCustomValidity('Semua data harus diisi')"
+                oninput="this.setCustomValidity('')"
                 class="outline-none focus:ring-0 border-2 w-full border-neutral-400  px-2 py-1 text-lg rounded-md text-neutral-400 focus:text-yellow-500 focus:border-yellow-500 duration-200 "
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}>
                 @foreach ($bank as $key => $value)
@@ -150,10 +139,8 @@
             </div>
             <div class="col-span-4 flex flex-col items-start">
               <p class="text-yellow-500 font-medium mx-2">No Rekening</p>
-              <input type="text" placeholder="no_ktp" name="no_rekening"
-              minlength="10" maxlength="16"
-              required
-              oninvalid="this.setCustomValidity('Semua data harus diisi')"
+              <input type="text" placeholder="no_ktp" name="no_rekening" minlength="10" maxlength="16" required
+                oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
                 {{ empty(request()->get('kota')) || empty(request()->get('kecamatan')) ? 'disabled' : '' }}
                 class="outline-none text-neutral-400 font-medium placeholder:text-neutral-400 border-2 border-neutral-400 focus:text-yellow-500 duration-200 w-full  rounded-md py-1 px-2 focus:border-yellow-500">
             </div>
