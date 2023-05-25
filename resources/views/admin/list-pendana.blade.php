@@ -13,35 +13,25 @@
 <body class="antialiased bg-neutral-200 min-h-screen w-full flex flex-col overflow-x-hidden ">
   <x-navbar />
 
-  <div class="flex w-full flex-1 my-4 gap-x-4">
-    {{-- SIDEBAR --}}
-    <div
-      class="md:flex max-h-[30rem] hidden flex-col w-[15rem] bg-white rounded-r-lg text-left text-lg text-yellow-500 font-medium overflow-hidden z-10 shadow-lg shadow-black/50 ">
-      <div class="font-semibold text-white bg-yellow-500 py-2 font-righteous px-4 cursor-default select-none">
-        <p>Daftar Menu</p>
-      </div>
-      <div class="flex flex-col flex-1 justify-center font-medium font-roboto">
-        <a href="/admin/daftar-usaha" class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
-          <p>Daftar Usaha</p>
-        </a>
-        <a class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
-          <p>Proyek Pendanaan</p>
-        </a>
-        <a href="/admin/daftar-pendana" class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
-          <p>Akun Pendana</p>
-        </a>
-        <a href="/admin/daftar-pengusaha" class="hover:bg-yellow-400 hover:text-white cursor-pointer duration-200 py-2 my-2 px-4">
-          <p>Akun Pengusaha</p>
-        </a>
-      </div>
-      <a href="/"
-        class="py-2 px-4 hover:bg-red-500 bg-red-200 hover:text-white duration-200 font-semibold text-lg cursor-pointer text-red-500 ">
-        Back to home
+  <div class="flex flex-col items-center flex-1 my-4 gap-x-4 mx-4">
+    {{-- NAVIGATION ADMIN PAGE --}}
+    <div class="flex rounded-full bg-neutral-400 w-[40rem] overflow-hidden">
+      <a href="/admin/daftar-pengusaha"
+        class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">Daftar
+        Pengusaha</a>
+      <a class="flex-1 bg-yellow-500 font-medium font-roboto py-1 text-center cursor-pointer text-white duration-200">Daftar Pendana
       </a>
+      <a href="/admin/daftar-pembayaran"
+        class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
+        Daftar
+        Pembayaran</a>
+      <a class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
+        Daftar
+        Pencairan</a>
     </div>
 
     {{-- LIST USER --}}
-    <div class="flex-1 flex flex-col pr-6 relative gap-4">
+    <div class="flex-1 flex flex-col relative gap-4">
       <h1 class="text-yellow-500 font-righteous text-3xl text-center my-4">Daftar Pendana</h1>
       <div class="bg-white p-2 rounded-md">
         <table class="w-full">

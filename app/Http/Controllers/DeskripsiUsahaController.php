@@ -79,7 +79,7 @@ class DeskripsiUsahaController extends Controller
   {
     try {
       $usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->update([
-      'id_status_pengajuan' => 2,
+        'id_status_pengajuan' => 2,
       ]);
 
       session()->flash('pesan', 'Perubahan berhasil disimpan');
@@ -94,10 +94,10 @@ class DeskripsiUsahaController extends Controller
     try {
       $usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->update([
         'id_status_pengajuan' => 1,
-        ]);
-  
-        session()->flash('pesan', 'Perubahan berhasil disimpan');
-        return redirect('/admin/daftar-usaha');
+      ]);
+
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
+      return redirect('/admin/daftar-usaha');
     } catch (\Throwable $th) {
       dd($th);
     }
@@ -172,25 +172,24 @@ class DeskripsiUsahaController extends Controller
 
       $foto_usaha = $request->file('foto_usaha');
       $proposal = $request->file('proposal');
-      if(!empty($foto_usaha)){
+      if (!empty($foto_usaha)) {
         $path_foto_usaha = $this->upload_foto($foto_usaha);
       }
-      if(!empty($proposal)){
+      if (!empty($proposal)) {
         $path_proposal = $this->upload_proposal($proposal);
       }
 
       $deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->first();
 
       $update_deskripsi_usaha = DeskripsiUsaha::whereIdDeskripsiUsaha($id_deskripsi_usaha)->update([
-        'nama_usaha' => $request['nama_usaha'],
-        'deskripsi' => $request['deskripsi'],
+        'nama_usaha' => (string)$request['nama_usaha'],
+        'deskripsi' => (string)$request['deskripsi'],
         'tahun_berdiri' => (int)$request['tahun_berdiri'],
         'periode_produksi' => (int)$request['periode_produksi'],
         'target_dana' => (int)$request['target_dana'],
         'id_jenis_usaha' => (int)$request['jenis_usaha'],
-        'id_status_pengajuan' => 1,
-        'foto_usaha' => !empty($foto_usaha) ? $path_foto_usaha : $deskripsi_usaha->foto_usaha ,
-        'proposal' => !empty($proposal) ? $path_proposal : $deskripsi_usaha->proposal,
+        'foto_usaha' => !empty($foto_usaha) ? (string)$path_foto_usaha : $deskripsi_usaha->foto_usaha,
+        'proposal' => !empty($proposal) ? (string)$path_proposal : $deskripsi_usaha->proposal,
       ]);
 
       session()->flash('pesan', 'Perubahan berhasil disimpan');

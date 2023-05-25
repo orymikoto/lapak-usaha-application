@@ -14,7 +14,7 @@ class PemilikUsahaController extends Controller
       ->join('indonesia_districts', 'indonesia_districts.code', '=', 'pemilik_usaha.kecamatan')
       ->select('*', 'indonesia_cities.name as nama_kota')
       ->get();
-    return view('admin.list-pendana')->with(array('list_user' => $list_user));
+    return view('admin.list-pengusaha')->with(array('list_user' => $list_user));
   }
   /**
    * Display a listing of the resource.

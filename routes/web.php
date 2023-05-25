@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\DeskripsiUsahaController;
+use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\PemilikUsahaController;
+use App\Http\Controllers\PencairanDanaController;
 use App\Http\Controllers\PendanaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProyekPendanaanController;
@@ -47,6 +49,10 @@ Route::get('/daftar-usaha/tidak-konfirmasi/{id_deskripsi_usaha}', [DeskripsiUsah
 // ADMIN VIEW
 Route::get('/admin/daftar-pendana', [PendanaController::class, 'admin_daftar_pendana'])->middleware(['logineduser', 'admin']);
 Route::get('/admin/daftar-pengusaha', [PemilikUsahaController::class, 'admin_daftar_pemilik_usaha'])->middleware(['logineduser', 'admin']);
+Route::get('/admin/daftar-pembayaran', [PembayaranController::class, 'admin_daftar_pembayaran'])->middleware(['logineduser', 'admin']);
+Route::get('/admin/daftar-pencairan', [PencairanDanaController::class, 'admin_daftar_pencairan'])->middleware(['logineduser', 'admin']);
+Route::get('/admin/detail-pembayaran/{id_pembayaran}', [PembayaranController::class, 'admin_detail_pembayaran'])->middleware(['logineduser', 'admin']);
+
 
 // PENDANAAN VIEW
 Route::get('/admin/pendanaan/', [ProyekPendanaanController::class, 'admin_daftar_pendanaan'])->middleware(['logineduser', 'admin']);

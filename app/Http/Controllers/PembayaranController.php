@@ -7,59 +7,41 @@ use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
+  public function admin_daftar_pembayaran()
+  {
+    $daftar_pembayaran = Pembayaran::all();
+    return view('admin.list-pembayaran')->with(array('daftar_pembayaran' => $daftar_pembayaran));
+  }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  public function pendana_daftar_pembayaran($id_pendana)
+  {
+    $daftar_pembayaran = Pembayaran::whereIdProyekPendanaan($id_pendana);
+    return view('admin.list-pembayaran')->with(array('daftar_pembayaran' => $daftar_pembayaran));
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  public function admin_detail_pembayaran($id_pembayaran)
+  {
+    $pembayaran = Pembayaran::whereIdPembayaran($id_pembayaran);
+    return view('admin.list-pembayaran')->with(array('pembayaran' => $pembayaran));
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pembayaran $pembayaran)
-    {
-        //
-    }
+  public function detail_pembayaran($id_pembayaran)
+  {
+    $pembayaran = Pembayaran::whereIdPembayaran($id_pembayaran);
+    return view('admin.list-pembayaran')->with(array('pembayaran' => $pembayaran));
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pembayaran $pembayaran)
-    {
-        //
+  // UPDATE METHOD
+  public function setujui_pembayaran($id_pembayaran)
+  {
+    try {
+      $pembayaran = Pembayaran::whereIdPembayaran($id_pembayaran)->update([
+        'status_pembayaran' => true
+      ]);
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
+      return redirect('/admin/detail-pembayaran/' . $id_pembayaran);
+    } catch (\Throwable $th) {
+      throw $th;
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pembayaran $pembayaran)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pembayaran $pembayaran)
-    {
-        //
-    }
+  }
 }
