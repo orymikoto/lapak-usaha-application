@@ -49,8 +49,8 @@
                 <div class="py-1 flex-1 text-center hover:text-white hover:bg-emerald-400 cursor-pointer duration-200 {{$value->Pembayaran->status_pembayaran == 1 ? 'text-white bg-emerald-400 cursor-default' : ''}}">Disetujui</div>
                 <div class="py-1 flex-1 text-center hover:text-white hover:bg-red-500 cursor-pointer duration-200 {{$value->Pembayaran->status_pembayaran == 0 ? 'text-white bg-red-500 cursor-default': ''}}">Belum Disetujui</div>
               </div>
-              <div class="w-full py-1 font-roboto font-medium text-center text-white hover:text-teal-400 bg-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400/75 rounded-md duration-200 cursor-pointer">Lihat Detail</div>
-              <div class="w-full py-1 font-roboto font-medium text-center text-white hover:text-yellow-500 bg-yellow-500 hover:bg-white hover:shadow-md hover:shadow-yellow-500/75 rounded-md duration-200 cursor-pointer">Lihat Proyek</div>
+              <a href="{{'/admin/detail-pembayaran/' . $value->Pembayaran->id_pembayaran}}" class="w-full py-1 font-roboto font-medium text-center text-white hover:text-teal-400 bg-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400/75 rounded-md duration-200 cursor-pointer">Lihat Detail</a>
+              <a href="{{'/admin/pendanaan/detail/' . $value->id_proyek_pendanaan}}" class="w-full py-1 font-roboto font-medium text-center text-white hover:text-yellow-500 bg-yellow-500 hover:bg-white hover:shadow-md hover:shadow-yellow-500/75 rounded-md duration-200 cursor-pointer">Lihat Proyek</a>
             </div>
           @endforeach
         @elseif (request()->get('menu') == 2)
@@ -62,8 +62,8 @@
                   <div class="py-1 flex-1 text-center hover:text-white hover:bg-emerald-400 cursor-pointer duration-200 {{$value->Pembayaran->status_pembayaran == 1 ? 'text-white bg-emerald-400 cursor-default' : ''}}">Disetujui</div>
                   <div class="py-1 flex-1 text-center hover:text-white hover:bg-red-500 cursor-pointer duration-200 {{$value->Pembayaran->status_pembayaran == 0 ? 'text-white bg-red-500 cursor-default': ''}}">Belum Disetujui</div>
                 </div>
-                <div class="w-full py-1 font-roboto font-medium text-center text-white hover:text-teal-400 bg-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400/75 rounded-md duration-200 cursor-pointer">Lihat Detail</div>
-                <div class="w-full py-1 font-roboto font-medium text-center text-white hover:text-yellow-500 bg-yellow-500 hover:bg-white hover:shadow-md hover:shadow-yellow-500/75 rounded-md duration-200 cursor-pointer">Lihat Proyek</div>
+                <a href="{{'/admin/detail-pembayaran/' . $value->Pembayaran->id_pembayaran}}" class="w-full py-1 font-roboto font-medium text-center text-white hover:text-teal-400 bg-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400/75 rounded-md duration-200 cursor-pointer">Lihat Detail</a>
+                <a href="{{'/admin/pendanaan/detail/' . $value->id_proyek_pendanaan}}" class="w-full py-1 font-roboto font-medium text-center text-white hover:text-yellow-500 bg-yellow-500 hover:bg-white hover:shadow-md hover:shadow-yellow-500/75 rounded-md duration-200 cursor-pointer">Lihat Proyek</a>
               </div>
             @endif
           @endforeach
@@ -77,8 +77,8 @@
                   <div class="py-1 flex-1 text-center hover:text-white hover:bg-emerald-400 cursor-pointer duration-200 {{$value->Pembayaran->status_pembayaran == 1 ? 'text-white bg-emerald-400 cursor-default' : ''}}">Disetujui</div>
                   <div class="py-1 flex-1 text-center hover:text-white hover:bg-red-500 cursor-pointer duration-200 {{$value->Pembayaran->status_pembayaran == 0 ? 'text-white bg-red-500 cursor-default': ''}}">Belum Disetujui</div>
                 </div>
-                <div class="w-full py-1 font-roboto font-medium text-center text-white hover:text-teal-400 bg-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400/75 rounded-md duration-200 cursor-pointer">Lihat Detail</div>
-                <div class="w-full py-1 font-roboto font-medium text-center text-white hover:text-yellow-500 bg-yellow-500 hover:bg-white hover:shadow-md hover:shadow-yellow-500/75 rounded-md duration-200 cursor-pointer">Lihat Proyek</div>
+                <a href="{{'/admin/detail-pembayaran/' . $value->Pembayaran->id_pembayaran}}" class="w-full py-1 font-roboto font-medium text-center text-white hover:text-teal-400 bg-teal-400 hover:bg-white hover:shadow-md hover:shadow-teal-400/75 rounded-md duration-200 cursor-pointer">Lihat Detail</a>
+                <a href="{{'/admin/pendanaan/detail/' . $value->id_proyek_pendanaan}}" class="w-full py-1 font-roboto font-medium text-center text-white hover:text-yellow-500 bg-yellow-500 hover:bg-white hover:shadow-md hover:shadow-yellow-500/75 rounded-md duration-200 cursor-pointer">Lihat Proyek</a>
               </div>
             @endif
           @endforeach

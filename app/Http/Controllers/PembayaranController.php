@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DeskripsiUsaha;
 use App\Models\Pembayaran;
+use App\Models\Pendana;
 use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
 
@@ -23,8 +25,10 @@ class PembayaranController extends Controller
 
   public function admin_detail_pembayaran($id_pembayaran)
   {
-    $pembayaran = Pembayaran::whereIdPembayaran($id_pembayaran);
-    return view('admin.list-pembayaran')->with(array('pembayaran' => $pembayaran));
+    $pembayaran = Pembayaran::whereIdPembayaran($id_pembayaran)->with('proyekPendanaan')->first();
+    $deskripsiUsaha = DeskripsiUsaha::whereIdDeskripsiUsaha($pembayaran->proyekPendanaan->id_deskripsi_usaha)->first();
+    $pendana = Pendana::whereIdPendana($pembayaran->proyekPendanaan->id_pendana)->first();
+    return view('admin.detail-pembayaran')->with(array('pembayaran' => $pembayaran, 'deskripsi_usaha' => $deskripsiUsaha, 'pendana' => $pendana));
   }
 
   public function detail_pembayaran($id_pembayaran)
