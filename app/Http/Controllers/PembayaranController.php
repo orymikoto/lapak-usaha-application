@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembayaran;
+use App\Models\ProyekPendanaan;
 use Illuminate\Http\Request;
 
 class PembayaranController extends Controller
 {
   public function admin_daftar_pembayaran()
   {
-    $daftar_pembayaran = Pembayaran::all();
-    return view('admin.list-pembayaran')->with(array('daftar_pembayaran' => $daftar_pembayaran));
+    // $daftar_pembayaran = Pembayaran::with('proyekPendanaan');
+    $proyek_pendanaan = ProyekPendanaan::with('deskripsiUsaha', 'Pembayaran', 'Pendana')->get();
+    return view('admin.list-pembayaran')->with(array('proyek_pendanaan' => $proyek_pendanaan, ));
   }
 
   public function pendana_daftar_pembayaran($id_pendana)

@@ -23,12 +23,12 @@
         class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">Daftar
         Pendana
       </a>
-      <div class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
+      <a href="/admin/daftar-pembayaran" class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
         Daftar
-        Pembayaran</div>
-      <div class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
+        Pembayaran</a>
+      <a href="/admin/daftar-pencairan" class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">
         Daftar
-        Pencairan</div>
+        Pencairan</a>
     </div>
 
     {{-- LIST USER --}}
