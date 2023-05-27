@@ -7,13 +7,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @vite('resources/js/app.js')
   <script>
-    const closePicture = () => {
-      let picture = document.getElementById("picture")
-      picture.classList.add('hidden')
+    // POPUP MENAMPILKAN UPLOAD FILE
+    function showUploadModal(actionUrl, judul, file_name, inputType) {
+      document.getElementById("modal-upload-file").classList.remove('hidden')
+      document.getElementById("modal-upload-file-judul").innerText = judul
+      document.getElementById("modal-upload-file-form").action = actionUrl
+      document.getElementById("modal-upload-file-input").name = file_name
+      document.getElementById("modal-upload-file-input").accept = inputType
     }
-    const openPicture = () => {
-      let picture = document.getElementById("picture")
-      picture.classList.remove('hidden')
+
+    function hideUploadModal() {
+      document.getElementById("modal-upload-file").classList.add('hidden')
+      document.getElementById("modal-upload-file-judul").innerText = ""
+      document.getElementById("modal-upload-file-form").action = ""
+      document.getElementById("modal-upload-file-input").name = ""
     }
   </script>
 
@@ -22,6 +29,7 @@
 
 <body class="antialiased bg-neutral-200 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   <x-navbar />
+  <x-upload-file />
   @if (session()->has('pesan'))
     <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
       <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
@@ -70,8 +78,10 @@
           </div>
         </div>
       </div>
-      <a href="{{ $pembayaran->status_pembayaran == 0 ? '/admin/setujui-pembayaran/' . $pembayaran->id_pembayaran : '/admin/tolak-pembayaran/' . $pembayaran->id_pembayaran }}"
-        class="w-[20rem] my-2 py-1 text-white text-center duration-200 {{ $pembayaran->status_pembayaran == 0 ? 'bg-emerald-400 hover:text-emerald-400 hover:bg-white rounded-full hover:shadow-md hover:shadow-emerald-400/50' : 'bg-red-600 hover:text-red-600 hover:bg-white rounded-full hover:shadow-md hover:shadow-red-600/50' }}">{{ $pembayaran->status_pembayaran == 0 ? 'Setujui Pembayaran' : 'Tidak Setujui Pembayaran' }}</a>
+      <div
+        onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran', '{{ 'image/' . '*' }}' )"
+        class="w-[20rem] my-2 py-1 text-white text-center duration-200 {{ $pembayaran->status_pembayaran == 0 ? 'bg-emerald-400 hover:text-emerald-400 hover:bg-white rounded-full hover:shadow-md hover:shadow-emerald-400/50' : 'bg-red-600 hover:text-red-600 hover:bg-white rounded-full hover:shadow-md hover:shadow-red-600/50' }}">
+        {{ $pembayaran->status_pembayaran == 0 ? 'Setujui Pembayaran' : 'Tidak Setujui Pembayaran' }}</div>
       <button onclick="javascript:history.back()"
         class="w-[20rem] my-2 py-1 bg-rose-600 text-white hover:text-rose-600 hover:bg-white rounded-full hover:shadow-md hover:shadow-rose-600/50 duration-200">Back</button>
     </div>

@@ -82,6 +82,10 @@
 
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
+    <div class="flex w-[20rem] bg-neutral-400 rounded-full overflow-hidden">
+      <a class="flex-1 py-1" href="{{ '/pendanaan/detail/' . $detailPendanaan->id_proyek_pendanaan }}">Proyek Pendanaan</a>
+      <a class="flex-1 py-1" href="{{ '/pendanaan/pencairan/' . $detailPendanaan->id_proyek_pendanaan }}">Pencairan Dana</a>
+    </div>
     <div class="bg-white rounded-lg p-4 flex flex-col items-center w-[40rem] shadow-[2px_3px_7px_1px_rgba(0,0,0,0.3)]">
       {{-- DESKRIPSI USAHA --}}
       <h2 class="font-righteous text-xl text-neutral-700 my-4">Deskripsi Usaha</h2>
@@ -174,7 +178,8 @@
         <div class="flex flex-col font-roboto font-medium col-span-6">
           <h3 class="mx-2 text-lg font-medium">Status Pembayaran</h3>
           <div class="p-2 rounded-md w-full bg-neutral-200">
-            {{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Dibayarkan' : 'Lunas' }}
+            <a href="{{ '/pembayaran/detail/' . $detailPendanaan->pembayaran->id_pembayaran }}"
+              class="cursor-pointer hover:text-teal-400 duration-200">{{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Dibayarkan' : 'Lunas' }}</a>
           </div>
         </div>
         <div class="flex flex-col font-roboto font-medium col-span-6">
