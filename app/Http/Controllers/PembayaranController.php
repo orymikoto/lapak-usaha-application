@@ -56,6 +56,7 @@ class PembayaranController extends Controller
     try {
       $pembayaran = Pembayaran::whereIdPembayaran($id_pembayaran)->update([
         'status_pembayaran' => false
+
       ]);
       session()->flash('pesan', 'Perubahan berhasil disimpan');
       return redirect('/admin/detail-pembayaran/' . $id_pembayaran);

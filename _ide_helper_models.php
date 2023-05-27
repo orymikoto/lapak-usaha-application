@@ -135,8 +135,8 @@ namespace App\Models{
  * App\Models\Pembayaran
  *
  * @property int $id_pembayaran
- * @property string $tanggal_pembayaran
- * @property string $bukti_pembayaran
+ * @property string|null $tanggal_pembayaran
+ * @property string|null $bukti_pembayaran
  * @property int $status_pembayaran
  * @property int $id_proyek_pendanaan
  * @property \Illuminate\Support\Carbon|null $created_at

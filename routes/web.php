@@ -7,7 +7,9 @@ use App\Http\Controllers\PemilikUsahaController;
 use App\Http\Controllers\PencairanDanaController;
 use App\Http\Controllers\PendanaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProgresPendanaanController;
 use App\Http\Controllers\ProyekPendanaanController;
+use App\Models\Pembayaran;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +55,36 @@ Route::get('/admin/daftar-pembayaran', [PembayaranController::class, 'admin_daft
 Route::get('/admin/daftar-pencairan', [PencairanDanaController::class, 'admin_daftar_pencairan'])->middleware(['logineduser', 'admin']);
 Route::get('/admin/detail-pembayaran/{id_pembayaran}', [PembayaranController::class, 'admin_detail_pembayaran'])->middleware(['logineduser', 'admin']);
 
+// PEMBAYARAN VIEW
+Route::get('/pembayaran/detail/{id_pembayaran}', [PembayaranController::class, 'setujui_pembayaran'])->middleware(['logineduser']);
+
+// PEMBAYARAN POST METHOD
+Route::post('/pembayaran/tambah-bukti-pembayaran/{id_pembayaran}', [PembayaranController::class, 'setujui_pembayaran'])->middleware(['logineduser', 'pendana']);
+Route::get('/admin/setujui-pembayaran/{id_pembayaran}', [PembayaranController::class, 'setujui_pembayaran'])->middleware(['logineduser', 'admin']);
+Route::get('/admin/tolak-pembayaran/{id_pembayaran}', [PembayaranController::class, 'tolak_pembayaran'])->middleware(['logineduser', 'admin']);
+
+// PENCAIRAN VIEW
+Route::get('/pendanaan/pencairan/{id_proyek_pendanaan}', [PencairanDanaController::class, 'daftar_pencairan'])->middleware(['logineduser']);
+Route::get('/pencairan/detail/{id_pencairan}', [PencairanDanaController::class, 'detail_pencairan'])->middleware(['logineduser']);
+Route::get('/pencairan/tambah/{id_proyek_pendanaan}', [PencairanDanaController::class, 'tambah_pencairan'])->middleware(['logineduser', 'pengusaha']);
+Route::get('/pencairan/edit/{id_pencairan}', [PencairanDanaController::class, 'edit_pencairan'])->middleware(['logineduser', 'pengusaha']);
+
+// PENCAIRAN POST METHOD
+Route::post('/pencairan/tambah/{id_proyek_pendanaan}', [PencairanDanaController::class, 'tambah_pencairan_post'])->middleware(['logineduser', 'pengusaha']);
+Route::post('/pencairan/edit/{id_pencairan}', [PencairanDanaController::class, 'edit_pencairan_post'])->middleware(['logineduser', 'pengusaha']);
+Route::get('/pencairan/hapus/{id_pencairan}', [PencairanDanaController::class, 'hapus_pencairan_post'])->middleware(['logineduser', 'pengusaha']);
+
+
+// PROGRES PENDANAAN VIEW
+Route::get('/pendanaan/progres-pendanaan/{id_proyek_pendanaan}', [ProgresPendanaanController::class, 'daftar_progres_pendanaan'])->middleware(['logineduser']);
+Route::get('/progres-pendanaan/detail/{id_progres_pendanaan}', [ProgresPendanaanController::class, 'detail_progres_pendanaaan'])->middleware(['logineduser']);
+Route::get('/progres-pendanaan/tambah/{id_proyek_pendanaan}', [ProgresPendanaanController::class, 'tambah_progres_pendanaan'])->middleware(['logineduser']);
+Route::get('/progres-pendanaan/edit/{id_progres_pendanaan}', [ProgresPendanaanController::class, 'edit_progres_pendanaan'])->middleware(['logineduser']);
+
+// PROGRES PENDANAAN POST
+Route::post('/progres-pendanaan/tambah/{id_proyek_pendanaan}', [ProgresPendanaanController::class, 'tambah_progres_pendanaan_post'])->middleware(['logineduser', 'pengusaha']);
+Route::post('/progres-pendanaan/edit/{id_progres_pendanaan}', [ProgresPendanaanController::class, 'edit_progres_pendanaan_post'])->middleware(['logineduser', 'pengusaha']);
+Route::get('/progres-pendanaan/hapus/{id_progres_pendanaan}', [ProgresPendanaanController::class, 'hapus_progres_pendanaan'])->middleware(['logineduser', 'pengusaha']);
 
 // PENDANAAN VIEW
 Route::get('/admin/pendanaan/', [ProyekPendanaanController::class, 'admin_daftar_pendanaan'])->middleware(['logineduser', 'admin']);

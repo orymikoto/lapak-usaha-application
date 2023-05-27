@@ -76,11 +76,12 @@
     <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
       <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
         <h2 class="text-lg">Pesan!</h2>
-        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{session()->get('pesan')}}</p>
-        <a href="/daftar-usaha/{{request()->route()->id_pemilik_usaha}}" class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
+        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{ session()->get('pesan') }}</p>
+        <a href="/daftar-usaha/{{ request()->route()->id_pemilik_usaha }}"
+          class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
       </div>
     </div>
-    {{session()->forget('pesan')}}
+    {{ session()->forget('pesan') }}
   @endif
 
   {{-- HIDDEN MODAL --}}
@@ -92,6 +93,14 @@
 
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
+    <div class="flex w-[30rem] bg-neutral-400 rounded-full overflow-hidden">
+      <a class="flex-1 py-1 text-center font-roboto font-medium text-white bg-yellow-500"
+        href="{{ '/pendanaan/detail/' . $detailPendanaan->id_proyek_pendanaan }}">Proyek Pendanaan</a>
+      <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500 duration-200"
+        href="{{ '/pendanaan/pencairan/' . $detailPendanaan->id_proyek_pendanaan }}">Pencairan Dana</a>
+      <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500 duration-200"
+        href="{{ '/pendanaan/progres-pendanaan/' . $detailPendanaan->id_proyek_pendanaan }}">Progres Proyek</a>
+    </div>
     <div class="bg-white rounded-lg p-4 flex flex-col items-center w-[40rem] shadow-[2px_3px_7px_1px_rgba(0,0,0,0.3)]">
       {{-- DESKRIPSI USAHA --}}
       <h2 class="font-righteous text-xl text-neutral-700 my-4">Deskripsi Usaha</h2>

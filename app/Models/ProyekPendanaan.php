@@ -58,7 +58,7 @@ class ProyekPendanaan extends Model
 
   public function progresPendanaan(): HasMany
   {
-    return $this->hasMany(ProgresPendanaan::class, 'id_progres_pendanaan');
+    return $this->hasMany(ProgresPendanaan::class, 'id_proyek_pendanaan', 'id_proyek_pendanaan');
   }
 
   public function pencairanDana(): HasMany
