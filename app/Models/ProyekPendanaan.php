@@ -53,7 +53,7 @@ class ProyekPendanaan extends Model
 
   public function riwayatProyek(): HasOne
   {
-    return $this->hasOne(RiwayatProyek::class);
+    return $this->hasOne(RiwayatProyek::class, 'id_proyek_pendanaan', 'id_proyek_pendanaan');
   }
 
   public function progresPendanaan(): HasMany
@@ -63,6 +63,6 @@ class ProyekPendanaan extends Model
 
   public function pencairanDana(): HasMany
   {
-    return $this->hasMany(PencairanDana::class);
+    return $this->hasMany(PencairanDana::class, 'id_proyek_pendanaan', 'id_proyek_pendanaan');
   }
 }
