@@ -60,7 +60,7 @@
     <h1 class="text-yellow-500 font-righteous text-3xl text-center mt-4">Daftar Pembayaran</h1>
     <div class="flex w-[30rem] bg-neutral-400 rounded-full overflow-hidden">
       <a class="flex-1 py-1 text-center font-roboto font-medium hover:Ptext-white hover:bg-yellow-500"
-        href="{{ '/pendanaan/detail/' . request()->route()->id_proyek_pendanaan }}">Proyek Pendanaan</a>
+        href="{{ auth('admin')->check() ? '/admin/pendanaan/detail/' . request()->route()->id_proyek_pendanaan : '/pendanaan/detail/' . request()->route()->id_proyek_pendanaan }}">Proyek Pendanaan</a>
       <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500 duration-200"
         href="{{ '/pendanaan/pencairan/' . request()->route()->id_proyek_pendanaan }}">Pencairan Dana</a>
       <a class="flex-1 py-1 text-center font-roboto font-medium text-white bg-yellow-500 duration-200"

@@ -6,6 +6,7 @@ use App\Models\DeskripsiUsaha;
 use App\Models\JenisUsaha;
 use App\Models\Pembayaran;
 use App\Models\ProyekPendanaan;
+use App\Models\StatusPendanaan;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\This;
 
@@ -71,8 +72,23 @@ class ProyekPendanaanController extends Controller
   public function admin_detail_pendanaan($id_proyek_pendanaan)
   {
     $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan', 'progresPendanaan', 'Pembayaran')->first();
+    $statusPendanaan = StatusPendanaan::all(); 
     $jenis_usaha = JenisUsaha::whereIdJenisUsaha($proyek_pendanaan->deskripsiUsaha->id_jenis_usaha)->first();
-    return view('admin.detail-pendanaan')->with(array('detailPendanaan' => $proyek_pendanaan, 'jenisUsaha' => $jenis_usaha));
+    return view('admin.detail-pendanaan')->with(array('detailPendanaan' => $proyek_pendanaan, 'jenisUsaha' => $jenis_usaha, 'statusPendanaan' => $statusPendanaan));
+  }
+
+  public function admin_ubah_status(Request $request, $id_proyek_pendanaan)
+  {
+    try {
+      $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->update([
+        'id_status_pendanaan' => $request->id_status_pendanaan
+      ]);
+
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
+      return redirect('/admin/pendanaan/detail/' . $id_proyek_pendanaan);
+    } catch (\Throwable $th) {
+      dd($th);
+    }
   }
 
   public function admin_tambah_file_kontrak_post(Request $request, $id_proyek_pendanaan)

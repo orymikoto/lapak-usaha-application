@@ -67,24 +67,51 @@
     function hideNoFileKontrak() {
       document.getElementById("modal-show-no-file-pdf").classList.add('hidden')
     }
+
+    const showUpdateFormModal = (action) => {
+      console.log('jello')
+    document.getElementById("modal-update-form-data").classList.remove("hidden")
+    document.getElementById("modal-update-form-data-action").action = `${action}`
+    }
+    const hideUpdateFormModal = () => {
+      document.getElementById("modal-update-form-data").classList.add("hidden")
+      document.getElementById("modal-update-form-data-action").innerText = ""
+    }
   </script>
 </head>
 
 <body class="antialiased bg-neutral-200 min-h-screen w-full flex flex-col overflow-x-hidden relative ">
   <x-navbar />
 
+  @if (session()->has('pesan'))
+    <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
+      <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+        <h2 class="text-lg">Pesan!</h2>
+        <p class="text-sm font-light text-neutral-400 w-[10rem]">{{ session()->get('pesan') }}</p>
+        <a href="{{ '/admin/pendanaan/detail/' . $detailPendanaan->id_proyek_pendanaan }}"
+          class="py-1 w-[7rem] text-center bg-red-500 text-white hover:text-red-500 hover:bg-white rounded-md hover:shadow-md hover:shadow-red-500/50">close</a>
+      </div>
+    </div>
+    {{ session()->forget('pesan') }}
+  @endif
+
   {{-- HIDDEN MODAL --}}
   <x-modal-show-picture />
   <x-modal-upload-file />
   <x-modal-show-file-pdf />
   <x-modal-show-no-file-pdf />
+  <x-modal-update-form-data :statusPendanaan="$statusPendanaan" />
 
 
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
-    <div class="flex w-[20rem] bg-neutral-400 rounded-full overflow-hidden">
-      <a class="flex-1 py-1" href="{{ '/pendanaan/detail/' . $detailPendanaan->id_proyek_pendanaan }}">Proyek Pendanaan</a>
-      <a class="flex-1 py-1" href="{{ '/pendanaan/pencairan/' . $detailPendanaan->id_proyek_pendanaan }}">Pencairan Dana</a>
+    <div class="flex w-[30rem] bg-neutral-400 rounded-full overflow-hidden" >
+      <a class="flex-1 py-1 text-center font-roboto font-medium text-white bg-yellow-500"
+        href="{{ '/pendanaan/detail/' . $detailPendanaan->id_proyek_pendanaan }}">Proyek Pendanaan</a>
+      <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500 duration-200"
+        href="{{ '/pendanaan/pencairan/' . $detailPendanaan->id_proyek_pendanaan }}">Pencairan Dana</a>
+      <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500 duration-200"
+        href="{{ '/pendanaan/progres-pendanaan/' . $detailPendanaan->id_proyek_pendanaan }}">Progres Proyek</a>
     </div>
     <div class="bg-white rounded-lg p-4 flex flex-col items-center w-[40rem] shadow-[2px_3px_7px_1px_rgba(0,0,0,0.3)]">
       {{-- DESKRIPSI USAHA --}}
@@ -188,6 +215,7 @@
             {{ $detailPendanaan->statusPendanaan->nama_status }}
           </div>
         </div>
+        <button onclick="showUpdateFormModal('{{ '/pendanaan/ubah-status/' . $detailPendanaan->id_proyek_pendanaan}}')" class="col-start-4 my-2 font-roboto font-medium col-end-10 py-1 bg-amber-400 text-center text-white hover:bg-white hover:text-amber-400 hover:shadow-amber-400/50 hover:shadow-md duration-200 cursor-pointer rounded-md">Perbarui Status Proyek</button>
       </div>
 
       {{-- FILE KONTRAK --}}

@@ -11,10 +11,10 @@ class PencairanDanaController extends Controller
   public function admin_daftar_pencairan()
   {
     $pencairan = PencairanDana::all();
-    return view('admin.list-pencairan');
+    return view('admin.list-pencairan')->with(array('pencairan' => $pencairan));
   }
   // VIEW METHOD
-  public function daftar_progres_pencairan($id_proyek_pendanaan)
+  public function daftar_pencairan($id_proyek_pendanaan)
   {
     $pencairan = PencairanDana::whereIdProyekPendanaan($id_proyek_pendanaan)->with('proyekPendanaan')->get();
     return view('pencairan.daftar-pencairan')->with(array('pencairan' => $pencairan));
@@ -22,17 +22,19 @@ class PencairanDanaController extends Controller
 
   public function ajukan_pencairan($id_proyek_pendanaan)
   {
-    return view('progres_pendanaan.tambah-progres-pendanaan');
+    $pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->first();
+    return view('pencairan.tambah-pencairan')->with(array('pendanaan' => $pendanaan)) ;
   }
 
   // POST METHOD
 
-  public function setujui_pencairan($id_pencairan)
+  public function admin_setujui_pencairan($id_pencairan)
   {
     try {
       //code...
       $pencairan = PencairanDana::whereIdPencairanDana($id_pencairan)->first();
       $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($pencairan->id_pencairan_dana)->first();
+      // dd($proyek_pendanaan->jumlah_dana - $pencairan->nominal_pencairan);
       if ($proyek_pendanaan->jumlah_dana > $pencairan->nominal_pencairan) {
         # code...
         PencairanDana::whereIdPencairanDana($id_pencairan)->update([
@@ -41,7 +43,32 @@ class PencairanDanaController extends Controller
         ProyekPendanaan::whereIdProyekPendanaan($pencairan->id_pencairan_dana)->update([
           'jumlah_dana' => $proyek_pendanaan->jumlah_dana - $pencairan->nominal_pencairan
         ]);
+
+        session()->flash('pesan', 'Perubahan berhasil disimpan');
+        return redirect('/admin/daftar-pencairan');
       }
+      session()->flash('pesan', 'Perubahan gagal dilakukan, jumlah dana tidak mencukupi');
+      return redirect('/admin/daftar-pencairan');
+    } catch (\Throwable $th) {
+      dd( $th);
+    }
+  }
+
+  public function admin_tolak_pencairan($id_pencairan)
+  {
+    try {
+      //code...
+      $pencairan = PencairanDana::whereIdPencairanDana($id_pencairan)->first();
+      $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($pencairan->id_pencairan_dana)->first();
+      PencairanDana::whereIdPencairanDana($id_pencairan)->update([
+        'status_pencairan' => false
+      ]);
+      ProyekPendanaan::whereIdProyekPendanaan($pencairan->id_pencairan_dana)->update([
+        'jumlah_dana' => $proyek_pendanaan->jumlah_dana + $pencairan->nominal_pencairan
+      ]);
+
+      session()->flash('pesan', 'Perubahan berhasil disimpan');
+      return redirect('/admin/daftar-pencairan');
     } catch (\Throwable $th) {
       throw $th;
     }
@@ -50,7 +77,7 @@ class PencairanDanaController extends Controller
   public function hapus_pencairan($id_pencairan)
   {
     try {
-      $pencairan = PencairanDana::whereIdProgresPendanaan($id_pencairan)->first();
+      $pencairan = PencairanDana::whereIdPencairanDana($id_pencairan)->first();
       if ($pencairan->status_pencairan == true) {
         session()->flash('pesan', 'Penghapusan gagal karena pencairan telah disetujui');
         return redirect("/pendanaan/pencairan/" . $pencairan->id_proyek_pendanaan);
@@ -64,22 +91,31 @@ class PencairanDanaController extends Controller
     }
   }
 
-  public function tambah_progres_pendanaan_post(Request $request, $id_proyek_pendanaan)
+  public function admin_hapus_pencairan($id_pencairan)
   {
     try {
-      $file_laporan_keuangan = $request->file('laporan_keuangan');
-      // dd(date('Y-m-d'));
-      $path_file_laporan_keuangan = $this->upload_file($file_laporan_keuangan);
+      $pencairan = PencairanDana::whereIdPencairanDana($id_pencairan)->first();
+      PencairanDana::whereIdPencairanDana($id_pencairan)->delete();
 
-      $progres_pendanaan = PencairanDana::create([
-        'tanggal_laporan_progres_pendanaan' => date('Y-m-d'),
-        'keterangan' => $request->keterangan,
-        'laporan_keuangan' => $path_file_laporan_keuangan,
+      session()->flash('pesan', 'Data berhasil dihapus');
+      return redirect("/admin/daftar-pencairan/" . $pencairan->id_proyek_pendanaan);
+    } catch (\Throwable $th) {
+      throw $th;
+    }
+  }
+
+  public function ajukan_pencairan_post(Request $request, $id_proyek_pendanaan)
+  {
+    try {
+
+      $pencairan = PencairanDana::create([
+        'tanggal_pencairan_dana' => date('Y-m-d'),
+        'nominal_pencairan' => $request->nominal_pencairan,
         'id_proyek_pendanaan' => $id_proyek_pendanaan
       ]);
 
       session()->flash('pesan', 'Data berhasil disimpan');
-      return redirect('/pendanaan/progres-pendanaan/' . $id_proyek_pendanaan);
+      return redirect('/pendanaan/pencairan/' . $id_proyek_pendanaan);
     } catch (\Throwable $th) {
       throw $th;
     }

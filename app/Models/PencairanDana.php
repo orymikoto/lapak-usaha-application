@@ -20,6 +20,6 @@ class PencairanDana extends Model
 
   public function proyekPendanaan(): BelongsTo
   {
-    return $this->belongsTo(ProyekPendanaan::class);
+    return $this->belongsTo(ProyekPendanaan::class, 'id_proyek_pendanaan', 'id_proyek_pendanaan');
   }
 }

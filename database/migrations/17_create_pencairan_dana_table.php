@@ -15,7 +15,7 @@ return new class extends Migration
       $table->increments('id_pencairan_dana');
       $table->date('tanggal_pencairan_dana');
       $table->integer('nominal_pencairan');
-      $table->boolean('status_pencairan');
+      $table->boolean('status_pencairan')->default(false);
 
       // Foreign Key Column
       $table->integer('id_proyek_pendanaan')->unsigned();

@@ -212,21 +212,21 @@ namespace App\Models{
 /**
  * App\Models\PencairanDana
  *
- * @property int $pencairan_dana
+ * @property int $id_pencairan_dana
  * @property string $tanggal_pencairan_dana
  * @property int $nominal_pencairan
  * @property int $status_pencairan
  * @property int $id_proyek_pendanaan
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\ProyekPendanaan|null $proyekPendanaan
+ * @property-read \App\Models\ProyekPendanaan $proyekPendanaan
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana query()
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana whereIdPencairanDana($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana whereIdProyekPendanaan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana whereNominalPencairan($value)
- * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana wherePencairanDana($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana whereStatusPencairan($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana whereTanggalPencairanDana($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PencairanDana whereUpdatedAt($value)
