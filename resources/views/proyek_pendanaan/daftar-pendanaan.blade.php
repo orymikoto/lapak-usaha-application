@@ -83,14 +83,14 @@
             @endphp
           @elseif($key == count($daftarPendanaan) - 1 && $total == 0)
             <div class="w-[90vw] h-[20rem] flex flex-col items-center justify-center rounded-lg bg-white">
-              <h2 class="text-neutral-700 font-righteous text-xl">Nothing to Show Here Yet</h2>
+              <h2 class="text-neutral-700 font-righteous text-xl">Tidak Ada Pendanaan dengan Kriteria Tersebut</h2>
               <img src="/images/nothing.jpg" class="h-[15rem]" alt="" srcset="">
             </div>
           @endif
         @endforeach
       @else
         <div class="w-[90vw] h-[20rem] flex flex-col items-center justify-center rounded-lg bg-white">
-          <h2 class="text-neutral-700 font-righteous text-xl">This User Don't Have Any Pendanaan Yet</h2>
+          <h2 class="text-neutral-700 font-righteous text-xl">Pengguna Ini Belum Memiliki Proyek Pendanaan</h2>
           <img src="/images/nothing.jpg" class="h-[15rem]" alt="" srcset="">
         </div>
       @endif

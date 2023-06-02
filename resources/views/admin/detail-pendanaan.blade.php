@@ -70,12 +70,12 @@
 
     const showUpdateFormModal = (action) => {
       console.log('jello')
-    document.getElementById("modal-update-form-data").classList.remove("hidden")
-    document.getElementById("modal-update-form-data-action").action = `${action}`
+      document.getElementById("modal-update-form-data").classList.remove("hidden")
+      document.getElementById("modal-update-form-data-action").action = `${action}`
     }
     const hideUpdateFormModal = () => {
       document.getElementById("modal-update-form-data").classList.add("hidden")
-      document.getElementById("modal-update-form-data-action").innerText = ""
+      document.getElementById("modal-update-form-data-action").action = ""
     }
   </script>
 </head>
@@ -105,7 +105,7 @@
 
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
     <h1 class="font-righteous text-3xl text-yellow-500 my-2">Detail Pendanaan</h1>
-    <div class="flex w-[30rem] bg-neutral-400 rounded-full overflow-hidden" >
+    <div class="flex w-[30rem] bg-neutral-400 rounded-full overflow-hidden">
       <a class="flex-1 py-1 text-center font-roboto font-medium text-white bg-yellow-500"
         href="{{ '/pendanaan/detail/' . $detailPendanaan->id_proyek_pendanaan }}">Proyek Pendanaan</a>
       <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500 duration-200"
@@ -205,8 +205,7 @@
         <div class="flex flex-col font-roboto font-medium col-span-6">
           <h3 class="mx-2 text-lg font-medium">Status Pembayaran</h3>
           <div class="p-2 rounded-md w-full bg-neutral-200">
-            <a href="{{ '/pembayaran/detail/' . $detailPendanaan->pembayaran->id_pembayaran }}"
-              class="cursor-pointer hover:text-teal-400 duration-200">{{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Dibayarkan' : 'Lunas' }}</a>
+            {{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Terlunaskan' : 'Lunas' }}
           </div>
         </div>
         <div class="flex flex-col font-roboto font-medium col-span-6">
@@ -215,7 +214,15 @@
             {{ $detailPendanaan->statusPendanaan->nama_status }}
           </div>
         </div>
-        <button onclick="showUpdateFormModal('{{ '/pendanaan/ubah-status/' . $detailPendanaan->id_proyek_pendanaan}}')" class="col-start-4 my-2 font-roboto font-medium col-end-10 py-1 bg-amber-400 text-center text-white hover:bg-white hover:text-amber-400 hover:shadow-amber-400/50 hover:shadow-md duration-200 cursor-pointer rounded-md">Perbarui Status Proyek</button>
+        <button onclick="showUpdateFormModal('{{ '/pendanaan/ubah-status/' . $detailPendanaan->id_proyek_pendanaan }}')"
+          class="col-start-4 font-roboto font-medium col-end-10 py-1 bg-amber-400 text-center text-white hover:bg-white hover:text-amber-400 hover:shadow-amber-400/50 hover:shadow-md duration-200 cursor-pointer rounded-md">Perbarui
+          Status Proyek</button>
+        <a href="{{ '/admin/detail-pembayaran/' . $detailPendanaan->pembayaran->id_pembayaran }}"
+          class="col-start-4 font-roboto font-medium col-end-10 py-1 rounded-md  text-center {{ $detailPendanaan->pembayaran->bukti_pembayaran == null ? 'bg-neutral-400 text-white cursor-default pointer-events-none' : 'bg-teal-400 text-white hover:bg-white hover:text-teal-400 hover:shadow-teal-400/50 hover:shadow-md duration-200 cursor-pointer ' }}">
+          Lihat Detail Pembayaran</a>
+        {{-- <button onclick="showUpdateFormModal('{{ '/pendanaan/ubah-status/' . $detailPendanaan->id_proyek_pendanaan }}')"
+          class="col-start-4 my-2 font-roboto font-medium col-end-10 py-1 bg-amber-400 text-center text-white hover:bg-white hover:text-amber-400 hover:shadow-amber-400/50 hover:shadow-md duration-200 cursor-pointer rounded-md">Lihat
+          Detail Pembayaran</button> --}}
       </div>
 
       {{-- FILE KONTRAK --}}
@@ -266,30 +273,30 @@
 
       {{-- ACTIONS --}}
       <h2 class="text-neutral-700 font-medium font-righteous text-xl text-center mt-4">Tambah Data</h2>
-      <div class="flex gap-4 w-[70%]">
-        <div
+      <div class="flex gap-4 w-[70%] font-roboto font-medium text-neutral-600">
+        <button
           onclick="showUploadModal( 
           '{{ auth('admin')->check() ? '/pendanaan/tambah-file-kontrak/admin/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pendana')->check() ? '/pendanaan/tambah-file-kontrak/pendana/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pengusaha')->check() ? '/pendanaan/tambah-file-kontrak/pengusaha/' . $detailPendanaan->id_proyek_pendanaan : '' }}' , 'Upload File Kontrak', 'file_kontrak', 'application/pdf'  )"
           class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>File Kontrak</p>
-        </div>
-        <div
+        </button>
+        <button disabled
           onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran', '{{ 'image/' . '*' }}' )"
           class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Pembayaran</p>
-        </div>
-        <div
+        </button>
+        <button disabled
           onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-bagi-hasil/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Bagi Hasil', 'file_bukti_bagi_hasil', '{{ 'image/' . '*' }}' )"
           class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Bagi Hasil</p>
-        </div>
+        </button>
       </div>
-      <div
+      <div onclick="window.history.go(-1); return false;"
         class="text-white bg-red-600 hover:text-red-600 rounded-md hover:bg-white hover:shadow-md hover:shadow-red-600/70 duration-200 w-[14rem] py-1 font-roboto font-medium text-xl text-center cursor-pointer my-4">
-        Batalkan</div>
+        Kembali</div>
       @if (!empty(request()->get('showProgres')))
         <a href="/pendanaan/detail/{{ $detailPendanaan->id_proyek_pendanaan }}" class="flex flex-col items-center">
           <p class="text-teal-400 font-roboto font-medium">Sembunyikan Progres Pendanaan</p>

@@ -56,7 +56,7 @@ Route::get('/admin/daftar-pencairan', [PencairanDanaController::class, 'admin_da
 Route::get('/admin/detail-pembayaran/{id_pembayaran}', [PembayaranController::class, 'admin_detail_pembayaran'])->middleware(['logineduser', 'admin']);
 
 // PEMBAYARAN VIEW
-Route::get('/pembayaran/detail/{id_pembayaran}', [PembayaranController::class, 'setujui_pembayaran'])->middleware(['logineduser']);
+Route::get('/pembayaran/detail/{id_pembayaran}', [PembayaranController::class, 'detail_pembayaran'])->middleware(['logineduser']);
 
 // PEMBAYARAN POST METHOD
 Route::post('/pembayaran/tambah-bukti-pembayaran/{id_pembayaran}', [PembayaranController::class, 'setujui_pembayaran'])->middleware(['logineduser', 'pendana']);

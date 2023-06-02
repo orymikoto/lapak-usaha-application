@@ -202,6 +202,9 @@
             {{ $detailPendanaan->statusPendanaan->nama_status }}
           </div>
         </div>
+        <a href="{{ '/pembayaran/detail/' . $detailPendanaan->pembayaran->id_pembayaran }}"
+          class="col-start-4 font-roboto font-medium col-end-10 py-1 rounded-md  text-center {{ $detailPendanaan->pembayaran->bukti_pembayaran == null ? 'bg-neutral-400 text-white cursor-default pointer-events-none' : 'bg-teal-400 text-white hover:bg-white hover:text-teal-400 hover:shadow-teal-400/50 hover:shadow-md duration-200 cursor-pointer ' }}">
+          Lihat Detail Pembayaran</a>
       </div>
 
       {{-- FILE KONTRAK --}}
@@ -222,6 +225,7 @@
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pengusaha</p>
         </div>
+
       </div>
 
       {{-- FILE FOTO --}}
@@ -256,26 +260,28 @@
         <div
           onclick="showUploadModal( 
           '{{ auth('admin')->check() ? '/pendanaan/tambah-file-kontrak/admin/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pendana')->check() ? '/pendanaan/tambah-file-kontrak/pendana/' . $detailPendanaan->id_proyek_pendanaan : '' }}{{ auth('pengusaha')->check() ? '/pendanaan/tambah-file-kontrak/pengusaha/' . $detailPendanaan->id_proyek_pendanaan : '' }}' , 'Upload File Kontrak', 'file_kontrak', 'application/pdf'  )"
-          class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+          class="font-medium font-roboto text-neutral-600 hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>File Kontrak</p>
         </div>
-        <div
+        <button
+          {{ auth('pendana')->check() == true ? (auth('pendana')->user()->id_pendana == $detailPendanaan->id_pendana ? '' : 'disabled') : 'disabled' }}
           onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-pembayaran/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Pembayaran', 'file_bukti_pembayaran', '{{ 'image/' . '*' }}' )"
-          class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+          class="font-medium font-roboto text-neutral-600 hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Pembayaran</p>
-        </div>
-        <div
+        </button>
+        <button
+          {{ auth('pengusaha')->check() == true ? (auth('pengusaha')->user()->id_pemilik_usaha == $detailPendanaan->id_pemilik_usaha ? '' : 'disabled') : 'disabled' }}
           onclick="showUploadModal('{{ '/pendanaan/tambah-bukti-bagi-hasil/' . $detailPendanaan->id_proyek_pendanaan }}', 'Upload Bukti Bagi Hasil', 'file_bukti_bagi_hasil', '{{ 'image/' . '*' }}' )"
-          class="hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
+          class="font-medium font-roboto text-neutral-600 hover:text-yellow-500 py-1 flex flex-col items-center flex-1 hover:bg-neutral-200 duration-200 cursor-pointer ">
           <img src="/icons/upload.svg" class="w-10 h-10 " alt="">
           <p>Bukti Bagi Hasil</p>
-        </div>
+        </button>
       </div>
-      <div
+      <div onclick="window.history.go(-1); return false;"
         class="text-white bg-red-600 hover:text-red-600 rounded-md hover:bg-white hover:shadow-md hover:shadow-red-600/70 duration-200 w-[14rem] py-1 font-roboto font-medium text-xl text-center cursor-pointer my-4">
-        Batalkan</div>
+        Kembali</div>
       @if (!empty(request()->get('showProgres')))
         <a href="/pendanaan/detail/{{ $detailPendanaan->id_proyek_pendanaan }}" class="flex flex-col items-center">
           <p class="text-teal-400 font-roboto font-medium">Sembunyikan Progres Pendanaan</p>

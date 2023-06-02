@@ -99,8 +99,10 @@
         {{-- ACTION --}}
         <div class="flex items-center justify-center gap-2 w-[12rem]">
           <div class="w-14 h-14 flex items-center justify-center">
-            <a href="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->proposal) : $value->proposal }}">
-              <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
+            <a class="flex flex-col items-center hover:bg-neutral-200/70 duration-200 p-2"
+              href="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->proposal) : $value->proposal }}">
+              <img src="/icons/pdf.svg" alt="" class="w-12 h-12 ">
+              <p class="font-medium font-roboto text-xs text-neutral-600 text-center">Lihat Proposal</p>
             </a>
           </div>
           <div class="flex w-[10rem] rounded-full bg-neutral-200 overflow-hidden">

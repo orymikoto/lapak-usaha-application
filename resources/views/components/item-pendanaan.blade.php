@@ -39,7 +39,7 @@
       </p>
     </div>
   </div>
-  
+
   <div class="flex flex-col items-center gap-1 justify-center">
     <h3 class="text-sm font-medium font-roboto text-neutral-400">Status Pendanaan</h3>
     <div
@@ -60,7 +60,7 @@
   <div class="flex flex-col items-center justify-center cursor-pointer text-neutral-700 hover:text-yellow-500 duration-200 w-[9rem]">
     <img src="{{ !empty($value->file_kontrak_admin) ? '/icons/pdf.svg' : '/icons/pdf-disabled.svg' }}" class="w-12 h-12">
     <p class="font-medium font-roboto w-[7rem] text-center {{ empty($value->file_kontrak_admin) ? 'text-neutral-400' : '' }}">File
-      Kontrak
+      Kontrak Admin
     </p>
   </div>
   <div class="flex rounded-full bg-neutral-400 text-neutral-700 w-[15rem] h-[2rem] my-auto overflow-hidden">

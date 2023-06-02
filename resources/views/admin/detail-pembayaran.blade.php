@@ -73,7 +73,7 @@
       <a href="{{ $pembayaran->status_pembayaran == 0 ? '/admin/setujui-pembayaran/' . $pembayaran->id_pembayaran : '/admin/tolak-pembayaran/' . $pembayaran->id_pembayaran }}"
         class="w-[20rem] my-2 py-1 text-white text-center duration-200 {{ $pembayaran->status_pembayaran == 0 ? 'bg-emerald-400 hover:text-emerald-400 hover:bg-white rounded-full hover:shadow-md hover:shadow-emerald-400/50' : 'bg-red-600 hover:text-red-600 hover:bg-white rounded-full hover:shadow-md hover:shadow-red-600/50' }}">{{ $pembayaran->status_pembayaran == 0 ? 'Setujui Pembayaran' : 'Tidak Setujui Pembayaran' }}</a>
       <button onclick="javascript:history.back()"
-        class="w-[20rem] my-2 py-1 bg-rose-600 text-white hover:text-rose-600 hover:bg-white rounded-full hover:shadow-md hover:shadow-rose-600/50 duration-200">Back</button>
+        class="w-[20rem] my-2 py-1 bg-rose-600 text-white hover:text-rose-600 hover:bg-white rounded-full hover:shadow-md hover:shadow-rose-600/50 duration-200">Kembali</button>
     </div>
   </div>
 

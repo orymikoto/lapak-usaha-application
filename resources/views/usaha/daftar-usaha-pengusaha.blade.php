@@ -58,7 +58,7 @@
       <div class="flex flex-col md:flex-row md:justify-start items-center rounded-md p-4 gap-4 shadow-[4px_5px_10px_0px_rgba(0,0,0,0.5)] ">
         {{-- FOTO USAHA --}}
         {{-- {{ $value->foto_usaha }} --}}
-        <img class="xl:block md:hidden block w-[16rem] h-[14rem]  rounded-md shadow-md object-cover object-center"
+        <img class="xl:block md:hidden block w-[20rem] h-[16rem]  rounded-md shadow-md object-cover object-center"
           src="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->foto_usaha) : $value->foto_usaha }}" alt="" srcset="">
 
         {{-- DETAIL USAHA --}}
@@ -87,24 +87,20 @@
               {{ $value->deskripsi }}
             </p>
           </div>
+          <div class="flex flex-col items-center self-center my-2 justify-center gap-2 w-[12rem]">
+            <div class="flex w-[10rem] rounded-full bg-neutral-200 overflow-hidden">
+              <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
+                class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-yellow-500 hover:bg-yellow-500 font-roboto">
+                Edit</a>
+              <div onclick="showKonfirmasi({{ $value->id_deskripsi_usaha }})"
+                class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-red-500 hover:bg-red-500 font-roboto">
+                Delete</div>
+            </div>
+          </div>
         </div>
 
         {{-- ACTION --}}
-        <div class="flex flex-col items-center justify-center gap-2 w-[12rem]">
-          <div class="w-14 h-14 flex items-center justify-center">
-            <a href="{{ $value->id_deskripsi_usaha > 3 ? asset('/storage' . $value->proposal) : $value->proposal }}">
-              <img src="/icons/pdf.svg" alt="" class="w-12 h-12 cursor-pointer hover:w-14 hover:h-14 duration-300">
-            </a>
-          </div>
-          <div class="flex w-[10rem] rounded-full bg-neutral-200 overflow-hidden">
-            <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
-              class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-yellow-500 hover:bg-yellow-500 font-roboto">
-              Edit</a>
-            <div onclick="showKonfirmasi({{ $value->id_deskripsi_usaha }})"
-              class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-red-500 hover:bg-red-500 font-roboto">
-              Delete</div>
-          </div>
-        </div>
+
 
       </div>
     @endforeach
