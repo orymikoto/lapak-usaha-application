@@ -72,7 +72,7 @@ class ProyekPendanaanController extends Controller
   public function admin_detail_pendanaan($id_proyek_pendanaan)
   {
     $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan', 'progresPendanaan', 'Pembayaran')->first();
-    $statusPendanaan = StatusPendanaan::all(); 
+    $statusPendanaan = StatusPendanaan::all();
     $jenis_usaha = JenisUsaha::whereIdJenisUsaha($proyek_pendanaan->deskripsiUsaha->id_jenis_usaha)->first();
     return view('admin.detail-pendanaan')->with(array('detailPendanaan' => $proyek_pendanaan, 'jenisUsaha' => $jenis_usaha, 'statusPendanaan' => $statusPendanaan));
   }
@@ -107,7 +107,51 @@ class ProyekPendanaanController extends Controller
     }
   }
 
+  public function admin_riwayat_pendanaan()
+  {
+    $pendanaan_pendana = ProyekPendanaan::whereIdStatusPendanaan(3)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
+
+    return view('riwayat.daftar-riwayat')->with(array(
+      'daftarPendanaan' => $pendanaan_pendana
+    ));
+  }
+
   // VIEW METHOD
+  public function riwayat_pendanaan($id_pengguna)
+  {
+    if (auth('pendana')->check()) {
+      $pendanaan_pendana = ProyekPendanaan::whereIdPendana($id_pengguna)->whereIdStatusPendanaan(3)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
+
+      return view('riwayat.daftar-riwayat')->with(array(
+        'daftarPendanaan' => $pendanaan_pendana
+      ));
+    } elseif (auth('pengusaha')->check()) {
+      $pendanaan_pendana = ProyekPendanaan::whereIdPemilikUsaha($id_pengguna)->whereIdStatusPendanaan(3)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
+
+      return view('riwayat.daftar-riwayat')->with(array(
+        'daftarPendanaan' => $pendanaan_pendana
+      ));
+    } else {
+      return view('welcome');
+    }
+  }
+
+  public function detail_riwayat_pendanaan($id_pengguna)
+  {
+    if (auth('pendana')->check()) {
+      $pendanaan_pendana = ProyekPendanaan::whereIdPendana($id_pengguna)->whereIdStatusPendanaan(3)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
+
+      return view('riwayat.detail-riwayat')->with(array(
+        'daftarPendanaan' => $pendanaan_pendana
+      ));
+    } elseif (auth('pengusaha')->check()) {
+      $pendanaan_pengusaha = ProyekPendanaan::whereIdPemilikUsaha($id_pengguna)->whereIdStatusPendanaan(3)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
+      return view('riwayat.detail-riwayat')->with(array('daftarPendanaan' => $pendanaan_pengusaha));
+    } else {
+      return view('welcome');
+    }
+  }
+
   public function daftar_pendanaan($id_pengguna)
   {
     if (auth('pendana')->check()) {
@@ -121,7 +165,7 @@ class ProyekPendanaanController extends Controller
       $pendanaan_pengusaha = ProyekPendanaan::whereIdPemilikUsaha($id_pengguna)->with('deskripsiUsaha', 'Pendana', 'pemilikUsaha', 'statusPendanaan')->get();
       return view('proyek_pendanaan.daftar-pendanaan')->with(array('daftarPendanaan' => $pendanaan_pengusaha));
     } else {
-      return view('proyek_pendanaan.daftar-pendanaan');
+      return view('welcome');
     }
   }
 
