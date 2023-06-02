@@ -56,14 +56,23 @@ class AuthenticationController extends Controller
     ]);
 
     if (request()->role == 'admin') {
-      Auth::guard('admin')->attempt($validation);
-      return redirect('/');
+      if (Auth::guard('admin')->attempt($validation)) {
+        return redirect('/');
+      }
+      session()->flash('pesan', 'Username atau password salah');
+      return redirect('/login');
     } elseif (request()->role == 'pendana') {
-      Auth::guard('pendana')->attempt($validation);
-      return redirect('/');
+      if (Auth::guard('pendana')->attempt($validation)) {
+        return redirect('/');
+      }
+      session()->flash('pesan', 'Username atau password salah');
+      return redirect('/login');
     } elseif (request()->role == 'pengusaha') {
-      Auth::guard('pengusaha')->attempt($validation);
-      return redirect('/');
+      if (Auth::guard('pengusaha')->attempt($validation)) {
+        return redirect('/');
+      }
+      session()->flash('pesan', 'Username atau password salah');
+      return redirect('/login');
     } else {
       return view('auth.login')->with('failed', 'Silahkan pilih jenis akun terlebih dahulu');
     }
@@ -88,7 +97,7 @@ class AuthenticationController extends Controller
       return view('auth.login')->with('registered', 'Register berhasil dilakukan silahkan login!');
     } elseif (request()->role == 'pendana') {
       $check = Pendana::whereEmail($request->email)->orWhere('username' == $request->username)->first();
-      if(!empty($check)){
+      if (!empty($check)) {
         session()->flash('gagal', 'Email telah digunakan, silakan masukkan email lain atau login dengan akun yang sudah ada');
         return view('auth.register');
       }
@@ -109,7 +118,7 @@ class AuthenticationController extends Controller
       return view('auth.login')->with('registered', 'Register berhasil dilakukan silahkan login!');
     } elseif (request()->role == 'pengusaha') {
       $check = PemilikUsaha::whereEmail($request->email)->orWhere('username' == $request->username)->first();
-      if(!empty($check)){
+      if (!empty($check)) {
         session()->flash('gagal', 'Email telah digunakan, silakan masukkan email lain atau login dengan akun yang sudah ada');
         return view('auth.register');
       }
