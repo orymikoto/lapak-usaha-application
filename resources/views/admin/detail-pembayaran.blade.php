@@ -40,9 +40,8 @@
       <h2 class="text-2xl font-righteous text-neutral-700 my-2">{{ $deskripsi_usaha->nama_usaha }}</h2>
       <div class="flex flex-col items-center w-full">
         <h3 class="mx-2 text-lg">Foto Bukti Pembayaran</h3>
-        <div
-          class=" rounded-md w-full h-[25rem] bg-contain bg-no-repeat bg-[url('{{ empty($pembayaran->bukti_pembayaran) ? '/images/nothing.jpg' : $pembayaran->bukti_pembayaran }}')]">
-        </div>
+        <img src="{{ empty($pembayaran->bukti_pembayaran) ? '/images/nothing.jpg' : $pembayaran->bukti_pembayaran }}"
+          class=" rounded-md w-full h-[25rem] object-cover object-center">
       </div>
       <div class="grid grid-cols-12 w-full gap-2 ">
         <div class="col-span-6 flex flex-col">

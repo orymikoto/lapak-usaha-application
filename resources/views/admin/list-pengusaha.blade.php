@@ -19,7 +19,7 @@
     <div class="flex rounded-full bg-neutral-400 w-[40rem] overflow-hidden">
       <div class="flex-1 bg-yellow-500 font-medium font-roboto py-1 text-center cursor-pointer text-white duration-200">Daftar
         Pengusaha</div>
-      <a href="/admin/daftar-pengusaha"
+      <a href="/admin/daftar-pendana"
         class="flex-1 hover:bg-yellow-500 text-neutral-800 font-medium font-roboto py-1 text-center cursor-pointer hover:text-white duration-200">Daftar
         Pendana
       </a>
@@ -37,6 +37,7 @@
     <div class="flex flex-col relative gap-4">
       <h1 class="text-yellow-500 font-righteous text-3xl text-center my-4">Daftar Pengusaha</h1>
       <div class="bg-white p-2 rounded-md">
+
         <table class="w-full">
           <thead>
             <tr class="text-neutral-700">

@@ -26,15 +26,15 @@ class ProyekPendanaanSeeder extends Seeder
     ));
     ProyekPendanaan::insert(array(
       [
-       'jumlah_dana' => 25000000,
-       'file_kontrak_admin' => null,
-       'file_kontrak_pengusaha' => null,
-       'file_kontrak_pendana' => null,
-       'bukti_bagi_hasil' => null,
-       'id_deskripsi_usaha' => 1,
-       'id_pemilik_usaha' => 1,
-       'id_pendana' => 1,
-       'id_status_pendanaan' => 1,
+        'jumlah_dana' => 25000000,
+        'file_kontrak_admin' => null,
+        'file_kontrak_pengusaha' => null,
+        'file_kontrak_pendana' => null,
+        'bukti_bagi_hasil' => null,
+        'id_deskripsi_usaha' => 1,
+        'id_pemilik_usaha' => 1,
+        'id_pendana' => 1,
+        'id_status_pendanaan' => 1,
       ],
       [
         'jumlah_dana' => 10000000,
@@ -62,19 +62,19 @@ class ProyekPendanaanSeeder extends Seeder
     Pembayaran::insert(array(
       [
         'tanggal_pembayaran' => '2022-01-15',
-        'bukti_pembayaran' => '/storage/upload/bukti_pembayaran/bukti_pembayaran_1.jpg',
+        'bukti_pembayaran' => '/upload/bukti_pembayaran/bukti_pembayaran_1.jpg',
         'status_pembayaran' => false,
         'id_proyek_pendanaan' => 1,
       ],
       [
         'tanggal_pembayaran' => '2022-02-20',
-        'bukti_pembayaran' => '/storage/upload/bukti_pembayaran/bukti_pembayaran_2.jpg',
+        'bukti_pembayaran' => '/upload/bukti_pembayaran/bukti_pembayaran_2.jpg',
         'status_pembayaran' => false,
         'id_proyek_pendanaan' => 2,
       ],
       [
         'tanggal_pembayaran' => '2022-03-25',
-        'bukti_pembayaran' => '/storage/upload/bukti_pembayaran/bukti_pembayaran_3.jpg',
+        'bukti_pembayaran' => '/upload/bukti_pembayaran/bukti_pembayaran_3.jpg',
         'status_pembayaran' => true,
         'id_proyek_pendanaan' => 3,
       ]
@@ -83,30 +83,30 @@ class ProyekPendanaanSeeder extends Seeder
       [
         'tanggal_laporan_progres_pendanaan' => '2023-03-09',
         'keterangan' => 'Proyek masih berjalan dan sudah mencapai 25% dari target',
-        'laporan_keuangan' => '/storage/upload/progres_pendanaan/laporan_keuangan_2023_03_09.pdf',
+        'laporan_keuangan' => '/upload/progres_pendanaan/laporan_keuangan_2023_03_09.pdf',
         'id_proyek_pendanaan' => 3,
       ],
       [
         'tanggal_laporan_progres_pendanaan' => '2023-03-21',
         'keterangan' => 'Proyek sudah mencapai 50% dari target yang ditentukan',
-        'laporan_keuangan' => '/storage/upload/progres_pendanaan/laporan_keuangan_2023_03_21.pdf',
+        'laporan_keuangan' => '/upload/progres_pendanaan/laporan_keuangan_2023_03_21.pdf',
         'id_proyek_pendanaan' => 3,
       ],
       [
         'tanggal_laporan_progres_pendanaan' => '2023-04-05',
         'keterangan' => 'Proyek telah selesai dan berhasil mencapai target',
-        'laporan_keuangan' => '/storage/upload/progres_pendanaan/laporan_keuangan_2023_04_05.pdf',
+        'laporan_keuangan' => '/upload/progres_pendanaan/laporan_keuangan_2023_04_05.pdf',
         'id_proyek_pendanaan' => 3,
       ],
-  ));
-  for ($i = 1; $i <= 3; $i++) {
-    RiwayatProyek::insert([
+    ));
+    for ($i = 1; $i <= 3; $i++) {
+      RiwayatProyek::insert([
         'tanggal_mulai' => now()->subDays($i * 7),
         'tanggal_selesai' => now()->subDays($i * 7 - 5),
         'id_proyek_pendanaan' => $i
-    ]);
-  };
-  PencairanDana::insert(array(
+      ]);
+    };
+    PencairanDana::insert(array(
       [
         'tanggal_pencairan_dana' => Carbon::now()->subDays(15),
         'nominal_pencairan' => 100000,

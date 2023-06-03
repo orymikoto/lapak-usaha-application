@@ -238,10 +238,10 @@
             alt="">
           <p>Deskripsi Usaha</p>
         </button>
-        <button {{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? 'disabled' : '' }}
+        <button {{ $detailPendanaan->Pembayaran->bukti_pembayaran == null ? 'disabled' : '' }}
           onclick="showPictureModal('{{ $detailPendanaan->Pembayaran->bukti_pembayaran }}', 'Bukti Pembayaran')"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="{{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? '/icons/img-disabled.svg' : '/icons/img.svg' }}" class="w-16 h-16 "
+          <img src="{{ $detailPendanaan->Pembayaran->bukti_pembayaran == null ? '/icons/img-disabled.svg' : '/icons/img.svg' }}" class="w-16 h-16 "
             alt="">
           <p>Bukti Pembayaran</p>
         </button>

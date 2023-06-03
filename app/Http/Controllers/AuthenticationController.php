@@ -96,7 +96,7 @@ class AuthenticationController extends Controller
       // Auth::guard('admin')->attempt($validation);
       return view('auth.login')->with('registered', 'Register berhasil dilakukan silahkan login!');
     } elseif (request()->role == 'pendana') {
-      $check = Pendana::whereEmail($request->email)->orWhere('username' == $request->username)->first();
+      $check = Pendana::whereEmail($request->email)->first();
       if (!empty($check)) {
         session()->flash('gagal', 'Email telah digunakan, silakan masukkan email lain atau login dengan akun yang sudah ada');
         return view('auth.register');
@@ -117,7 +117,7 @@ class AuthenticationController extends Controller
       ]);
       return view('auth.login')->with('registered', 'Register berhasil dilakukan silahkan login!');
     } elseif (request()->role == 'pengusaha') {
-      $check = PemilikUsaha::whereEmail($request->email)->orWhere('username' == $request->username)->first();
+      $check = PemilikUsaha::whereEmail($request->email)->first();
       if (!empty($check)) {
         session()->flash('gagal', 'Email telah digunakan, silakan masukkan email lain atau login dengan akun yang sudah ada');
         return view('auth.register');

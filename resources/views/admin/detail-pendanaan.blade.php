@@ -205,7 +205,8 @@
         <div class="flex flex-col font-roboto font-medium col-span-6">
           <h3 class="mx-2 text-lg font-medium">Status Pembayaran</h3>
           <div class="p-2 rounded-md w-full bg-neutral-200">
-            {{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Terlunaskan' : 'Lunas' }}
+            {{-- {{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Terlunaskan' : 'Lunas' }} --}}
+            {{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Disetujui' : 'Belum Disetujui' }}
           </div>
         </div>
         <div class="flex flex-col font-roboto font-medium col-span-6">
@@ -214,8 +215,11 @@
             {{ $detailPendanaan->statusPendanaan->nama_status }}
           </div>
         </div>
-        <button onclick="showUpdateFormModal('{{ '/pendanaan/ubah-status/' . $detailPendanaan->id_proyek_pendanaan }}')"
-          class="col-start-4 font-roboto font-medium col-end-10 py-1 bg-amber-400 text-center text-white hover:bg-white hover:text-amber-400 hover:shadow-amber-400/50 hover:shadow-md duration-200 cursor-pointer rounded-md">Perbarui
+        <button
+          {{ empty($detailPendanaan->file_kontrak_admin) || empty($detailPendanaan->file_kontrak_pengusaha) || empty($detailPendanaan->file_kontrak_pendana) ? 'disabled' : '' }}
+          onclick="showUpdateFormModal('{{ '/pendanaan/ubah-status/' . $detailPendanaan->id_proyek_pendanaan }}')"
+          class="col-start-4 font-roboto font-medium col-end-10 py-1 text-center rounded-md 
+          {{ empty($detailPendanaan->file_kontrak_admin) || empty($detailPendanaan->file_kontrak_pengusaha) || empty($detailPendanaan->file_kontrak_pendana) ? 'bg-neutral-400 text-white cursor-default' : 'bg-amber-400 text-white hover:bg-white hover:text-amber-400 hover:shadow-amber-400/50 hover:shadow-md duration-200 cursor-pointer' }}">Perbarui
           Status Proyek</button>
         <a href="{{ '/admin/detail-pembayaran/' . $detailPendanaan->pembayaran->id_pembayaran }}"
           class="col-start-4 font-roboto font-medium col-end-10 py-1 rounded-md  text-center {{ $detailPendanaan->pembayaran->bukti_pembayaran == null ? 'bg-neutral-400 text-white cursor-default pointer-events-none' : 'bg-teal-400 text-white hover:bg-white hover:text-teal-400 hover:shadow-teal-400/50 hover:shadow-md duration-200 cursor-pointer ' }}">
@@ -255,10 +259,10 @@
             alt="">
           <p>Deskripsi Usaha</p>
         </button>
-        <button {{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? 'disabled' : '' }}
+        <button {{ $detailPendanaan->Pembayaran->bukti_pembayaran == null ? 'disabled' : '' }}
           onclick="showPictureModal('{{ $detailPendanaan->Pembayaran->bukti_pembayaran }}', 'Bukti Pembayaran')"
           class="flex flex-col cursor-pointer items-center text-neutral-600 font-medium font-roboto hover:text-yellow-500 duration-200 flex-1 hover:bg-neutral-200">
-          <img src="{{ $detailPendanaan->Pembayaran->status_pembayaran == 0 ? '/icons/img-disabled.svg' : '/icons/img.svg' }}" class="w-16 h-16 "
+          <img src="{{ $detailPendanaan->Pembayaran->bukti_pembayaran == null ? '/icons/img-disabled.svg' : '/icons/img.svg' }}" class="w-16 h-16 "
             alt="">
           <p>Bukti Pembayaran</p>
         </button>
