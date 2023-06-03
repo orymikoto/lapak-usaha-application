@@ -15,6 +15,22 @@
     function hideUploadFileKontrak() {
       document.getElementById("upload_file_kontrak").classList.add("hidden")
     }
+    const showDeleteModal = (link) => {
+      document.getElementById("modal-delete-data").classList.remove("hidden")
+      document.getElementById("modal-delete-data-link").href = `${link}`
+      document.getElementById("modal-delete-data-main").scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+      window.scrollBy(0, -200);
+    }
+
+    const hideDeleteModal = () => {
+      document.getElementById("modal-delete-data").classList.add("hidden")
+      document.getElementById("modal-delete-data-link").href = "/"
+    }
+
 
     function reveal() {
       var reveals = document.querySelectorAll(".item");
@@ -54,6 +70,7 @@
     </form>
   </div>
   <x-navbar />
+  <x-modal-delete-data />
   <div class="flex flex-col items-center flex-1">
     <div class="flex rounded-full bg-neutral-400 text-neutral-700  w-[35rem] my-2 overflow-hidden font-medium font-roboto">
       <a href="{{ url()->current() . '?menu=0' }}"
