@@ -67,9 +67,9 @@
     <a href="/pendanaan/detail/{{ $value->id_proyek_pendanaan }}"
       class="flex-1 py-1 hover:bg-amber-400 hover:text-white font-medium font-roboto duration-200 text-center cursor-pointer">Detail
     </a>
-    <div
-      class="flex-1 py-1  font-medium font-roboto duration-200 text-center cursor-default {{ $value->id_status_pendanaan == 1 ? 'hover:bg-red-500 hover:text-white cursor-pointer' : '' }}">
+    <button onclick="showDeleteModal('{{ '/pendanaan/hapus/' . $value->id_proyek_pendanaan }}')"
+      class="flex-1 py-1  font-medium font-roboto duration-200 text-center cursor-default {{ $value->id_status_pendanaan == 1 ? 'hover:bg-red-500 hover:text-white cursor-pointer' : 'pointer-events-none' }}">
       Batalkan
-    </div>
+    </button>
   </div>
 </div>

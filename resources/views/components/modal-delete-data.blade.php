@@ -1,5 +1,6 @@
 <div id="modal-delete-data" class="hidden w-full h-full z-10 flex items-center justify-center absolute bg-neutral-500/60">
-  <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
+  <div id="modal-delete-data-main"
+    class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">
     <h2 class="text-lg">Pesan!</h2>
     <p class="text-sm font-light text-neutral-400 w-[10rem]">Konfirmasi Hapus Data Yang Dipilih</p>
     <div class="flex gap-x-2">

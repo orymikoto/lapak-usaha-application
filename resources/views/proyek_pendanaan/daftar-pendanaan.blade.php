@@ -11,6 +11,22 @@
 </head>
 
 <script>
+  const showDeleteModal = (link) => {
+    document.getElementById("modal-delete-data").classList.remove("hidden")
+    document.getElementById("modal-delete-data-link").href = `${link}`
+    document.getElementById("modal-delete-data-main").scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest'
+    });
+    window.scrollBy(0, -200);
+  }
+
+  const hideDeleteModal = () => {
+    document.getElementById("modal-delete-data").classList.add("hidden")
+    document.getElementById("modal-delete-data-link").href = "/"
+  }
+
   function reveal() {
     var reveals = document.querySelectorAll(".item");
 
@@ -30,8 +46,9 @@
   window.addEventListener("scroll", reveal);
 </script>
 
-<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-y-scroll overflow-x-hidden">
+<body class="antialiased bg-neutral-100 min-h-screen w-full flex flex-col overflow-y-scroll overflow-x-hidden relative">
   <x-navbar />
+  <x-modal-delete-data />
   @if (session()->has('pesan'))
     <div class="absolute w-full h-full bg-neutral-500/50 flex items-center justify-center z-10">
       <div class="p-4 bg-white rounded-md flex flex-col items-center text-neutral-700 font-roboto font-medium gap-2 text-center">

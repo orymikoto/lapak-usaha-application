@@ -272,7 +272,20 @@ class ProyekPendanaanController extends Controller
     }
   }
 
-  public function index()
+  public function hapus_proyek_pendanaan($id_proyek_pendanaan)
   {
+    try {
+      $proyek_pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->first();
+      ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->delete();
+
+      session()->flash('pesan', 'Data Berhasil Dihapus');
+      if (auth('pengusaha')->check()) {
+        return redirect("/pendanaan/" . $proyek_pendanaan->id_pemilik_usaha);
+      } elseif (auth('pendana')->check()) {
+        return redirect("/pendanaan/" . $proyek_pendanaan->id_pendana);
+      }
+    } catch (\Throwable $th) {
+      throw $th;
+    }
   }
 }
