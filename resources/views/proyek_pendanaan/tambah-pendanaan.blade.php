@@ -89,7 +89,7 @@
             @csrf
             <div class="flex flex-col text-white font-medium font-roboto col-span-6">
               <p class="mx-2">Jumlah Dana</p>
-              <input name="jumlah_dana" max="{{ $deskripsi_usaha->target_dana }}" type="number" step="100000" required
+              <input name="jumlah_dana" max="{{ $deskripsi_usaha->target_dana }}" type="number" min="0" step="100000" required
                 oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
                 class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate focus:ring-0 outline-none hover:bg-yellow-200/50 duration-200" />
             </div>

@@ -92,11 +92,20 @@
               <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
                 class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-yellow-500 hover:bg-yellow-500 font-roboto">
                 Edit</a>
-              <div onclick="showKonfirmasi({{ $value->id_deskripsi_usaha }})"
-                class="flex-1 hover:text-white duration-200 font-medium text-center py-1 cursor-pointer text-red-500 hover:bg-red-500 font-roboto">
-                Delete</div>
             </div>
           </div>
+        </div>
+        <div class="flex items-center self-center my-2 justify-center gap-2 w-[12rem]">
+          <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
+            class="flex-1 flex flex-col items-center rounded-md text-neutral-400 duration-200 font-medium text-center py-1 cursor-pointer  hover:text-neutral-700 hover:bg-neutral-200 font-roboto">
+            <img src="/icons/pdf.svg" class="w-8 h-8" alt="">
+            <p>Lihat Proposal</p>
+          </a>
+          <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
+            class="flex-1 flex flex-col items-center rounded-md text-neutral-400 duration-200 font-medium text-center py-1 cursor-pointer  hover:text-neutral-700 hover:bg-neutral-200 font-roboto">
+            <img src="/icons/upload.svg" class="w-8 h-8" alt="">
+            <p>Upload Proposal</p>
+          </a>
         </div>
 
         {{-- ACTION --}}

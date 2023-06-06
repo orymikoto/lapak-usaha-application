@@ -60,28 +60,56 @@
     <h1 class="text-yellow-500 font-righteous text-3xl text-center mt-4">Daftar Pembayaran</h1>
     <div class="flex w-[30rem] bg-neutral-400 rounded-full overflow-hidden">
       <a class="flex-1 py-1 text-center font-roboto font-medium hover:Ptext-white hover:bg-yellow-500"
-        href="{{ auth('admin')->check() ? '/admin/pendanaan/detail/' . request()->route()->id_proyek_pendanaan : '/pendanaan/detail/' . request()->route()->id_proyek_pendanaan }}">Proyek Pendanaan</a>
+        href="{{ auth('admin')->check() ? '/admin/pendanaan/detail/' . request()->route()->id_proyek_pendanaan : '/pendanaan/detail/' . request()->route()->id_proyek_pendanaan }}">Proyek
+        Pendanaan</a>
       <a class="flex-1 py-1 text-center font-roboto font-medium text-white bg-yellow-500 duration-200"
         href="{{ '/pendanaan/pencairan/' . request()->route()->id_proyek_pendanaan }}">Pencairan Dana</a>
       <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500 duration-200"
         href="{{ '/pendanaan/progres-pendanaan/' . request()->route()->id_proyek_pendanaan }}">Progres Proyek</a>
-    </div> 
+    </div>
     @if (count($pencairan) > 0)
       <div class="grid grid-cols-12 gap-4 my-4 w-[60rem] ">
         @foreach ($pencairan as $key => $value)
-          <div class="animate-fade-in-down p-4 col-span-3 rounded-lg flex flex-col bg-white gap-2 items-center">
-            <h2 class="font-righteous text-xl text-center">Rp. {{ number_format($value->nominal_pencairan) }}</h2>
-            <p class="font-roboto font-medium text-neutral-600 text-sm text-center flex-1">{{ $value->tanggal_pencairan_dana }}</p>
-            <div class="flex flex-col w-full items-center text-neutral-800">
-              <div class="rounded-full bg-neutral-400 font-roboto text-sm w-full font-medium text-center cursor-default py-1 {{ $value->status_pencairan == false ? 'bg-yellow-500 text-white' : '' }}">Menunggu Persetujuan</div>
-              <img src="/icons/next-down.svg" class="w-4 h-4" alt="">
-              <div class="rounded-full bg-neutral-400 font-roboto text-sm w-full font-medium text-center cursor-default py-1 {{ $value->status_pencairan == true ? 'bg-yellow-500 text-white' : '' }}">Berhasil Dicairkan</div>
+          @if (auth('admin')->check())
+            <div class="animate-fade-in-down p-4 col-span-3 rounded-lg flex flex-col bg-white gap-2 items-center">
+              <h2 class="font-righteous text-xl text-center">Rp. {{ number_format($value->nominal_pencairan) }}</h2>
+              <p class="font-roboto font-medium text-neutral-600 text-sm text-center flex-1">{{ $value->tanggal_pencairan_dana }}</p>
+              <a href="/admin/pendanaan/detail/{{ $value->id_proyek_pendanaan }}"
+                class="text-sm text-neutral-600 hover:text-yellow-500 duration-200">Lihat Detail Pendanaan</a>
+              <div class="flex flex-col w-full items-center text-neutral-800">
+                <button {{ $value->status_pencairan == false ? 'disabled' : '' }}
+                  onclick="showUpdateModal('{{ '/admin/pencairan/tolak/' . $value->id_pencairan_dana }}', 'Jadikan status pencairan menjadi Menunggu Persestujuan?')"
+                  class="rounded-full bg-neutral-400 font-roboto text-sm w-full font-medium text-center cursor-default py-1 {{ $value->status_pencairan == false ? 'bg-yellow-500 text-white' : 'cursor-pointer hover:bg-yellow-500 hover:text-white duration-200' }}">Menunggu
+                  Persetujuan</button>
+                <img src="/icons/next-down.svg" class="w-4 h-4" alt="">
+                <button {{ $value->status_pencairan == true ? 'disabled' : '' }}
+                  onclick="showUpdateModal('{{ '/admin/pencairan/setujui/' . $value->id_pencairan_dana }}', 'Jadikan status pencairan menjadi Disetujui')"
+                  class="rounded-full bg-neutral-400 font-roboto text-sm w-full font-medium text-center cursor-default py-1 {{ $value->status_pencairan == true ? 'bg-yellow-500 text-white' : 'cursor-pointer hover:bg-yellow-500 hover:text-white duration-200' }}">Berhasil
+                  Dicairkan</button>
+              </div>
+              <button onclick="showDeleteModal('{{ '/admin/pencairan/hapus/' . $value->id_pencairan_dana }}')"
+                class=" w-full rounded-full flex-1 text-center py-1 bg-red-600 text-white  hover:bg-white  hover:text-red-600 hover:shadow-md hover:shadow-red-600/50 duration-200 cursor-pointer">Hapus</button>
             </div>
-            @if (auth('pengusaha')->check())
-                <button {{ $value->status_pencairan == true ? 'disabled' : ''}} onclick="showDeleteModal('{{ '/pencairan/hapus/' . $value->id_pencairan_dana }}')"
-                  class=" w-full rounded-full flex-1 text-center py-1  {{ $value->status_pencairan == false ? 'bg-red-600 text-white  hover:bg-white  hover:text-red-600 hover:shadow-md hover:shadow-red-600/50 duration-200 cursor-pointer' : 'bg-neutral-400 text-neutral-800 cursor-default'}}">Batalkan</button>
-            @endif
-          </div>
+          @else
+            <div class="animate-fade-in-down p-4 col-span-3 rounded-lg flex flex-col bg-white gap-2 items-center">
+              <h2 class="font-righteous text-xl text-center">Rp. {{ number_format($value->nominal_pencairan) }}</h2>
+              <p class="font-roboto font-medium text-neutral-600 text-sm text-center flex-1">{{ $value->tanggal_pencairan_dana }}</p>
+              <div class="flex flex-col w-full items-center text-neutral-800">
+                <div
+                  class="rounded-full bg-neutral-400 font-roboto text-sm w-full font-medium text-center cursor-default py-1 {{ $value->status_pencairan == false ? 'bg-yellow-500 text-white' : '' }}">
+                  Menunggu Persetujuan</div>
+                <img src="/icons/next-down.svg" class="w-4 h-4" alt="">
+                <div
+                  class="rounded-full bg-neutral-400 font-roboto text-sm w-full font-medium text-center cursor-default py-1 {{ $value->status_pencairan == true ? 'bg-yellow-500 text-white' : '' }}">
+                  Berhasil Dicairkan</div>
+              </div>
+              @if (auth('pengusaha')->check())
+                <button {{ $value->status_pencairan == true ? 'disabled' : '' }}
+                  onclick="showDeleteModal('{{ '/pencairan/hapus/' . $value->id_pencairan_dana }}')"
+                  class=" w-full rounded-full flex-1 text-center py-1  {{ $value->status_pencairan == false ? 'bg-red-600 text-white  hover:bg-white  hover:text-red-600 hover:shadow-md hover:shadow-red-600/50 duration-200 cursor-pointer' : 'bg-neutral-400 text-neutral-800 cursor-default' }}">Batalkan</button>
+              @endif
+            </div>
+          @endif
         @endforeach
       </div>
     @else

@@ -9,7 +9,7 @@
   <script>
     function showUploadFileKontrak(id_pendanaan) {
       document.getElementById("upload_file_kontrak").classList.remove("hidden")
-      document.getElementById("form_upload").action = `/admin/pendanaan/tambah-file-kontrak/${id_pendanaan}`
+      document.getElementById("form_upload").action = `/pendanaan/tambah-file-kontrak/admin/${id_pendanaan}`
     }
 
     function hideUploadFileKontrak() {
