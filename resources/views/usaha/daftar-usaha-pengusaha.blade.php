@@ -96,9 +96,9 @@
           </div>
         </div>
         <div class="flex items-center self-center my-2 justify-center gap-2 w-[12rem]">
-          <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"
-            class="flex-1 flex flex-col items-center rounded-md text-neutral-400 duration-200 font-medium text-center py-1 cursor-pointer  hover:text-neutral-700 hover:bg-neutral-200 font-roboto">
-            <img src="/icons/pdf.svg" class="w-8 h-8" alt="">
+          <a href="{{ $value->proposal }}"
+            class="flex-1 flex flex-col items-center rounded-md text-neutral-400 duration-200 font-medium text-center py-1 cursor-pointer  hover:text-neutral-700 hover:bg-neutral-200 font-roboto {{ empty($value->proposal) ? 'pointer-events-none' : '' }}">
+            <img src="{{ empty($value->proposal) ? '/icons/pdf-disabled.svg' : '/icons/pdf.svg' }}" class="w-8 h-8" alt="">
             <p>Lihat Proposal</p>
           </a>
           <a href="/daftar-usaha/edit/{{ $value->id_deskripsi_usaha }}"

@@ -283,6 +283,8 @@ class ProyekPendanaanController extends Controller
         return redirect("/pendanaan/" . $proyek_pendanaan->id_pemilik_usaha);
       } elseif (auth('pendana')->check()) {
         return redirect("/pendanaan/" . $proyek_pendanaan->id_pendana);
+      } else {
+        return redirect("/admin/pendanaan");
       }
     } catch (\Throwable $th) {
       throw $th;

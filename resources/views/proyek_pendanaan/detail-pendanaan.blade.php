@@ -89,6 +89,8 @@
   <x-modal-upload-file />
   <x-modal-show-file-pdf />
   <x-modal-show-no-file-pdf />
+  <x-modal-update-data />
+
 
 
   <div class="flex-1 flex flex-col w-full items-center gap-4 mb-8">
@@ -166,7 +168,7 @@
       <div class="grid grid-cols-12 gap-2 w-full text-neutral-600">
         <div class="flex flex-col font-roboto font-medium col-span-6">
           <div class="flex flex-col font-roboto font-medium ">
-            <h3 class="mx-2 text-lg font-mediu col-span-6">Nama Pendana</h3>
+            <h3 class="mx-2 text-lg font-medium col-span-6">Nama Pendana</h3>
             <div class="p-2 rounded-md w-full bg-neutral-200">
               {{ $detailPendanaan->Pendana->nama }}
             </div>
@@ -193,7 +195,7 @@
         <div class="flex flex-col font-roboto font-medium col-span-6">
           <h3 class="mx-2 text-lg font-medium">Status Pembayaran</h3>
           <div class="p-2 rounded-md w-full bg-neutral-200">
-            {{ $detailPendanaan->pembayaran->status_pembayaran == 1 ? 'Belum Dibayarkan' : 'Lunas' }}
+            {{ $detailPendanaan->pembayaran->status_pembayaran == 0 ? 'Belum Dibayarkan' : 'Lunas' }}
           </div>
         </div>
         <div class="flex flex-col font-roboto font-medium col-span-6">
@@ -225,7 +227,6 @@
           <img src="/icons/pdf.svg" class="w-16 h-16 " alt="">
           <p>Pengusaha</p>
         </div>
-
       </div>
 
       {{-- FILE FOTO --}}

@@ -28,32 +28,32 @@
     <div class="flex lg:flex-row flex-col gap-x-2">
       {{-- DESKRIPSI USAHA --}}
       <div class="w-[30rem] h-[35rem] bg-neutral-400/25 flex flex-col-reverse overflow-hidden rounded-lg shadow-md">
-        <div class="w-full h-[33rem] bg-neutral-800 rounded-t-lg flex flex-col p-4">
-          <h2 class="text-white font-righteous text-xl text-center my-2">Deskripsi Usaha</h2>
+        <div class="w-full h-[33rem] text-neutral-600 bg-white rounded-t-lg flex flex-col p-4">
+          <h2 class="text-neutral-700 font-righteous text-xl text-center my-2">Deskripsi Usaha</h2>
           <div class="grid grid-cols-12 gap-2 my-8">
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->nama_usaha }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->nama_usaha }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Pemilik Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->pemilikUsaha->nama }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->pemilikUsaha->nama }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Tahun Berdiri</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->tahun_berdiri }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->tahun_berdiri }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Periode Produksi</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->periode_produksi }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->periode_produksi }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Jenis Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->jenisUsaha->nama_jenis_usaha }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->jenisUsaha->nama_jenis_usaha }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Target Dana</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->target_dana }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->target_dana }}</div>
             </div>
             <div class="col-start-2 col-end-12 my-4 rounded-full bg-neutral-200 overflow-hidden flex">
               <div
@@ -67,11 +67,11 @@
           <div class="my-2 flex items-center justify-center gap-x-4">
             <div class="flex flex-col items-center text-center">
               <img class="h-12 rounded-md object-cover" src="/icons/img.svg" alt="">
-              <p class="text-white font-roboto font-medium">Foto Usaha</p>
+              <p class="text-neutral-600 font-roboto font-medium">Foto Usaha</p>
             </div>
             <div class="flex flex-col items-center text-center">
               <img class="h-12 rounded-md object-cover" src="/icons/pdf.svg" alt="">
-              <p class="text-white font-roboto font-medium">File Proposal</p>
+              <p class="text-neutral-600 font-roboto font-medium">File Proposal</p>
             </div>
           </div>
         </div>
@@ -83,48 +83,48 @@
 
       {{-- FORMULIR PENDANAAN --}}
       <div class="w-[30rem] h-[35rem] bg-neutral-400/25 flex flex-col-reverse overflow-hidden rounded-lg shadow-md">
-        <div class="w-full h-[33rem] bg-neutral-800 rounded-t-lg flex flex-col p-4">
-          <h2 class="text-white font-righteous text-xl text-center my-2">Tambah Pendanaan</h2>
+        <div class="w-full h-[33rem] text-neutral-600 bg-white rounded-t-lg flex flex-col p-4">
+          <h2 class="text-neutral-700 font-righteous text-xl text-center my-2">Tambah Pendanaan</h2>
           <form action="/pendanaan/tambah/{{ $deskripsi_usaha->id_deskripsi_usaha }}" method="POST" class="grid grid-cols-12 gap-2 my-8">
             @csrf
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Jumlah Dana</p>
               <input name="jumlah_dana" max="{{ $deskripsi_usaha->target_dana }}" type="number" min="0" step="100000" required
                 oninvalid="this.setCustomValidity('Semua data harus diisi')" oninput="this.setCustomValidity('')"
-                class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate focus:ring-0 outline-none hover:bg-yellow-200/50 duration-200" />
+                class="px-2 rounded-md py-1 bg-neutral-200 truncate focus:ring-0 outline-none text-neutral-600 hover:bg-yellow-200/50 duration-200" />
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->nama_usaha }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->nama_usaha }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Nama Pemilik Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->pemilikUsaha->nama }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->pemilikUsaha->nama }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Nominal Bagi Hasil</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">Belum Ditentukan</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">Belum Ditentukan</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Periode Produksi</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->periode_produksi }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->periode_produksi }}</div>
             </div>
-            <div class="flex flex-col text-white font-medium font-roboto col-span-6">
+            <div class="flex flex-col font-medium font-roboto col-span-6">
               <p class="mx-2">Jenis Usaha</p>
-              <div class="px-2 rounded-md py-1 bg-yellow-100/25 text-white truncate">{{ $deskripsi_usaha->jenisUsaha->nama_jenis_usaha }}</div>
+              <div class="px-2 rounded-md py-1 truncate bg-neutral-200">{{ $deskripsi_usaha->jenisUsaha->nama_jenis_usaha }}</div>
             </div>
             <div class="my-8 flex items-center justify-center gap-x-4 col-span-12">
               <div class="flex flex-col items-center text-center">
                 <img class="h-12 rounded-md object-cover" src="/icons/pdf-disabled.svg" alt="">
-                <p class="text-white font-roboto font-medium">File Kontrak Admin</p>
+                <p class="text-neutral-600 font-roboto font-medium">File Kontrak Admin</p>
               </div>
               <div class="flex flex-col items-center text-center">
                 <img class="h-12 rounded-md object-cover" src="/icons/pdf-disabled.svg" alt="">
-                <p class="text-white font-roboto font-medium">File Kontrak Pendana</p>
+                <p class="text-neutral-600 font-roboto font-medium">File Kontrak Pendana</p>
               </div>
               <div class="flex flex-col items-center text-center">
                 <img class="h-12 rounded-md object-cover" src="/icons/pdf-disabled.svg" alt="">
-                <p class="text-white font-roboto font-medium">File Kontrak Pengusaha</p>
+                <p class="text-neutral-600 font-roboto font-medium">File Kontrak Pengusaha</p>
               </div>
             </div>
             <button type="submit"

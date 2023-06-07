@@ -21,6 +21,17 @@
     document.getElementById("modal-delete-data-link").href = "/"
   }
 
+  const showUpdateModal = (link, pesan) => {
+    document.getElementById("modal-update-data").classList.remove("hidden")
+    document.getElementById("modal-update-data-pesan").innerText = `${pesan}`
+    document.getElementById("modal-update-data-link").href = `${link}`
+  }
+  const hideUpdateModal = () => {
+    document.getElementById("modal-update-data").classList.add("hidden")
+    document.getElementById("modal-update-data-pesan").innerText = ""
+    document.getElementById("modal-update-data-link").href = "/"
+  }
+
   function reveal() {
     var reveals = document.querySelectorAll(".item");
 
@@ -55,11 +66,13 @@
   @endif
 
   <x-modal-delete-data />
+  <x-modal-update-data />
+
   {{-- LIST PROGRES PENDANAAN --}}
   <div class="flex flex-col mx-4 gap-4 items-center mb-8 w-full">
     <h1 class="text-yellow-500 font-righteous text-3xl text-center mt-4">Daftar Pembayaran</h1>
     <div class="flex w-[30rem] bg-neutral-400 rounded-full overflow-hidden">
-      <a class="flex-1 py-1 text-center font-roboto font-medium hover:Ptext-white hover:bg-yellow-500"
+      <a class="flex-1 py-1 text-center font-roboto font-medium hover:text-white hover:bg-yellow-500"
         href="{{ auth('admin')->check() ? '/admin/pendanaan/detail/' . request()->route()->id_proyek_pendanaan : '/pendanaan/detail/' . request()->route()->id_proyek_pendanaan }}">Proyek
         Pendanaan</a>
       <a class="flex-1 py-1 text-center font-roboto font-medium text-white bg-yellow-500 duration-200"

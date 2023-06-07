@@ -23,7 +23,7 @@ class PencairanDanaController extends Controller
   public function ajukan_pencairan($id_proyek_pendanaan)
   {
     $pendanaan = ProyekPendanaan::whereIdProyekPendanaan($id_proyek_pendanaan)->first();
-    return view('pencairan.tambah-pencairan')->with(array('pendanaan' => $pendanaan)) ;
+    return view('pencairan.tambah-pencairan')->with(array('pendanaan' => $pendanaan));
   }
 
   // POST METHOD
@@ -48,9 +48,9 @@ class PencairanDanaController extends Controller
         return redirect('/admin/daftar-pencairan');
       }
       session()->flash('pesan', 'Perubahan gagal dilakukan, jumlah dana tidak mencukupi');
-      return redirect('/admin/daftar-pencairan');
+      return redirect()->back();
     } catch (\Throwable $th) {
-      dd( $th);
+      dd($th);
     }
   }
 
@@ -68,7 +68,7 @@ class PencairanDanaController extends Controller
       ]);
 
       session()->flash('pesan', 'Perubahan berhasil disimpan');
-      return redirect('/admin/daftar-pencairan');
+      return redirect()->back();
     } catch (\Throwable $th) {
       throw $th;
     }
@@ -85,7 +85,7 @@ class PencairanDanaController extends Controller
       PencairanDana::whereIdProgresPendanaan($id_pencairan)->delete();
 
       session()->flash('pesan', 'Data berhasil dihapus');
-      return redirect("/pendanaan/pencairan/" . $pencairan->id_proyek_pendanaan);
+      return redirect()->back();
     } catch (\Throwable $th) {
       throw $th;
     }
@@ -98,7 +98,7 @@ class PencairanDanaController extends Controller
       PencairanDana::whereIdPencairanDana($id_pencairan)->delete();
 
       session()->flash('pesan', 'Data berhasil dihapus');
-      return redirect("/admin/daftar-pencairan/" . $pencairan->id_proyek_pendanaan);
+      return redirect()->back();
     } catch (\Throwable $th) {
       throw $th;
     }
